@@ -2,8 +2,14 @@ function GameState(){
 }
 
 GameState.prototype.init = function(){
-  this.elements = [];
+
+  var that = this;
+  this.elements = [
+    [function(){that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1}); that.cash.add(1);}, {x:7.5, y:4, w:1, h:1}]
+  ];
   this.t = 0;
+
+  this.moneyEffects = [];
 
   this.pot = new Pot();
   this.cash = new Cash();
@@ -20,6 +26,11 @@ GameState.prototype.init = function(){
   this.laserController = new LaserController();
 }
 
+GameState.prototype.spawnMoneyEffect = function(options){
+    this.moneyEffects.push(new MoneyEffect(options));
+}
+
+
 GameState.prototype.pause = function(){
 }
 
@@ -34,7 +45,13 @@ GameState.prototype.render = function(ctx){
     var enemy = this.enemies[i];
     enemy.render(ctx);
   }
+
   this.laserController.render();
+
+  for (var i=0;i<this.moneyEffects.length;i++){
+    var moneyEffect = this.moneyEffects[i];
+    moneyEffect.render(ctx);
+  }
 }
 
 GameState.prototype.update = function(){
@@ -48,5 +65,14 @@ GameState.prototype.update = function(){
     var enemy = this.enemies[i];
     enemy.update();
   }
+
   this.laserController.update(t);
+
+  for (var i=0;i<this.moneyEffects.length;i++){
+    var moneyEffect = this.moneyEffects[i];
+    if(!moneyEffect.update()){
+      this.moneyEffects[i] = this.moneyEffects[this.moneyEffects.length-1];
+      this.moneyEffects.pop();
+    }
+  }
 }
