@@ -8,57 +8,57 @@ function smoothstep(a, b, t) {
   return b * v + a * (1 - v);
 };
 function clamp(low, x, high){
-    return Math.max(low,Math.min(x,high));
+  return Math.max(low,Math.min(x,high));
 }
 
 function loadImage(path){
-    var img = new Image();
-    loaded++;
-    img.onload = function(){loaded--};
-    img.src = path;
-    return img;
+  var img = new Image();
+  loaded++;
+  img.onload = function(){loaded--};
+  img.src = path;
+  return img;
 }
 
 window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       || 
-    window.webkitRequestAnimationFrame || 
-    window.mozRequestAnimationFrame    || 
-    window.oRequestAnimationFrame      || 
-    window.msRequestAnimationFrame     || 
-    function( callback ){
-        window.setTimeout(callback, 0);
-    };
+  return  window.requestAnimationFrame       || 
+  window.webkitRequestAnimationFrame || 
+  window.mozRequestAnimationFrame    || 
+  window.oRequestAnimationFrame      || 
+  window.msRequestAnimationFrame     || 
+  function( callback ){
+    window.setTimeout(callback, 0);
+  };
 })();
 
 function loop(){
-    if(loaded > 0){
-        canvas.width = canvas.width;
-        ctx.fillStyle = "white";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "black";
-        ctx.fillText("Loading "+loaded, 8*GU,4.5*GU);
-        requestAnimFrame(loop);
-        return;
-    }
-    t = +new Date();
-    dt += (t-old_time);
-    old_time = t;
-    while(dt>20){
-        sm.update();
-        dt-= 20;
-    }
-    /* clearing canvas */
+  if(loaded > 0){
     canvas.width = canvas.width;
-    sm.render(ctx);
-
-
-
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillText("Loading "+loaded, 8*GU,4.5*GU);
     requestAnimFrame(loop);
+    return;
+  }
+  t = +new Date();
+  dt += (t-old_time);
+  old_time = t;
+  while(dt>20){
+    sm.update();
+    dt-= 20;
+  }
+  /* clearing canvas */
+  canvas.width = canvas.width;
+  sm.render(ctx);
+
+
+
+  requestAnimFrame(loop);
 }
 
 function bootstrap(){
 
-    loaded = 1;
+  loaded = 1;
 
   /* global on purpose */
   canvas = document.createElement("canvas");
@@ -92,8 +92,8 @@ function bootstrap(){
   });
 
   /* add game states here */
-  
-  sm.addState("example", new ExampleState());
+
+  sm.addState("game", new GameState());
 
 
   resize();
@@ -102,10 +102,10 @@ function bootstrap(){
 
   /* start the game */
 
-  sm.changeState("example");
+  sm.changeState("game");
 
-    console.log("bootstrapping loaded");
-    loaded--;
+  console.log("bootstrapping loaded");
+  loaded--;
   requestAnimFrame(loop);
 }
 
@@ -129,9 +129,9 @@ function readData() {
   if (json_data !== undefined) {
     return JSON.parse(json_data);
   }else{
-        /* default game_data object */
-       return {progress:[0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]};
-    }
+    /* default game_data object */
+    return {progress:[0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]};
+  }
 }
 
 function setCookie(c_name,value,exdays) {
@@ -164,7 +164,7 @@ function relMouseCoords(e){
   }
   while(currentElement = currentElement.offsetParent);
 
-    var event = e;
+  var event = e;
   canvasX = (event.pageX||(event.touches[0]&&event.touches[0].pageX)||(this.cached_coords.x+totalOffsetX)) - totalOffsetX;
   canvasY = (event.pageY||(event.touches[0]&&event.touches[0].pageY)||(this.cached_coords.y+totalOffsetY)) - totalOffsetY;
 
@@ -174,35 +174,35 @@ function relMouseCoords(e){
 document.addEventListener('click', yo);
 document.addEventListener('touchstart', yo);
 document.addEventListener('touchmove', function(e){e.preventDefault();e.stopPropagation();return false;});
-        
-    function yo(e){
-        e.preventDefault();
-      mouseXY = relMouseCoords(e);
-        var clickables;
-        if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
-            clickables = sm.activeState.gameMenuWindow.buttons;
-        } else {
-            clickables = sm.activeState.elements;
-        }
-        var coordX, coordY, sizeX, sizeY;
-    for(var i=0; i<clickables.length;i++){
-      coordX = clickables[i][1].x;
-      coordY = clickables[i][1].y;
-      sizeX = clickables[i][1].w;
-      sizeY = clickables[i][1].h;
-      if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
-        clickables[i][0](clickables[i].slice(2)); 
-                break;
-      }
+
+function yo(e){
+  e.preventDefault();
+  mouseXY = relMouseCoords(e);
+  var clickables;
+  if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
+    clickables = sm.activeState.gameMenuWindow.buttons;
+  } else {
+    clickables = sm.activeState.elements;
+  }
+  var coordX, coordY, sizeX, sizeY;
+  for(var i=0; i<clickables.length;i++){
+    coordX = clickables[i][1].x;
+    coordY = clickables[i][1].y;
+    sizeX = clickables[i][1].w;
+    sizeY = clickables[i][1].h;
+    if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
+      clickables[i][0](clickables[i].slice(2)); 
+      break;
     }
   }
+}
 
 window.onresize = resize;
 
 /* global mixin for position/size-objects that do AABB collision with another posititon/size-object */
 function contains(obj){
-    return obj.position.x < this.position.x+this.size.w &&
-       obj.position.x+obj.size.w > this.position.x &&
-       obj.position.y < this.position.y+this.size.h &&
-       obj.position.y+obj.size.h > this.position.y;
+  return obj.position.x < this.position.x+this.size.w &&
+    obj.position.x+obj.size.w > this.position.x &&
+    obj.position.y < this.position.y+this.size.h &&
+    obj.position.y+obj.size.h > this.position.y;
 }
