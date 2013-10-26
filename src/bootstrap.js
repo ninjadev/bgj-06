@@ -80,6 +80,7 @@ function bootstrap(){
   sm = new StateManager();
 
   Particle.prototype.sprite = loadImage("res/particle.png");
+  Lens.prototype.sprite = loadImage("res/concave_lens.png");
 
   dt = 0;
   t = 0;
