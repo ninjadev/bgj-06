@@ -6,7 +6,7 @@ GameState.prototype.init = function(){
   this.t = 0;
 
   this.pot = new Pot();
-  this.cash = 0;
+  this.cash = new Cash();
 
   this.spawnRate = 100;
   this.enemyHP = 10;
