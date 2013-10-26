@@ -9,8 +9,7 @@ GameState.prototype.init = function(){
   this.lasers[0] = new Laser("rgb(255,0,0)", Math.PI/4, Math.random()/4-.125);
   this.lasers[1] = new Laser("rgb(0,255,0)", -Math.PI/4, Math.random()/4-.125);
 
-  this.lenses = [];
-  this.lenses[0] = new Lens(CENTER.x + 2, CENTER.y, 0, 6, Math.PI/3); //
+  this.pot = new Pot();
 
 }
 
@@ -26,11 +25,7 @@ GameState.prototype.render = function(ctx){
     var laser = this.lasers[i];
     laser.render();
   }
-  for (var i=0;i<this.lenses.length;i++){
-    var lens = this.lenses[i];
-    lens.render();
-  }
-
+  this.pot.render();
 }
 
 GameState.prototype.update = function(){
