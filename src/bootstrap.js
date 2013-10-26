@@ -67,8 +67,11 @@ function loop(){
 
 function bootstrap(){
 
+  //Enable/disable Rift support!
   RIFT = 0;
+  //Tweak RIFT_MARGIN for your IPD.
   RIFT_MARGIN = -55;
+  
   loaded = 1;
 
   /* global on purpose */
