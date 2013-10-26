@@ -56,6 +56,10 @@ function loop(){
   canvas.width = canvas.width;
   sm.render(ctx);
 
+  if(RIFT){
+    rift_canvas.width = rift_canvas.width;
+    rift_ctx.drawImage(canvas, 0, 0);
+  }
 
 
   requestAnimFrame(loop);
@@ -63,9 +67,15 @@ function loop(){
 
 function bootstrap(){
 
+  RIFT = 0;
+  RIFT_MARGIN = -55;
   loaded = 1;
 
   /* global on purpose */
+  if(RIFT){
+    rift_canvas = document.createElement("canvas");
+    rift_ctx = rift_canvas.getContext("2d");
+  }
   canvas = document.createElement("canvas");
   ctx = canvas.getContext("2d");
   canvas.style.zIndex = 999;
@@ -107,6 +117,9 @@ function bootstrap(){
   resize();
 
   document.body.appendChild(canvas);
+  if(RIFT){
+    document.body.appendChild(rift_canvas);
+  }
 
   /* start the game */
 
@@ -118,15 +131,26 @@ function bootstrap(){
 }
 
 function resize(e){
-  if(window.innerWidth/window.innerHeight > 16/9){
+  var width = RIFT ? window.innerWidth/2 : window.innerWidth;
+  if(width/window.innerHeight > 16/9){
     GU = (window.innerHeight/9);
   }else{
-    GU = (window.innerWidth/16);
+    GU = (width/16);
   }
   canvas.width = 16*GU;
   canvas.height = 9*GU;
-  canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 "+((window.innerWidth-16*GU)/2)+"px";
+  if(RIFT){
+    canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 0px";
+    rift_canvas.width = canvas.width;
+    rift_canvas.height = canvas.height;
+    rift_canvas.style.position = "fixed"
+    rift_canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"0px 0 0 "+RIFT_MARGIN+"px";
+
+  }else{
+    canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 "+((window.innerWidth-16*GU)/2)+"px";
+  }
 }
+
 
 function saveData(data) {
   json_data = JSON.stringify(data);
