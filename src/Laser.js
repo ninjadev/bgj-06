@@ -1,13 +1,19 @@
-function Laser(color, direction){
+function Laser(color, direction, speed){
   this.color = color;
-  this.direction = direction;
-  this.toPoint = {
-    x: 8,
-    y: Math.tan(direction)*8
-  };
+  this.speed = speed;
+  this.setDirection(direction);
 }
 
 Laser.prototype.update = function(){
+  this.setDirection(this.direction-this.speed);
+}
+
+Laser.prototype.setDirection = function(direction) {
+  this.direction = direction % (Math.PI*2);
+  this.toPoint = {
+    x: Math.cos(direction)*8,
+    y: Math.sin(direction)*8
+  };
 }
 
 Laser.prototype.render = function(){
