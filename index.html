@@ -20,6 +20,7 @@
         <script src=src/Pot.js></script>
         <script src=src/Particle.js></script>
         <script src=src/Toast.js></script>
+        <script src=src/Achievements.js></script>
 
         <style>
             *{
@@ -47,6 +48,16 @@
             .template {
                 display: none;
             }
+
+            .achievement .description {
+                font-size: 20px;
+            }
+
+            .achievement .image {
+                float:left;
+                margin-right: 10px;
+            }
+
              
         </style>
     </head>
@@ -55,6 +66,14 @@
 
     <div class="toast template">
         <div class=message>
+        </div>
+    </div>
+
+    <div class="achievement template">
+        <img class=image />
+        <div>
+            <div class=name></div>
+            <div class=description></div>
         </div>
     </div>
 </html>
