@@ -34,7 +34,7 @@ GameState.prototype.init = function(){
   var playerHP = 20;
   this.pot = new Pot(playerHP);
   this.rainbow = new Rainbow();
-  this.cash = new Cash(this.achievements);
+  this.cash = new Cash(this.achievements, this);
 
   this.spawnRate = 100;
   this.enemyHP = 10;
