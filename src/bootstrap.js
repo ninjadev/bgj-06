@@ -90,6 +90,7 @@ function bootstrap(){
   sm = new StateManager();
 
   Pot.prototype.sprite = loadImage("res/pot.png");
+  Rainbow.prototype.sprite = loadImage("res/rainbow.png");
 
   dt = 0;
   t = 0;
