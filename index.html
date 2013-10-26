@@ -102,6 +102,18 @@
                 width: 140px;
             }
 
+            .health {
+                position: absolute;
+                top: 10px;
+                background: white;
+                width: 180px;
+                left: 50%;
+                margin-left: -90px;
+            }
+
+            .health .value {
+                font-size: 18px;
+            }
              
         </style>
     </head>
@@ -131,6 +143,11 @@
     <div class="upgrades template">
         <h2>Upgrades</h2>
         <ul class="upgrade-container"></ul>
+    </div>
+
+    <div class="health template">
+        <h3>Health Remaning</h3>
+        <div class=value></div>
     </div>
 
     <script id="upgrade-template" type="text/x-handlebars-template">
