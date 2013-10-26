@@ -1,22 +1,22 @@
 function Laser(color, direction, speed){
   this.color = color;
   this.speed = speed;
-  this.setDirection(direction);
+  this.direction = direction;
 
   this.lightParticles = [];
 
   this.lastParticleSpawnTime = 0;
 }
 
-Laser.prototype.update = function(t){
-  this.setDirection(this.direction-this.speed);
+Laser.prototype.update = function(t, rotation){
+  var direction = this.getDirection(rotation);
 
   if (t-this.lastParticleSpawnTime >= 4) {
     this.lastParticleSpawnTime = t;
     this.lightParticles.push(new Particle(
       CENTER.x,
       CENTER.y,
-      this.direction,
+      direction,
       0.5,
       this.color,
       1
@@ -28,12 +28,8 @@ Laser.prototype.update = function(t){
   }
 }
 
-Laser.prototype.setDirection = function(direction) {
-  this.direction = direction % (Math.PI*2);
-  this.toPoint = {
-    x: Math.cos(direction)*8,
-    y: Math.sin(direction)*8
-  };
+Laser.prototype.getDirection = function(rotation) {
+  return this.direction + rotation;
 }
 
 Laser.prototype.render = function(){
