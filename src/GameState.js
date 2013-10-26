@@ -25,6 +25,15 @@ GameState.prototype.init = function(){
     dead: [loadImage('res/dog/dog-dead-1.png')]
   }
 
+  this.pinkbear_sprites = {
+    walking: (function(){
+        var frames = []; for(var i=1;i<=4;i++){
+            frames.push(loadImage('res/pinkbear/pinkbear-walking-' + i + '.png'));
+        } return frames;
+    })(),
+    dead: [loadImage('res/pinkbear/pinkbear-dead-1.png')]
+  }
+
   this.moneyEffects = [];
 
   this.achievements = new Achievements();
@@ -43,7 +52,11 @@ GameState.prototype.init = function(){
 
   this.enemies = [];
   for(var i = 0; i < 3; i++){
-    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites, this.enemyBounty);
+    this.enemies[i] = Enemy.spawnRandom(
+      this.enemyHP,
+      this.enemySpeed,
+      this.dog_sprites,
+      this.enemyBounty);
   }
 
   this.laserController = new LaserController();
@@ -87,7 +100,14 @@ GameState.prototype.update = function(){
 
   if (!this.isGameOver) {
     if(this.t % this.spawnRate == 0){
-      this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites, this.enemyBounty))
+      this.enemies.push(
+        Enemy.spawnRandom(
+          this.enemyHP,
+          this.enemySpeed,
+          Math.random() > 0.5 ? this.dog_sprites : this.pinkbear_sprites,
+          this.enemyBounty
+        )
+      )
     }
 
     for (var i=0;i<this.enemies.length;i++){
