@@ -28,7 +28,7 @@ Particle.prototype.render = function(ctx){
   /* draw a rectangle for now */
   ctx.save();
   ctx.globalAlpha = this.opacity;
-  ctx.strokeStyle = this.color; //TODO: let a variable hold the color
+  ctx.strokeStyle = this.color;
   ctx.beginPath();
   ctx.moveTo(this.position.x * GU, this.position.y * GU);
   var dx = this.speed.dx * 10;
