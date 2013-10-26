@@ -27,7 +27,7 @@ Achievements.prototype.give = function(achievement_key){
     achievement.achieved = true;
     var achievement_div = this.template.clone().removeClass('template');
     achievement_div.find('.image').attr('src',
-            '/res/achievements/' + achievement_key + '.png');
+            'res/achievements/' + achievement_key + '.png');
     achievement_div.find('.name').text(achievement.name);
     achievement_div.find('.description').text(achievement.description);
     Toast(achievement_div[0].outerHTML);
