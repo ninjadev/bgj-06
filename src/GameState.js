@@ -6,7 +6,7 @@ GameState.prototype.init = function(){
     this.t = 0;
     this.spawnRate = 100;
     this.enemyHP = 10;
-    this.enemySpeed = 0.03;
+    this.enemySpeed = 0.01;
 
     this.lasers = [];
     this.lasers[0] = new Laser("rgb(255,0,0)", Math.PI/4, Math.random()/2-.25);
@@ -48,7 +48,7 @@ GameState.prototype.update = function(){
 
   for (var i=0;i<this.lasers.length;i++){
     var laser = this.lasers[i];
-    laser.update();
+    laser.update(this.t);
   }
 
   for (var i=0;i<this.enemies.length;i++){
