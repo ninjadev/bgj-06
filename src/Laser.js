@@ -3,41 +3,30 @@ function Laser(color, direction, speed){
   this.speed = speed;
   this.direction = direction;
 
-  this.lightParticles = [];
-
-  this.lastParticleSpawnTime = 0;
+  this.endpoints = this.getEndpoints();
 }
 
 Laser.prototype.update = function(t, rotation){
-  var direction = this.getDirection(rotation);
-
-  if (t-this.lastParticleSpawnTime >= 4) {
-    this.lastParticleSpawnTime = t;
-    this.lightParticles.push(new Particle(
-      CENTER.x,
-      CENTER.y,
-      direction,
-      0.5,
-      this.color,
-      1
-    ));
-  }
-  for (var i=0;i<this.lightParticles.length;i++){
-    var particle = this.lightParticles[i];
-    if (!particle.update()) {
-      this.lightParticles[i] = this.lightParticles[this.lightParticles.length - 1]
-      this.lightParticles.pop();
-    }
-  }
+  this.endpoints = this.getEndpoints(rotation);
 }
 
-Laser.prototype.getDirection = function(rotation) {
-  return this.direction + rotation;
+Laser.prototype.getEndpoints = function(rotation) {
+  var direction = this.direction + rotation;
+  return {
+    x: Math.cos(direction)*8,
+    y: Math.sin(direction)*8
+  };
 }
 
 Laser.prototype.render = function(){
-  for (var i=0;i<this.lightParticles.length;i++){
-    var particle = this.lightParticles[i];
-    particle.render();
-  }
+  ctx.save();
+  ctx.strokeStyle = this.color;
+  ctx.beginPath();
+  ctx.moveTo(CENTER.x*GU, CENTER.y*GU);
+  ctx.lineTo(
+    (8+this.endpoints.x)*GU,
+    (4.5+this.endpoints.y)*GU
+  );
+  ctx.stroke();
+  ctx.restore();
 }
