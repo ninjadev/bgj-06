@@ -29,9 +29,9 @@ Particle.prototype.render = function(){
   var dy = this.speed.dy * 10;
   var length = Math.sqrt(dx * dx + dy * dy);
   if (length > 0.5) {
-    var scaler = 0.5 / length;
-    dx *= scaler;
-    dy *= scaler;
+    var speedScalar = 0.5 / length;
+    dx *= speedScalar;
+    dy *= speedScalar;
   }
   ctx.lineTo((this.position.x + dx) * GU, (this.position.y + dy) * GU);
   ctx.stroke();
