@@ -12,6 +12,14 @@ GameState.prototype.init = function(){
   this.pot = new Pot();
   this.cash = 0;
 
+  this.spawnRate = 100;
+  this.enemyHP = 10;
+  this.enemySpeed = 0.03;
+
+  this.enemies = [];
+  for(var i = 0; i < 3; i++){
+    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed);
+  }
 }
 
 GameState.prototype.pause = function(){
@@ -27,12 +35,27 @@ GameState.prototype.render = function(ctx){
     laser.render();
   }
   this.pot.render();
+
+  for (var i=0;i<this.enemies.length;i++){
+    var enemy = this.enemies[i];
+    enemy.render(ctx);
+  }
 }
 
 GameState.prototype.update = function(){
   this.t++;
+
+  if(this.t % this.spawnRate == 0){
+    this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed))
+  }
+
   for (var i=0;i<this.lasers.length;i++){
     var laser = this.lasers[i];
     laser.update(this.t);
+  }
+
+  for (var i=0;i<this.enemies.length;i++){
+    var enemy = this.enemies[i];
+    enemy.update();
   }
 }

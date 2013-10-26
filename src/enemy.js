@@ -1,4 +1,4 @@
-function enemy(x, y, hp, speed){
+function Enemy(x, y, hp, speed){
 	this.x = x;
 	this.y = y;
 
@@ -9,13 +9,13 @@ function enemy(x, y, hp, speed){
 	centery = 4.5; 
 }
 
-enemy.prototype.render = function(ctx){
+Enemy.prototype.render = function(ctx){
 
 	ctx.fillStyle = "#160590";
 	ctx.fillRect(this.x*GU,this.y*GU,40,40);
 }
 
-enemy.prototype.update = function(){
+Enemy.prototype.update = function(){
 	//Make a vector from enemy to center
 	var movex = centerx - this.x;
 	var movey = centery - this.y;
@@ -29,9 +29,27 @@ enemy.prototype.update = function(){
 	this.y += movey;
 }
 
-enemy.spawnrandom = function(hp, speed){
-	var x = 15;
-	var y = Math.random()*9;
-
-	return new enemy(x,y,hp,speed)
+Enemy.spawnRandom = function(hp, speed){
+	var side = Math.floor(Math.random()*4);
+	var x = 0;
+	var y = 0;
+	switch(side){
+	case 0:
+		x = 0;
+		y = Math.random()*9;
+		break;
+	case 1:
+		x = Math.random()*15;
+		y = 0;
+		break;
+	case 2:
+		x = 16;
+		y = Math.random()*9;
+		break;
+	case 3:
+		x = Math.random()*15;
+		y = 9;
+		break;
+	}
+	return new Enemy(x,y,hp,speed)
 }
