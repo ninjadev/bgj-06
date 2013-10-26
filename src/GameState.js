@@ -43,6 +43,7 @@ GameState.prototype.init = function(){
   this.laserController = new LaserController();
 
   this.audioButton = new AudioButton();
+  this.upgrades = new Upgrades(this);
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
