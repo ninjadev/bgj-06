@@ -1,30 +1,24 @@
 /**
  * @param x number (position)
  * @param y number (position)
- * @param width number
- * @param height number
  * @param color string, f.ex "rgb(167,236,238)"
  * @param intensity number
  */
-function Particle(x, y, width, height, color, intensity) {
+function Particle(x, y, direction, speed, color, intensity) {
   this.position = {
     x: x || 0,
     y: y || 0
   };
-  this.size = {
-    w: width || 0.1 * Math.random() * 3,
-    h: height || 0.1 * Math.random() * 3
-  };
   this.speed = {
-    dx: 0,
-    dy: 0
+    dx: Math.cos(direction)*speed,
+    dy: Math.sin(direction)*speed
   };
   this.opacity = 1;
   this.color = color;
   this.intensity = intensity;
 }
 
-Particle.prototype.render = function(ctx){
+Particle.prototype.render = function(){
   /* draw a rectangle for now */
   ctx.save();
   ctx.globalAlpha = this.opacity;

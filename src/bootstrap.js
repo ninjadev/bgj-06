@@ -74,6 +74,8 @@ function bootstrap(){
 
   sm = new StateManager();
 
+  Particle.prototype.sprite = loadImage("res/particle.png");
+
   dt = 0;
   t = 0;
   time = +new Date();
