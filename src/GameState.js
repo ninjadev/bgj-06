@@ -5,10 +5,6 @@ GameState.prototype.init = function(){
   this.elements = [];
   this.t = 0;
 
-  this.lasers = [];
-  this.lasers[0] = new Laser("rgb(255,0,0)", Math.PI/4, Math.random()/4-.125);
-  this.lasers[1] = new Laser("rgb(0,255,0)", -Math.PI/4, Math.random()/4-.125);
-
   this.pot = new Pot();
   this.cash = 0;
 
@@ -20,6 +16,8 @@ GameState.prototype.init = function(){
   for(var i = 0; i < 3; i++){
     this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed);
   }
+
+  this.laserController = new LaserController();
 }
 
 GameState.prototype.pause = function(){
@@ -30,16 +28,13 @@ GameState.prototype.resume = function(){
 }
 
 GameState.prototype.render = function(ctx){
-  for (var i=0;i<this.lasers.length;i++){
-    var laser = this.lasers[i];
-    laser.render();
-  }
   this.pot.render();
 
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
     enemy.render(ctx);
   }
+  this.laserController.render();
 }
 
 GameState.prototype.update = function(){
@@ -49,13 +44,9 @@ GameState.prototype.update = function(){
     this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed))
   }
 
-  for (var i=0;i<this.lasers.length;i++){
-    var laser = this.lasers[i];
-    laser.update(this.t);
-  }
-
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
     enemy.update();
   }
+  this.laserController.update(t);
 }
