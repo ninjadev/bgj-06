@@ -1,4 +1,12 @@
-function Particle(x, y, width, height) {
+/**
+ * @param x number (position)
+ * @param y number (position)
+ * @param width number
+ * @param height number
+ * @param color string, f.ex "rgb(167,236,238)"
+ * @param intensity number
+ */
+function Particle(x, y, width, height, color, intensity) {
   this.position = {
     x: x || 0,
     y: y || 0
@@ -12,13 +20,15 @@ function Particle(x, y, width, height) {
     dy: 0
   };
   this.opacity = 1;
+  this.color = color;
+  this.intensity = intensity;
 }
 
 Particle.prototype.render = function(ctx){
   /* draw a rectangle for now */
   ctx.save();
   ctx.globalAlpha = this.opacity;
-  ctx.strokeStyle = "rgb(167,236,238)"; //TODO: let a variable hold the color
+  ctx.strokeStyle = this.color;
   ctx.beginPath();
   ctx.moveTo(this.position.x * GU, this.position.y * GU);
   var dx = this.speed.dx * 10;
