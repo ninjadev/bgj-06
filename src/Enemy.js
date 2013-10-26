@@ -57,6 +57,7 @@ Enemy.prototype.update = function(){
       var index = sm.states.game.enemies.indexOf(this);
       sm.states.game.enemies.splice(index, 1);
       sm.states.game.cash.add(this.bounty);
+      sm.states.game.spawnMoneyEffect({x: this.x, y: this.y, amount: this.bounty});
     }
     return true;
   }
