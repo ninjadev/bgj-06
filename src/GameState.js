@@ -9,6 +9,15 @@ GameState.prototype.init = function(){
   ];
   this.t = 0;
 
+  this.dog_sprites = {
+    walking: (function(){
+        var frames = []; for(var i=1;i<=8;i++){
+            frames.push(loadImage('res/dog/dog-walking-' + i + '.png'));
+        } return frames;
+    })(),
+    dead: [loadImage('res/dog/dog-dead-1.png')]
+  }
+
   this.moneyEffects = [];
 
   this.achievements = new Achievements();
@@ -23,7 +32,7 @@ GameState.prototype.init = function(){
 
   this.enemies = [];
   for(var i = 0; i < 3; i++){
-    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed);
+    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites);
   }
 
   this.laserController = new LaserController();
@@ -62,7 +71,7 @@ GameState.prototype.update = function(){
   this.t++;
 
   if(this.t % this.spawnRate == 0){
-    this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed))
+    this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites))
   }
 
   for (var i=0;i<this.enemies.length;i++){
