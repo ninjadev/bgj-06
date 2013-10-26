@@ -10,6 +10,7 @@ GameState.prototype.init = function(){
   this.lasers[1] = new Laser("rgb(0,255,0)", -Math.PI/4, Math.random()/4-.125);
 
   this.pot = new Pot();
+  this.cash = 0;
 
 }
 
