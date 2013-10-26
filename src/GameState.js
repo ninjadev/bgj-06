@@ -105,5 +105,6 @@ GameState.prototype.update = function(){
 }
 
 GameState.prototype.gameOver = function() {
+  this.isGameOver = true;
   alert('Game over');
 }
