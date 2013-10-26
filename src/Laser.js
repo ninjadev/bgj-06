@@ -8,13 +8,14 @@ function Laser(color, direction, speed){
 
 Laser.prototype.update = function(t, rotation){
   this.endpoints = this.getEndpoints(rotation);
+  this.hittedEnemies = this.hits();
 }
 
 Laser.prototype.getEndpoints = function(rotation) {
   var direction = this.direction + rotation;
   return {
-    x: Math.cos(direction)*8,
-    y: Math.sin(direction)*8
+    x: 8 + Math.cos(direction)*8,
+    y: 4.5 + Math.sin(direction)*8
   };
 }
 
@@ -24,9 +25,19 @@ Laser.prototype.render = function(){
   ctx.beginPath();
   ctx.moveTo(CENTER.x*GU, CENTER.y*GU);
   ctx.lineTo(
-    (8+this.endpoints.x)*GU,
-    (4.5+this.endpoints.y)*GU
+    this.endpoints.x*GU,
+    this.endpoints.y*GU
   );
   ctx.stroke();
   ctx.restore();
+}
+
+Laser.prototype.hits = function () {
+  var enemies = sm.states.game.enemies
+    , hitted = [];
+  for (var i = 0; i < enemies.length; i++){
+    if (distToSegment({x: enemies[i].x, y: enemies[i].y}, CENTER, this.endpoints) < enemies[i].radius)
+      hitted.push(enemies[i]);
+  }
+  return hitted;
 }
