@@ -24,10 +24,16 @@ function Enemy(x, y, hp, speed, sprites, bounty){
 
 Enemy.prototype.render = function(ctx){
 
+  ctx.save();
   this.renderEffects(ctx);
   var sprite = this.sprites.walking[this.animation_ticker|0];
+  if(this.dead){
+    sprite = this.sprites.dead[0];
+    if(this.dead_time < 20){
+      ctx.globalAlpha = this.dead_time / 20;
+    }
+  }
   var scaler = sprite.width * GU * 0.000015 * 0.3;
-  ctx.save();
   ctx.translate(this.x * GU, this.y * GU);
   if(this.x > CENTER.x){
     ctx.scale(-scaler, scaler);
@@ -44,6 +50,16 @@ Enemy.prototype.render = function(ctx){
 Enemy.prototype.update = function(){
   this.speed = this.baseSpeed;
   this.effectsUpdate();
+
+  if(this.dead){
+    this.dead_time && this.dead_time--;
+    if(!this.dead_time){
+      var index = sm.states.game.enemies.indexOf(this);
+      sm.states.game.enemies.splice(index, 1);
+      sm.states.game.cash.add(this.bounty);
+    }
+    return true;
+  }
 
   //Make a vector from enemy to center
   var movex = CENTER.x - this.x;
@@ -110,9 +126,8 @@ Enemy.prototype.hit = function (damage) {
 }
 
 Enemy.prototype.kill = function () {
-  var index = sm.states.game.enemies.indexOf(this);
-  sm.states.game.enemies.splice(index, 1);
-  sm.states.game.cash.add(this.bounty);
+  this.dead = true;
+  this.dead_time = 100;
 }
 
 Enemy.prototype.effectsUpdate = function(){
