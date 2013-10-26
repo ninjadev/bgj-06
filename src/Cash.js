@@ -3,8 +3,9 @@
  * @param Achievements achievements
  * @constructor
  */
-function Cash(achievements){
+function Cash(achievements, game){
   this.achievements = achievements;
+  this.game = game;
   this.accumulatedAmount = 0;
   this.amount = 0;
   this.cash_display = $('.cash.template').clone()
@@ -23,13 +24,17 @@ Cash.prototype.add = function(amount){
     this.achievements.give('grand');
   }
   this.render();
+  this.game.upgrades.render();
 }
 
 Cash.prototype.spend = function(amount){
-  if (this.amount >= amount){
-    this.amount -= amount;
+  if (this.amount < amount) {
+    return false;
   }
+  this.amount -= amount;
   this.render();
+  this.game.upgrades.render();
+  return true;
 }
 Cash.prototype.render = function(){
   this.cash_display.find('.value').text('$' + this.amount);

@@ -11,6 +11,7 @@
         <script src=lib/StateManager.js></script>
         <script src=lib/canvas-dragdrop.js></script>
         <script src=lib/pointToLine.js></script>
+        <script src=lib/handlebars.js></script>
 
         <!-- src files -->
         <script src=src/Enemy.js></script>
@@ -88,6 +89,14 @@
                 width: 60px;
             }
 
+            .upgrades {
+                position: absolute;
+                top: 40px;
+                left: 10px;
+                background: white;
+                width: 140px;
+            }
+
              
         </style>
     </head>
@@ -96,7 +105,6 @@
             <source src="http://jord.al/bgj-06/music.mp3" type="audio/mpeg">
             <source src="http://jord.al/bgj-06/music.ogg" type="audio/ogg">
         </audio>
-    </body>
 
     <div class="toast template">
         <div class=message>
@@ -114,4 +122,20 @@
     <div class="cash template">
         <div class="value"></div>
     </div>
+
+    <div class="upgrades template">
+        <h2>Upgrades</h2>
+        <ul class="upgrade-container"></ul>
+    </div>
+
+    <script id="upgrade-template" type="text/x-handlebars-template">
+        <li class="upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
+            <strong>{{ name }}</strong>
+            $<span>{{ cost }}</span>
+            Stock: {{ stock }}
+            <button class=upgrade-purchase>Purchase</button>
+        </li>
+    </script>
+
+    </body>
 </html>
