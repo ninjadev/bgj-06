@@ -7,6 +7,14 @@ function Achievements(){
         first: {
             name: 'First click',
             description: 'Clicked for the first time!'
+        },
+        hundred: {
+            name: 'Hundred coins',
+            description: 'Yay! You have earned 100 coins!'
+        },
+        grand: {
+            name: 'A grand',
+            description: 'You have totally earned a grand! Awesome!'
         }
     };
 }
