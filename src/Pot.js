@@ -10,6 +10,9 @@ function Pot(hp) {
   this.clickScaler = 1;
 
   this.hp = hp;
+
+  $('.health').removeClass('template');
+  $('.health .value').html(this.hp);
 }
 
 Pot.prototype.render = function() {
@@ -32,7 +35,7 @@ Pot.prototype.click = function() {
 Pot.prototype.lostLife = function() {
   this.hp--;
 
-  console.log("Pot lost life, pot life is now: " + this.hp);
+  $('.health .value').html(this.hp);
   if (this.hp < 1) {
     return false;
   }
