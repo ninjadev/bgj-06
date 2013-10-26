@@ -33,10 +33,11 @@ GameState.prototype.init = function(){
   this.spawnRate = 100;
   this.enemyHP = 10;
   this.enemySpeed = 0.03;
+  this.enemyBounty = 10;
 
   this.enemies = [];
   for(var i = 0; i < 3; i++){
-    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites);
+    this.enemies[i] = Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites, this.enemyBounty);
   }
 
   this.laserController = new LaserController();
@@ -79,7 +80,7 @@ GameState.prototype.update = function(){
 
   if (!this.isGameOver) {
     if(this.t % this.spawnRate == 0){
-      this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites))
+      this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites, this.enemyBounty))
     }
 
     for (var i=0;i<this.enemies.length;i++){

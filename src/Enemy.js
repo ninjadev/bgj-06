@@ -1,4 +1,4 @@
-function Enemy(x, y, hp, speed, sprites){
+function Enemy(x, y, hp, speed, sprites, bounty){
   this.x = x;
   this.y = y;
 
@@ -12,6 +12,7 @@ function Enemy(x, y, hp, speed, sprites){
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
+  this.bounty = bounty;
 }
 
 Enemy.prototype.render = function(ctx){
@@ -56,14 +57,14 @@ Enemy.prototype.update = function(){
 
   this.animation_ticker += 0.2;
   while(this.animation_ticker >= this.sprites.walking.length){
-    console.log(this.sprites.walking.length);
+    //console.log(this.sprites.walking.length);
     this.animation_ticker -= this.sprites.walking.length;
   }
 
   return true;
 }
 
-Enemy.spawnRandom = function(hp, speed, sprites){
+Enemy.spawnRandom = function(hp, speed, sprites, bounty){
   var side = Math.floor(Math.random()*4);
   var x = 0;
   var y = 0;
@@ -85,7 +86,7 @@ Enemy.spawnRandom = function(hp, speed, sprites){
     y = 9;
     break;
   }
-  return new Enemy(x,y,hp,speed, sprites)
+  return new Enemy(x,y,hp,speed, sprites, bounty)
 }
 
 Enemy.prototype.hit = function (damage) {
@@ -95,4 +96,5 @@ Enemy.prototype.hit = function (damage) {
 Enemy.prototype.kill = function () {
   var index = sm.states.game.enemies.indexOf(this);
   sm.states.game.enemies.splice(index, 1);
+  sm.states.game.cash.add(this.bounty);
 }
