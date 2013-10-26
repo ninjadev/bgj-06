@@ -2,7 +2,6 @@ function Laser(color, direction, speed){
   this.color = color;
   this.speed = speed;
   this.setDirection(direction);
-
   this.lightParticles = [];
 
   this.lastParticleSpawnTime = 0;
