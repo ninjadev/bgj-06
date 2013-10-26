@@ -22,7 +22,7 @@ GameState.prototype.init = function(){
 
   this.achievements = new Achievements();
 
-  this.gameOver = false;
+  this.isGameOver = false;
 
   var playerHP = 20;
   this.pot = new Pot(playerHP);
@@ -73,7 +73,7 @@ GameState.prototype.render = function(ctx){
 GameState.prototype.update = function(){
   this.t++;
 
-  if (!this.gameOver) {
+  if (!this.isGameOver) {
     if(this.t % this.spawnRate == 0){
       this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites))
     }
