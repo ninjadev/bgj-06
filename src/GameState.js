@@ -14,7 +14,7 @@ GameState.prototype.init = function(){
   this.achievements = new Achievements();
 
   this.pot = new Pot();
-  this.cash = new Cash();
+  this.cash = new Cash(this.achievements);
 
   this.spawnRate = 100;
   this.enemyHP = 10;
