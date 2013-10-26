@@ -163,6 +163,8 @@ function getCookie(c_name) {
   }
 }
 function relMouseCoords(e){
+  e.preventDefault();
+  e.stopPropagation();
   var totalOffsetX = 0;
   var totalOffsetY = 0;
   var canvasX = 0;

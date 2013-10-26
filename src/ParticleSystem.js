@@ -2,7 +2,7 @@
 function ParticleSystem(){
   this.num_particles = 0;
   this.particles = [];
-  this.max_particles = 1024;
+  this.max_particles = 128;
   for(var i=0;i<this.max_particles;i++){
     this.particles[i] = {x:0,y:0,dx:0,dy:0,t:0};
   }
@@ -36,7 +36,7 @@ ParticleSystem.prototype.render = function(ctx){
   for(var i=0;i<this.num_particles;i++){
     var p = this.particles[i];
     ctx.fillStyle = "rgba(32,32,32,"+Math.min(1,p.t/20)+")";
-    ctx.fillRect(p.x*GU,p.y*GU,GU*0.1,GU*0.1);
+    ctx.fillRect(p.x*GU,p.y*GU,GU*0.12,GU*0.12);
   }
   ctx.restore();
 }
