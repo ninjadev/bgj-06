@@ -34,6 +34,22 @@ function Upgrades(game) {
       },
       stock: 1
     },
+    {
+      cost: 10,
+      name: "Red laser",
+      init: function() {
+        that.game.laserController.addLaser(Colors.RED);
+      },
+      stock: 1
+    },
+    {
+      cost: 10,
+      name: "Purple laser",
+      init: function() {
+        that.game.laserController.addLaser(Colors.PURPLE);
+      },
+      stock: 1
+    },
   ];
   this.upgrade_menu = $('.upgrades.template').clone()
     .removeClass('template');
