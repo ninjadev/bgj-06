@@ -2,10 +2,29 @@ function Laser(color, direction, speed){
   this.color = color;
   this.speed = speed;
   this.setDirection(direction);
+  this.lightParticles = [];
+
+  this.lastParticleSpawnTime = 0;
 }
 
-Laser.prototype.update = function(){
+Laser.prototype.update = function(t){
   this.setDirection(this.direction-this.speed);
+
+  if (t-this.lastParticleSpawnTime >= 4) {
+    this.lastParticleSpawnTime = t;
+    this.lightParticles.push(new Particle(
+      CENTER.x,
+      CENTER.y,
+      this.direction,
+      0.5,
+      this.color,
+      1
+    ));
+  }
+  for (var i=0;i<this.lightParticles.length;i++){
+    var particle = this.lightParticles[i];
+    particle.update();
+  }
 }
 
 Laser.prototype.setDirection = function(direction) {
@@ -17,15 +36,8 @@ Laser.prototype.setDirection = function(direction) {
 }
 
 Laser.prototype.render = function(){
-  ctx.save();
-  ctx.strokeStyle = this.color;
-  ctx.beginPath();
-  ctx.moveTo(8*GU, 4.5*GU);
-  ctx.lineTo(
-    (8+this.toPoint.x)*GU,
-    (4.5+this.toPoint.y)*GU
-  );
-  ctx.stroke();
-
-  ctx.restore();
+  for (var i=0;i<this.lightParticles.length;i++){
+    var particle = this.lightParticles[i];
+    particle.render();
+  }
 }
