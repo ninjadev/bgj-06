@@ -24,13 +24,6 @@ LaserController.prototype.addLaser = function(color) {
 }
 
 LaserController.prototype.update = function(t){
-  if (KEYS[37]) {
-    this.rotation -= .05;
-  }
-  if (KEYS[39]) {
-    this.rotation += .05;
-  }
-
   for (var i=0;i<this.lasers.length;i++){
     var laser = this.lasers[i];
     laser.update(t, this.rotation);
