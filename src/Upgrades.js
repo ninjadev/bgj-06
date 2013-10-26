@@ -36,9 +36,9 @@ function Upgrades(game) {
     },
     {
       cost: 10,
-      name: "Red laser",
+      name: "Pink laser",
       init: function() {
-        that.game.laserController.addLaser(Colors.RED);
+        that.game.laserController.addLaser(Colors.PINK);
       },
       stock: 1
     },
