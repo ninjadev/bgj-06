@@ -22,7 +22,10 @@ GameState.prototype.init = function(){
 
   this.achievements = new Achievements();
 
-  this.pot = new Pot();
+  this.isGameOver = false;
+
+  var playerHP = 20;
+  this.pot = new Pot(playerHP);
   this.rainbow = new Rainbow();
   this.cash = new Cash(this.achievements);
 
@@ -70,24 +73,38 @@ GameState.prototype.render = function(ctx){
 GameState.prototype.update = function(){
   this.t++;
 
-  if(this.t % this.spawnRate == 0){
-    this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites))
-  }
-
-  for (var i=0;i<this.enemies.length;i++){
-    var enemy = this.enemies[i];
-    enemy.update();
-  }
-
-  this.laserController.update(t);
-
-  for (var i=0;i<this.moneyEffects.length;i++){
-    var moneyEffect = this.moneyEffects[i];
-    if(!moneyEffect.update()){
-      this.moneyEffects[i] = this.moneyEffects[this.moneyEffects.length-1];
-      this.moneyEffects.pop();
+  if (!this.isGameOver) {
+    if(this.t % this.spawnRate == 0){
+      this.enemies.push(Enemy.spawnRandom(this.enemyHP,this.enemySpeed, this.dog_sprites))
     }
-  }
 
-  this.pot.update();
+    for (var i=0;i<this.enemies.length;i++){
+      var enemy = this.enemies[i];
+      if (!enemy.update()) {
+        this.enemies[i] = this.enemies[this.enemies.length - 1];
+        this.enemies.pop();
+        if (!this.pot.lostLife()) {
+          this.gameOver();       
+          break;
+        }
+      }
+    }
+
+    this.laserController.update(t);
+
+    for (var i=0;i<this.moneyEffects.length;i++){
+      var moneyEffect = this.moneyEffects[i];
+      if(!moneyEffect.update()){
+        this.moneyEffects[i] = this.moneyEffects[this.moneyEffects.length-1];
+        this.moneyEffects.pop();
+      }
+    }
+
+    this.pot.update();
+  }
+}
+
+GameState.prototype.gameOver = function() {
+  this.isGameOver = true;
+  alert('Game over');
 }

@@ -101,12 +101,11 @@ function bootstrap(){
 
   canvas.addEventListener("mousemove", handleEvent);
 
+  resize();
+
   /* add game states here */
 
   sm.addState("game", new GameState());
-
-
-  resize();
 
   document.body.appendChild(canvas);
 
