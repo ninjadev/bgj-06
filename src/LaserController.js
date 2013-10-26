@@ -1,7 +1,16 @@
-function LaserController(){
+function LaserController() {
   this.rotation = 0;
   this.lasers = [];
   this.addLaser(Colors.RED);
+  this.startingRotation = null;
+  this.startingAngle = null;
+  var that = this;
+  canvas.addEventListener("mousedown", function(e) { that.start(e); });
+  canvas.addEventListener("touchstart", function(e) { that.start(e); });
+  canvas.addEventListener("mousemove", function(e) { that.move(e); });
+  canvas.addEventListener("touchmove", function(e) { that.move(e); });
+  canvas.addEventListener("mouseup", function(e) { that.end(e); });
+  canvas.addEventListener("touchend", function(e) { that.end(e); });
 }
 
 LaserController.prototype.addLaser = function(color) {
@@ -16,10 +25,10 @@ LaserController.prototype.addLaser = function(color) {
 
 LaserController.prototype.update = function(t){
   if (KEYS[37]) {
-    this.rotation -= .1;
+    this.rotation -= .05;
   }
   if (KEYS[39]) {
-    this.rotation += .1;
+    this.rotation += .05;
   }
 
   for (var i=0;i<this.lasers.length;i++){
@@ -34,3 +43,29 @@ LaserController.prototype.render = function(){
     laser.render();
   }
 }
+
+LaserController.prototype.start = function(e) {
+  this.startingRotation = this.rotation;
+  var startingPoint = relMouseCoords(e);
+  var dx = CENTER.x - startingPoint.x;
+  var dy = CENTER.y - startingPoint.y;
+  this.startingAngle = Math.atan2(dx, dy);
+}
+
+LaserController.prototype.move = function(e) {
+  if (this.startingRotation === null) {
+    return;
+  }
+  var currentPoint = relMouseCoords(e);
+  var dx = CENTER.x - currentPoint.x;
+  var dy = CENTER.y - currentPoint.y;
+  var currentAngle = Math.atan2(dx, dy);
+  var angleDelta = this.startingAngle - currentAngle;
+  this.rotation = this.startingRotation + angleDelta;
+}
+
+LaserController.prototype.end = function(e) {
+  this.startingAngle = null;
+  this.startingRotation = null;
+}
+
