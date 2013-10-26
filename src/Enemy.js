@@ -1,16 +1,17 @@
 function Enemy(x, y, hp, speed, sprites){
-	this.x = x;
-	this.y = y;
+  this.x = x;
+  this.y = y;
 
     this.sprites = sprites;
 
-	this.hp = hp;
-	this.speed = speed;
+  this.hp = hp;
+  this.speed = speed;
   this.killRadius = 0.0086*GU;
 
   this.width = 40;
   this.height = 40;
   this.animation_ticker = 0;
+  this.radius = 0.5;
 }
 
 Enemy.prototype.render = function(ctx){
@@ -32,22 +33,26 @@ Enemy.prototype.render = function(ctx){
 }
 
 Enemy.prototype.update = function(){
-	//Make a vector from enemy to center
-	var movex = CENTER.x - this.x;
-	var movey = CENTER.y - this.y;
-	var len = Math.sqrt(movex*movex + movey*movey);
+  //Make a vector from enemy to center
+  var movex = CENTER.x - this.x;
+  var movey = CENTER.y - this.y;
+  var len = Math.sqrt(movex*movex + movey*movey);
 
   if (len < this.killRadius) {
     return false;
   }
 
-	//Scale it to 1 amd multiply with speed
-	movex = this.speed * movex/len;
-	movey = this.speed * movey/len;
-	//Multiply with speed
+  //Scale it to 1 amd multiply with speed
+  movex = this.speed * movex/len;
+  movey = this.speed * movey/len;
+  //Multiply with speed
 
-	this.x += movex;
-	this.y += movey;
+  this.x += movex;
+  this.y += movey;
+
+  if (this.hp <= 0) {
+    this.kill();
+  }
 
   this.animation_ticker += 0.2;
   while(this.animation_ticker >= this.sprites.walking.length){
@@ -59,26 +64,35 @@ Enemy.prototype.update = function(){
 }
 
 Enemy.spawnRandom = function(hp, speed, sprites){
-	var side = Math.floor(Math.random()*4);
-	var x = 0;
-	var y = 0;
-	switch(side){
-	case 0:
-		x = 0;
-		y = Math.random()*9;
-		break;
-	case 1:
-		x = Math.random()*15;
-		y = 0;
-		break;
-	case 2:
-		x = 16;
-		y = Math.random()*9;
-		break;
-	case 3:
-		x = Math.random()*15;
-		y = 9;
-		break;
-	}
-	return new Enemy(x,y,hp,speed, sprites)
+  var side = Math.floor(Math.random()*4);
+  var x = 0;
+  var y = 0;
+  switch(side){
+  case 0:
+    x = 0;
+    y = Math.random()*9;
+    break;
+  case 1:
+    x = Math.random()*15;
+    y = 0;
+    break;
+  case 2:
+    x = 16;
+    y = Math.random()*9;
+    break;
+  case 3:
+    x = Math.random()*15;
+    y = 9;
+    break;
+  }
+  return new Enemy(x,y,hp,speed, sprites)
+}
+
+Enemy.prototype.hit = function (damage) {
+  this.hp -= damage;
+}
+
+Enemy.prototype.kill = function () {
+  var index = sm.states.game.enemies.indexOf(this);
+  sm.states.game.enemies.splice(index, 1);
 }

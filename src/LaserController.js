@@ -8,7 +8,8 @@ LaserController.prototype.addLaser = function(color) {
   var laser = new Laser(
     color,
     this.lasers.length * Math.PI * 2 / 7,
-    1
+    1,
+    0.5
   );
   this.lasers.push(laser);
 }
