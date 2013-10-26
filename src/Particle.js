@@ -1,6 +1,6 @@
 function Particle(x, y, width, height) {
   this.position = {
-    x :x || 0,
+    x: x || 0,
     y: y || 0
   };
   this.size = {
@@ -8,7 +8,7 @@ function Particle(x, y, width, height) {
     h: height || 0.1 * Math.random() * 3
   };
   this.speed = {
-    dx:0,
+    dx: 0,
     dy: 0
   };
   this.opacity = 1;
@@ -44,7 +44,7 @@ Particle.prototype.render = function(ctx){
 Particle.prototype.update = function(){
   this.position.x += this.speed.dx;
   this.position.y += this.speed.dy;
-  var speed = Math.sqrt(this.speed.dx*this.speed.dx + this.speed.dy*this.speed.dy);
+  var speed = Math.sqrt(this.speed.dx * this.speed.dx + this.speed.dy * this.speed.dy);
   if (speed > this.MAX_SPEED) {
     var scaler = this.MAX_SPEED / speed;
     this.speed.dx *= scaler;
