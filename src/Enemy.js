@@ -128,6 +128,7 @@ Enemy.prototype.hit = function (damage) {
 Enemy.prototype.kill = function () {
   this.dead = true;
   this.dead_time = 100;
+  sm.states.game.spawnMoneyEffect({x: this.x, y: this.y - 1, amount: this.bounty});
 }
 
 Enemy.prototype.effectsUpdate = function(){
