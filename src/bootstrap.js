@@ -1,5 +1,10 @@
 DEBUG = true;
 
+CENTER = {
+  x: 8,
+  y: 4.5
+};
+
 missedGFXFrames = 0;
 
 /* smoothstep interpolates between a and b, at time t from 0 to 1 */
