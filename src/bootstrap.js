@@ -89,7 +89,6 @@ function bootstrap(){
 
   sm = new StateManager();
 
-  Particle.prototype.sprite = loadImage("res/particle.png");
   Pot.prototype.sprite = loadImage("res/pot.png");
 
   dt = 0;
