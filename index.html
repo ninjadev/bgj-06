@@ -23,6 +23,7 @@
         <script src=src/Particle.js></script>
         <script src=src/Toast.js></script>
         <script src=src/Achievements.js></script>
+        <script src=src/Cash.js></script>
         <script src=src/Colors.js></script>
 
         <style>
@@ -61,6 +62,14 @@
                 margin-right: 10px;
             }
 
+            .cash {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: white;
+                width: 60px;
+            }
+
              
         </style>
     </head>
@@ -78,5 +87,9 @@
             <div class=name></div>
             <div class=description></div>
         </div>
+    </div>
+
+    <div class="cash template">
+        <div class="value"></div>
     </div>
 </html>
