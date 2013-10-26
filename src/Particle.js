@@ -48,6 +48,9 @@ Particle.prototype.render = function(){
 Particle.prototype.update = function(){
   this.position.x += this.speed.dx;
   this.position.y += this.speed.dy;
+  if (this.position.x < -1 || this.position.x > 17 || this.position.y < -1 || this.position.y > 10) {
+    return false;
+  }
   var speed = Math.sqrt(this.speed.dx * this.speed.dx + this.speed.dy * this.speed.dy);
   if (speed > this.MAX_SPEED) {
     var scaler = this.MAX_SPEED / speed;
@@ -58,6 +61,7 @@ Particle.prototype.update = function(){
   } else {
     this.opacity = 1;
   }
+  return true;
 }
 
 Particle.prototype.MAX_SPEED = 1;
