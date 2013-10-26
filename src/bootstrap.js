@@ -98,6 +98,8 @@ function bootstrap(){
     KEYS[e.keyCode] = false;
   });
 
+  canvas.addEventListener("mousemove", handleEvent);
+
   /* add game states here */
 
   sm.addState("game", new GameState());
@@ -178,13 +180,14 @@ function relMouseCoords(e){
   return {x:canvasX/GU, y:canvasY/GU}
 }
 
-document.addEventListener('click', yo);
-document.addEventListener('touchstart', yo);
+document.addEventListener('click', handleEvent);
+document.addEventListener('touchstart', handleEvent);
 document.addEventListener('touchmove', function(e){e.preventDefault();e.stopPropagation();return false;});
 
-function yo(e){
+function handleEvent(e){
   e.preventDefault();
   mouseXY = relMouseCoords(e);
+  var eventType = (e.type === "mousemove" || e.type === "touchmove" ? "hover" : "click");
   var clickables;
   if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
     clickables = sm.activeState.gameMenuWindow.buttons;
@@ -192,16 +195,22 @@ function yo(e){
     clickables = sm.activeState.elements;
   }
   var coordX, coordY, sizeX, sizeY;
+  var hoverOverClickable = false;
   for(var i=0; i<clickables.length;i++){
     coordX = clickables[i][1].x;
     coordY = clickables[i][1].y;
     sizeX = clickables[i][1].w;
     sizeY = clickables[i][1].h;
     if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
-      clickables[i][0](clickables[i].slice(2)); 
+      if (eventType === "click") {
+        clickables[i][0](clickables[i].slice(2));
+      } else if (eventType === "hover") {
+        hoverOverClickable = true;
+      }
       break;
     }
   }
+  $("canvas").css('cursor', hoverOverClickable ? "pointer" : "auto");
 }
 
 window.onresize = resize;
