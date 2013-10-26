@@ -5,7 +5,7 @@ GameState.prototype.init = function(){
 
   var that = this;
   this.elements = [
-    [function(){that.achievements.give('first'); that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1}); that.cash.add(1);}, {x:7.5, y:4, w:1, h:1}]
+    [function(){that.achievements.give('first'); that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1}); that.cash.add(1); that.pot.click();}, {x:7.5, y:4, w:1, h:1}]
   ];
   this.t = 0;
 
@@ -77,4 +77,6 @@ GameState.prototype.update = function(){
       this.moneyEffects.pop();
     }
   }
+
+  this.pot.update();
 }
