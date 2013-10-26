@@ -81,6 +81,8 @@ function bootstrap(){
 
   Pot.prototype.sprite = loadImage("res/pot.png");
   Rainbow.prototype.sprite = loadImage("res/rainbow.png");
+  AudioButton.prototype.sprite_on = loadImage("res/audio_on.png");
+  AudioButton.prototype.sprite_off = loadImage("res/audio_off.png");
 
   dt = 0;
   t = 0;

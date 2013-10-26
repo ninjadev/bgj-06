@@ -5,7 +5,8 @@ GameState.prototype.init = function(){
 
   var that = this;
   this.elements = [
-    [function(){that.achievements.give('first'); that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1}); that.cash.add(1); that.pot.click();}, {x:7.5, y:4, w:1, h:1}]
+    [function(){that.achievements.give('first'); that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1}); that.cash.add(1); that.pot.click();}, {x:7.5, y:4, w:1, h:1}],
+    [function(){that.audioButton.toggleActivated();}, {x:15, y:0, w:1, h:1}]
   ];
   this.t = 0;
 
@@ -39,6 +40,8 @@ GameState.prototype.init = function(){
   }
 
   this.laserController = new LaserController();
+
+  this.audioButton = new AudioButton();
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
@@ -56,6 +59,7 @@ GameState.prototype.resume = function(){
 GameState.prototype.render = function(ctx){
   this.pot.render();
   this.rainbow.render();
+  this.audioButton.render();
 
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
