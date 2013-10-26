@@ -14,6 +14,7 @@ GameState.prototype.init = function(){
   this.achievements = new Achievements();
 
   this.pot = new Pot();
+  this.rainbow = new Rainbow();
   this.cash = new Cash(this.achievements);
 
   this.spawnRate = 100;
@@ -42,6 +43,7 @@ GameState.prototype.resume = function(){
 
 GameState.prototype.render = function(ctx){
   this.pot.render();
+  this.rainbow.render();
 
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
