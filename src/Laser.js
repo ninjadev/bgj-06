@@ -24,7 +24,10 @@ Laser.prototype.update = function(t, rotation){
   }
   for (var i=0;i<this.lightParticles.length;i++){
     var particle = this.lightParticles[i];
-    particle.update();
+    if (!particle.update()) {
+      this.lightParticles[i] = this.lightParticles[this.lightParticles.length - 1]
+      this.lightParticles.pop();
+    }
   }
 }
 
