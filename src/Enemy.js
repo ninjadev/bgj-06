@@ -57,7 +57,6 @@ Enemy.prototype.update = function(){
 
   this.animation_ticker += 0.2;
   while(this.animation_ticker >= this.sprites.walking.length){
-    //console.log(this.sprites.walking.length);
     this.animation_ticker -= this.sprites.walking.length;
   }
 
