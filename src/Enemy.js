@@ -1,18 +1,33 @@
-function Enemy(x, y, hp, speed){
+function Enemy(x, y, hp, speed, sprites){
 	this.x = x;
 	this.y = y;
+
+    this.sprites = sprites;
 
 	this.hp = hp;
 	this.speed = speed;
 
   this.width = 40;
   this.height = 40;
+  this.animation_ticker = 0;
 }
 
 Enemy.prototype.render = function(ctx){
 
-	ctx.fillStyle = "#160590";
-	ctx.fillRect(this.x*GU - this.width/2, this.y*GU - this.height/2, this.width, this.height);
+    var sprite = this.sprites.walking[this.animation_ticker|0];
+    var scaler = sprite.width * GU * 0.000015 * 0.3;
+    ctx.save();
+    ctx.translate(this.x * GU, this.y * GU);
+    if(this.x > CENTER.x){
+        ctx.scale(-scaler, scaler);
+    }else{
+        ctx.scale(scaler, scaler);
+    }
+
+    ctx.rotate((CENTER.y - this.y) / 8);
+
+    ctx.drawImage(sprite, -sprite.width / 2, - sprite.height / 2);
+    ctx.restore();
 }
 
 Enemy.prototype.update = function(){
@@ -27,9 +42,15 @@ Enemy.prototype.update = function(){
 
 	this.x += movex;
 	this.y += movey;
+
+    this.animation_ticker += 0.2;
+    while(this.animation_ticker >= this.sprites.walking.length){
+        console.log(this.sprites.walking.length);
+        this.animation_ticker -= this.sprites.walking.length;
+    }
 }
 
-Enemy.spawnRandom = function(hp, speed){
+Enemy.spawnRandom = function(hp, speed, sprites){
 	var side = Math.floor(Math.random()*4);
 	var x = 0;
 	var y = 0;
@@ -51,5 +72,5 @@ Enemy.spawnRandom = function(hp, speed){
 		y = 9;
 		break;
 	}
-	return new Enemy(x,y,hp,speed)
+	return new Enemy(x,y,hp,speed, sprites)
 }
