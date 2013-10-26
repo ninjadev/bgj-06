@@ -6,6 +6,7 @@ function Enemy(x, y, hp, speed, sprites){
 
 	this.hp = hp;
 	this.speed = speed;
+  this.killRadius = 0.0086*GU;
 
   this.width = 40;
   this.height = 40;
@@ -34,7 +35,12 @@ Enemy.prototype.update = function(){
 	//Make a vector from enemy to center
 	var movex = CENTER.x - this.x;
 	var movey = CENTER.y - this.y;
-	var len = Math.sqrt(movex*movex + movey*movey)
+	var len = Math.sqrt(movex*movex + movey*movey);
+
+  if (len < this.killRadius) {
+    return false;
+  }
+
 	//Scale it to 1 amd multiply with speed
 	movex = this.speed * movex/len;
 	movey = this.speed * movey/len;
@@ -43,11 +49,13 @@ Enemy.prototype.update = function(){
 	this.x += movex;
 	this.y += movey;
 
-    this.animation_ticker += 0.2;
-    while(this.animation_ticker >= this.sprites.walking.length){
-        console.log(this.sprites.walking.length);
-        this.animation_ticker -= this.sprites.walking.length;
-    }
+  this.animation_ticker += 0.2;
+  while(this.animation_ticker >= this.sprites.walking.length){
+    console.log(this.sprites.walking.length);
+    this.animation_ticker -= this.sprites.walking.length;
+  }
+
+  return true;
 }
 
 Enemy.spawnRandom = function(hp, speed, sprites){
