@@ -19,6 +19,7 @@
         <script src=src/Laser.js></script>
         <script src=src/Pot.js></script>
         <script src=src/Particle.js></script>
+        <script src=src/Toast.js></script>
 
         <style>
             *{
@@ -31,8 +32,29 @@
                 overflow:hidden;
                 background:black;
             }
+
+            .toast {
+                position: relative;
+                top: 75%;
+                margin-left: 0 auto;
+                background: white;
+                padding: 20px;
+                text-align: center;
+                font-size: 40px;
+                display: none;
+            }
+
+            .template {
+                display: none;
+            }
+             
         </style>
     </head>
     <body onload="bootstrap()">
     </body>
+
+    <div class="toast template">
+        <div class=message>
+        </div>
+    </div>
 </html>
