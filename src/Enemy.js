@@ -11,6 +11,7 @@ function Enemy(x, y, hp, speed, sprites){
   this.width = 40;
   this.height = 40;
   this.animation_ticker = 0;
+  this.radius = 20;
 }
 
 Enemy.prototype.render = function(ctx){
@@ -81,4 +82,8 @@ Enemy.spawnRandom = function(hp, speed, sprites){
 		break;
 	}
 	return new Enemy(x,y,hp,speed, sprites)
+}
+
+Enemy.prototype.hit = function (damage) {
+	this.hp -= damage;
 }

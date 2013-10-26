@@ -1,7 +1,8 @@
-function Laser(color, direction, speed){
+function Laser(color, direction, speed, damage){
   this.color = color;
   this.speed = speed;
   this.direction = direction;
+  this.damage = damage;
 
   this.endpoints = this.getEndpoints();
 }
@@ -33,11 +34,10 @@ Laser.prototype.render = function(){
 }
 
 Laser.prototype.hits = function () {
-  var enemies = sm.states.game.enemies
-    , hitted = [];
+  var enemies = sm.states.game.enemies;
   for (var i = 0; i < enemies.length; i++){
-    if (distToSegment({x: enemies[i].x, y: enemies[i].y}, CENTER, this.endpoints) < enemies[i].radius)
-      hitted.push(enemies[i]);
+    if (distToSegment({x: enemies[i].x, y: enemies[i].y}, CENTER, this.endpoints) < enemies[i].radius){
+      enemies[i].hit(this.damage);
+    }
   }
-  return hitted;
 }
