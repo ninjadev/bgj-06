@@ -12,7 +12,7 @@ function Enemy(x, y, hp, speed, sprites, bounty){
 
   //Example of how to add enemy
   //TODO: Remove me
-  //this.addEffect(new SpeedEffect(0.5));
+  //this.addEffect(new DotEffect(0.3));
 
 
   this.width = 40;
