@@ -5,8 +5,10 @@ function Rainbow() {
   };
 
   this.ps = new ParticleSystem();
-  this.ps_timer = 10;
+  this.ps_timer = this.psTimerInterval;
 }
+
+Rainbow.prototype.psTimerInterval = 12;
 
 Rainbow.prototype.render = function() {
   ctx.save();
@@ -22,7 +24,7 @@ Rainbow.prototype.update = function(){
   this.ps.update();
   this.ps_timer--;
   if(!this.ps_timer){
-        this.ps_timer = 10;
+        this.ps_timer = this.psTimerInterval;
         this.ps.explode(CENTER.x, CENTER.y, 2);
   }
 }

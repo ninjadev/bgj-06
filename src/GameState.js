@@ -6,7 +6,7 @@ GameState.prototype.init = function(){
   var that = this;
   this.elements = [
     [function(){
-      that.rainbow.ps.explode(CENTER.x, CENTER.y, 50);
+      that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
       that.achievements.give('first');
       that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1});
       that.cash.add(1);
