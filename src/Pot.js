@@ -2,12 +2,14 @@
  * No, we're not talking about marihuana
  * @constructor
  */
-function Pot() {
+function Pot(hp) {
   this.position = {
     x: CENTER.x,
     y: CENTER.y
   };
   this.clickScaler = 1;
+
+  this.hp = hp;
 }
 
 Pot.prototype.render = function() {
@@ -25,4 +27,15 @@ Pot.prototype.update = function(){
 
 Pot.prototype.click = function() {
   this.clickScaler = 0.8;
+}
+
+Pot.prototype.lostLife = function() {
+  this.hp--;
+
+  console.log("Pot lost life, pot life is now: " + this.hp);
+  if (this.hp < 1) {
+    return false;
+  }
+
+  return true;
 }

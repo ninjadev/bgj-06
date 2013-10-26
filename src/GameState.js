@@ -22,7 +22,8 @@ GameState.prototype.init = function(){
 
   this.achievements = new Achievements();
 
-  this.pot = new Pot();
+  var playerHP = 20;
+  this.pot = new Pot(playerHP);
   this.rainbow = new Rainbow();
   this.cash = new Cash(this.achievements);
 
@@ -76,7 +77,14 @@ GameState.prototype.update = function(){
 
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
-    enemy.update();
+    if (!enemy.update()) {
+      this.enemies[i] = this.enemies[this.enemies.length - 1];
+      this.enemies.pop();
+      if (!this.pot.lostLife()) {
+        this.gameOver();       
+        break;
+      }
+    }
   }
 
   this.laserController.update(t);
@@ -90,4 +98,8 @@ GameState.prototype.update = function(){
   }
 
   this.pot.update();
+}
+
+GameState.prototype.gameOver = function() {
+  
 }
