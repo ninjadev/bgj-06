@@ -212,7 +212,7 @@ function Upgrades(game) {
     },
 
     {
-      cost: 1000,
+      cost: 100,
       name: "Slowmolizer",
       img: 'slowmolize.png',
       description: "Awesome triggeable super ability.",
@@ -225,7 +225,7 @@ function Upgrades(game) {
       dependencies: ["Blue Laser"]
     },
     {
-      cost: 10000,
+      cost: 100,
       name: "Blast",
       img: 'blast.png',
       init: function() {
