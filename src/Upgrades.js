@@ -175,6 +175,7 @@ function Upgrades(game) {
       cost: 10000,
       level: 1,
       name: "Cold Rotation",
+      img: 'blue_rotate.png',
       description: "Hire a leprechaun to turn the blue beam for you.",
       init: function() {
         //TODO implement.
@@ -260,6 +261,7 @@ function Upgrades(game) {
       cost: 10000,
       level: 1,
       name: "Green Rotation",
+      img: 'green_rotate.png',
       description: "Hire leprechauns to turn the green beam.",
       init: function() {
         //TODO implement.
