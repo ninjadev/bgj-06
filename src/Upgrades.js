@@ -38,7 +38,7 @@ function Upgrades(game) {
       name: "Blue laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 100, 40)}));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 50, 40)}));
         that.game.achievements.give('blue_laser');
       },
       stock: 1
@@ -63,7 +63,7 @@ function Upgrades(game) {
       cost: 25,
       name: "Slo'mo'alizer",
       init: function() {
-        that.game.activateSpecialWeapon("slomoalizer", 0.5, 2.5);
+        that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
       },
       stock: -1
     },
