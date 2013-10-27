@@ -7,7 +7,6 @@ Toast = (function(){
     });
 
     function Toast(message){
-        console.log(toast_template, message);
         toast_queue.push(message);
         if (active_toast == undefined) {
           printMessage(toast_queue.shift());
@@ -41,7 +40,7 @@ Toast = (function(){
             toast.fadeOut(500, function(){
                 toast.remove();
             });
-        }, 3000);
+        }, 3000 + 32 * (message.length - 200));
     }
 
     return Toast;

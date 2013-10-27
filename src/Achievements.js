@@ -64,24 +64,31 @@ function Achievements(){
             description: 'Man, you are really killing it!'
         },
         afford_red_laser: {
-            name: 'Spend your first dollars',
-            description: 'Now, buy a red laser, so you can take case of thiefs.'
+            name: 'Spend your first coins',
+            description: 'Now, buy a red laser, so you can take care of thiefs.',
+            custom_image: 'red_laser' /*TODO: perhaps make an icon with coins on it instead? */
+        },
+        first_wave_completed: {
+            name: 'First wave completed',
+            description: "Alright, no enemies in sight. Click the pot to get more gold while you can!",
+            custom_image: 'first'
         }
     };
 }
 
 Achievements.prototype.give = function(achievement_key){
-    var achievement = this.achievements[achievement_key];
-    if(achievement.achieved){
-        return;
-    }
-    achievement.achieved = true;
-    var achievement_div = this.template.clone().removeClass('template');
-    achievement_div.find('.image').attr('src',
-            'res/achievements/' + achievement_key + '.png');
-    achievement_div.find('.name').text(achievement.name);
-    achievement_div.find('.description').text(achievement.description);
-    Toast(achievement_div[0].outerHTML);
-    var chord = Math.random() > 0.5 ? 'S' : 'T';
-    createjs.Sound.play('res/achievement-'+chord+'.mp3|res/achievement-'+chord+'.ogg');
+  var achievement = this.achievements[achievement_key];
+  if (achievement.achieved) {
+      return;
+  }
+  achievement.achieved = true;
+  var achievement_div = this.template.clone().removeClass('template');
+  var image_key = achievement.hasOwnProperty('custom_image') ? achievement.custom_image : achievement_key;
+  achievement_div.find('.image').attr('src',
+          'res/achievements/' + image_key + '.png');
+  achievement_div.find('.name').text(achievement.name);
+  achievement_div.find('.description').text(achievement.description);
+  Toast(achievement_div[0].outerHTML);
+  var chord = Math.random() > 0.5 ? 'S' : 'T';
+  createjs.Sound.play('res/achievement-'+chord+'.mp3|res/achievement-'+chord+'.ogg');
 }
