@@ -20,7 +20,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 50,
       level: 1,
       name: "Intensify Beam 1",
       img: 'red_laser.png',
@@ -28,7 +28,7 @@ function Upgrades(game) {
       init: function() {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeDamageMultiplier(1.20));
-        this.cost *= 10;
+        this.cost *= 1.8;
         this.level++;
         this.name = "Intensify Beam "+this.level;
       },
@@ -43,7 +43,7 @@ function Upgrades(game) {
         var laser = that.game.laserController.redLaser;
         //TODO: Implement
       },
-      stock: 10,
+      stock: 0,
       dependencies: ["Intensify Beam 3"]
     },
     {
@@ -54,7 +54,7 @@ function Upgrades(game) {
         var laser = that.game.laserController.redLaser;
         //TODO: Implement
       },
-      stock: 10,
+      stock: 0,
       dependencies: ["Double Beam"]
     },
     {
@@ -65,7 +65,7 @@ function Upgrades(game) {
         var laser = that.game.laserController.redLaser;
         //TODO: Implement
       },
-      stock: 10,
+      stock: 0,
       dependencies: ["Tripple Beam"]
     },
 
@@ -88,9 +88,9 @@ function Upgrades(game) {
       level: 1,
       name: "Blue Power 1",
       img: 'blue_laser.png',
-      description: "Tweaking the blue mirrors you improve the slowing factor of the beam.",
+      description: "Tweaking the blue mirrors you improve the beam.",
       init: function() {
-        this.cost *= 4;
+        this.cost *= 1.8;
         this.level++;
         this.name = "Blue Power " + this.level;
 
@@ -101,66 +101,9 @@ function Upgrades(game) {
         var duration = upgradeExample.duration;
         var applicationsToMax = upgradeExample.applicationsToMax;
 
-        maxSpeed *= 0.7;
-        laser.upgrades[0].generateNewDebuff = function(){
-          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
-        }
-
-
-
-      },
-      stock: 10,
-      dependencies: ["Blue Laser"]
-    },
-
-    {
-      cost: 50,
-      level: 1,
-      name: "Snapfreeze 1",
-      description: "The enemies freezes faster.",
-      init: function() {
-        this.cost *= 4;
-        this.level++;
-        this.name = "Snapfreeze " + this.level;
-
-        //Please excuse the uglieness of this, on account of it being late in a hackathon.
-        var laser = that.game.laserController.blueLaser;
-        var upgradeExample = laser.upgrades[0].generateNewDebuff();
-        var maxSpeed = upgradeExample.maxSpeedFactor;
-        var duration = upgradeExample.duration;
-        var applicationsToMax = upgradeExample.applicationsToMax;
-
-        applicationsToMax *= 0.6;
-        laser.upgrades[0].generateNewDebuff = function(){
-          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
-        }
-
-
-
-      },
-      stock: 10,
-      dependencies: ["Blue Laser"]
-    },
-
-    {
-      cost: 50,
-      level: 1,
-      name: "Lingering Frost 1",
-      img: 'blue_laser.png',
-      description: "The cold stays longer.",
-      init: function() {
-        this.cost *= 4;
-        this.level++;
-        this.name = "Lingering Frost " + this.level;
-
-        //Please excuse the uglieness of this, on account of it being late in a hackathon.
-        var laser = that.game.laserController.blueLaser;
-        var upgradeExample = laser.upgrades[0].generateNewDebuff();
-        var maxSpeed = upgradeExample.maxSpeedFactor;
-        var duration = upgradeExample.duration;
-        var applicationsToMax = upgradeExample.applicationsToMax;
-
-        duration *= 1.3;
+        maxSpeed *= 0.8;
+        applications = Math.max(10,0.8*applications);
+        duration = Math.min(500, duration*1.2);
         laser.upgrades[0].generateNewDebuff = function(){
           return new SpeedEffect(maxSpeed, duration, applicationsToMax);
         }
@@ -179,7 +122,7 @@ function Upgrades(game) {
       init: function() {
         //TODO implement.
       },
-      stock: 1,
+      stock: 0,
       dependencies: ["Blue Power 3"]
     },
 
@@ -191,7 +134,7 @@ function Upgrades(game) {
           +" a while when they see it the first time.",
       init: function() {
       },
-      stock: 1,
+      stock: 0,
       dependencies: ["Blue Power 3", "Blue Duration 2"]
     },
 
@@ -206,7 +149,7 @@ function Upgrades(game) {
         this.level++;
         this.name = "Cold Pulses " + this.level;
       },
-      stock: 1,
+      stock: 0,
       dependencies: ["Blue Power 5"]
     },
 
@@ -231,8 +174,7 @@ function Upgrades(game) {
       img: 'green_laser.png',
       description: "Increases the toxicity of the green light",
       init: function() {
-        //TODO implement.
-        this.cost *= 1.9;
+        this.cost *= 1.8;
         this.level++;
         this.name = "Green Power " + this.level;
 
@@ -242,7 +184,9 @@ function Upgrades(game) {
         var duration = upgradeExample.duration;
         var applicationsToMax = upgradeExample.applicationsToMax;
 
-        maxDpt *= 1.3;
+        maxDpt *= 1.337;
+        applications = Math.max(10,0.8*applications);
+        duration = Math.min(500, duration*1.2);
         laser.upgrades[0].generateNewDebuff = function(){
           return new DotEffect(maxDpt, duration, applicationsToMax);
         }
@@ -250,48 +194,6 @@ function Upgrades(game) {
       stock: -1,
       dependencies: ["Green Laser"]
     },
-  {
-      cost: 150,
-      level: 1,
-      name: "Rapid Toxicity 1",
-      img: 'green_laser.png',
-      description: "Green beam applies the poison faster",
-      init: function() {
-        //TODO implement.
-        this.cost *= 1.9;
-        this.level++;
-        this.name = "Rapid Toxicity " + this.level;
-
-        var laser = that.game.laserController.greenLaser;
-        var upgradeExample = laser.upgrades[0].generateNewDebuff();
-        var maxDpt = upgradeExample.maxDpt;
-        var duration = upgradeExample.duration;
-        var applicationsToMax = upgradeExample.applicationsToMax;
-
-        applications *= 0.8;
-        laser.upgrades[0].generateNewDebuff = function(){
-          return new DotEffect(maxDpt, duration, applicationsToMax);
-        }
-      },
-      stock: -1,
-      dependencies: ["Green Laser"]
-    },
-    {
-      cost: 100,
-      level: 1,
-      img: 'green_laser.png',
-      name: "Contagious Beam 1",
-      description: "Oh noes! It's contagious :/",
-      init: function() {
-        //TODO implement.
-        this.cost *= 10;
-        this.level++;
-        this.name = "Contagious Beam " + this.level;
-      },
-      stock: 3,
-      dependencies: ["Green Laser"]
-    },
-
     {
       cost: 10000,
       level: 1,
@@ -300,7 +202,7 @@ function Upgrades(game) {
       init: function() {
         //TODO implement.
       },
-      stock: 1,
+      stock: 0,
       dependencies: ["Green Power 3"]
     },
 
@@ -357,16 +259,15 @@ function Upgrades(game) {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shock wave range 4"]
+      dependencies: ["Shock wave range 4"]
     },
 
     {
-      cost: 25,
+      cost: 1000,
       name: "Slowmolizer",
       img: 'slowmolize.png',
       description: "Awesome triggeable super ability.",
       init: function() {
-        //that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
         that.game.specialWeaponController.add(
           new SpecialWeapon("slomoalizer", this.img, 0.1, 2.5*50, 10)
         );
@@ -375,7 +276,7 @@ function Upgrades(game) {
       dependencies: ["Blue Laser"]
     },
     {
-      cost: 10,
+      cost: 10000,
       name: "Blast",
       img: 'blast.png',
       init: function() {
