@@ -9,15 +9,7 @@ function SpecialWeaponController(){
   $('#wrapper').append(this.weapons_container);
   $("body").on("click touchstart", ".weapon-image", function(){
     var weapon = $(this).parent('.weapon');
-    if (weapon.hasClass('loading')) {
-      return;
-    }
-    var index = weapon.data('id');
-    that.activate(index);
-    weapon.addClass('loading');
-    setTimeout(function(){
-      weapon.removeClass('loading');
-    }, 10000);
+    that.activate(weapon, weapon.data('id'));
   });
 }
 
@@ -36,6 +28,19 @@ SpecialWeaponController.prototype.update = function(){
       }
     }
   }
+  if (KEYS[49] && this.weapons[0]) {
+    var weapon = $('.weapons').find("[data-id='"+0+"']");
+    this.activate(weapon, 0);
+  }
+  if (KEYS[50] && this.weapons[1]) {
+    var weapon = $('.weapons').find("[data-id='"+1+"']");
+    this.activate(weapon, 1);
+  }
+  if (KEYS[51] && this.weapons[2]) {
+    var weapon = $('.weapons').find("[data-id='"+2+"']");
+    this.activate(weapon, 2);
+  }
+
 };
 
 SpecialWeaponController.prototype.render = function(){
@@ -52,7 +57,15 @@ SpecialWeaponController.prototype.renderList = function() {
   this.weapons_container.html(this.template({weapons: this.weapons}));
 };
 
-SpecialWeaponController.prototype.activate = function(index) {
-  console.log("index", index);
+SpecialWeaponController.prototype.activate = function(weapon, index) {
+  if (weapon.loading) {
+    return;
+  }
+  weapon.loading = true;
+  weapon.addClass('loading');
+  setTimeout(function(){
+    weapon.loading = false;
+    weapon.removeClass('loading');
+  }, 10000);
   this.weapons[index].active = true;
 };
