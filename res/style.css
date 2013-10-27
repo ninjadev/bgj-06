@@ -67,11 +67,16 @@ button {
 
 .health {
     position: absolute;
-    top: 10px;
-    background: white;
-    width: 180px;
-    left: 50%;
-    margin-left: -90px;
+    top: 58%;
+    width: 20%;
+    left: 40%;
+    text-align: center;
+    color: #d6116e;
+    display: none;
+}
+
+.health img {
+    width: 4%;
 }
 
 .health .value {

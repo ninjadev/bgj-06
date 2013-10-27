@@ -10,7 +10,9 @@ function Pot(hp) {
   this.clickScaler = 1;
 
   this.hp = hp;
+}
 
+Pot.prototype.setupView = function(){
   $('.health').removeClass('template');
   $('.health .value').html(this.hp);
 }
@@ -36,6 +38,9 @@ Pot.prototype.lostLife = function() {
   this.hp--;
 
   $('.health .value').html(this.hp);
+  if(this.hp < 20){
+    $('.health').show();
+  }
   if (this.hp < 1) {
     return false;
   }
