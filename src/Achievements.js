@@ -7,13 +7,18 @@ function Achievements(){
         that.template = $('.achievement.template');
     });
     this.achievements = {
+        welcome: {
+          name: 'What is that?',
+          description: 'The end of the rainbow! And there\'s gold!',
+          custom_image: 'pot-o-gold'
+        },
         first: {
             name: 'First click',
-            description: 'Clicked for the first time!'
+            description: 'Gold is so nice! Keep it all for yourself.'
         },
         hundred: {
             name: 'Hundred coins',
-            description: 'Yay! You have earned 100 coins!'
+            description: 'Yay! You have earned 100 coins! I remember my first 100...'
         },
         grand: {
             name: 'A grand',
@@ -21,11 +26,11 @@ function Achievements(){
         },
         green_laser: {
             name: 'Green laser',
-            description: 'Congratulations! You can poison enemies with this weapon.'
+            description: 'Yay! Make these beasts sick!'
         },
         blue_laser: {
             name: 'Blu-ray',
-            description: 'Nice! This laser can slow down your enemies'
+            description: 'Slow them down, get away!'
         },
         orange_laser: {
             name: 'Orange laser',
@@ -45,15 +50,15 @@ function Achievements(){
         },
         first_kill: {
             name: 'First kill',
-            description: "It's not going to be the last one"
+            description: 'Kill them all!'
         },
         twenty_kills: {
             name: 'Twenty kills',
-            description: 'Way to go!'
+            description: 'Maybe I can get out?'
         },
         fifty_kills: {
             name: 'Fifty kills',
-            description: '"Half-way to a hundred!"'
+            description: 'Hurry!'
         },
         hundred_kills: {
             name: 'Hundred kills',
@@ -61,11 +66,11 @@ function Achievements(){
         },
         thousand_kills: {
             name: 'Thousand kills',
-            description: 'Man, you are really killing it!'
+            description: 'Man, you are really killing it! What are you doing now?'
         },
         afford_red_laser: {
-            name: 'Spend your first coins',
-            description: 'Now, buy a red laser, so you can take care of thiefs.',
+            name: 'Is someone coming?',
+            description: 'Quick, you should buy a red laser to keep these guys at bay.',
             custom_image: 'red_laser' /*TODO: perhaps make an icon with coins on it instead? */
         },
         first_wave_completed: {
