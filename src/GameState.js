@@ -16,6 +16,9 @@ GameState.prototype.init = function(){
   ];
   this.t = 0;
 
+  this.bg = loadImage('res/bg.png');
+  this.vignette = loadImage('res/vignette.png');
+
   this.dog_sprites = {
     walking: (function(){
         var frames = []; for(var i=1;i<=8;i++){
@@ -78,6 +81,12 @@ GameState.prototype.resume = function(){
 }
 
 GameState.prototype.render = function(ctx){
+  ctx.save();
+  var scaler = 16*GU/this.bg.width;
+  ctx.scale(scaler, scaler);
+  ctx.drawImage(this.bg, 0, 0);
+  ctx.drawImage(this.vignette, 0, 0);
+  ctx.restore();
   this.rainbow.render();
   this.audioButton.render();
 
