@@ -22,6 +22,23 @@ function Upgrades(game) {
     {
       cost: 50,
       level: 1,
+      name: "Shovel 1",
+      img: 'pot-o-gold.png',
+      description: "Use another shovel to get more gold per click.",
+      init: function() {
+        sm.activeState.goldPerClick += 1;
+        sm.activeState.goldPerClick *= 1.1;
+        this.cost *= 1.3;
+        this.cost += 100;
+        this.level++;
+        this.name = "Shovel "+this.level;
+      },
+      stock: -1,
+      dependencies: ["Red Laser"]
+    },
+    {
+      cost: 50,
+      level: 1,
       name: "Intensify Beam 1",
       img: 'red_laser.png',
       description: "Tweak the mirrors to get a 20% damage bonus to your red beam.",
