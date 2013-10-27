@@ -126,12 +126,12 @@ GameState.prototype.update = function(){
       this.progressCircle.hide();
       this.enemies.nextWave(this.t, function () {
         that.progressCircle.show();
-        that.timeToWave = 15000;
+        that.timeToWave = 5000;
       });
     } 
 
     this.enemies.update(this.t);
-    this.progressCircle.update((15000-this.timeToWave)/15000);
+    this.progressCircle.update((5000-this.timeToWave)/5000);
 
     this.rainbow.update(t);
     this.laserController.update(t);
