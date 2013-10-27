@@ -113,7 +113,6 @@ function bootstrap(){
 
   sm.changeState("menu");
 
-  console.log("bootstrapping loaded");
   loaded--;
   requestAnimFrame(loop);
 }
