@@ -21,6 +21,10 @@ AudioButton.prototype.getMusicElement = function() {
   return $("#music")[0];
 }
 
+AudioButton.prototype.pause = function() {
+  this.getMusicElement().pause();
+}
+
 AudioButton.prototype.toggleActivated = function(){
   this.on = !this.on;
   if (this.on) {

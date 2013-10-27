@@ -9,10 +9,9 @@ function Enemy(x, y, hp, speed, sprites, bounty){
   this.killRadius = 0.0086*GU;
 
   this.effects = [];
-
   //Example of how to add enemy
   //TODO: Remove me
-  //this.addEffect(new SpeedEffect(0.5));
+  //this.addEffect(new DotEffect(0.3));
 
 
   this.width = 40;
@@ -140,9 +139,10 @@ Enemy.prototype.effectsUpdate = function(){
 /** If the enemy has an effect of the same type, it replaces that effect.
  If not it adds the effect to the enemy. */
 Enemy.prototype.addEffect = function(effect){
-  for(var i = 0; this.effects.length; i++){
+  for(var i = 0; i < this.effects.length; i++){
     if(this.effects[i] instanceof effect.constructor){
       this.effects[i] = effect;
+      effect.onApply(this);
       return;
     }
   }
