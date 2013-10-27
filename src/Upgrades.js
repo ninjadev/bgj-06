@@ -8,7 +8,7 @@ function Upgrades(game) {
   var that = this;
   this.upgrades = [
     {
-      cost: 100,
+      cost: 10,
       name: "Orange laser",
       init: function() {
         that.game.laserController.addLaser(Colors.ORANGE);
@@ -16,7 +16,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 200,
+      cost: 20,
       name: "Yellow laser",
       init: function() {
         that.game.laserController.addLaser(Colors.YELLOW);
@@ -24,7 +24,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 500,
+      cost: 50,
       name: "Green laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN);
@@ -32,7 +32,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 1000,
+      cost: 100,
       name: "Blue laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE);
@@ -41,7 +41,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 2000,
+      cost: 200,
       name: "Pink laser",
       init: function() {
         that.game.laserController.addLaser(Colors.PINK);
@@ -49,7 +49,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 5000,
+      cost: 500,
       name: "Purple laser",
       init: function() {
         that.game.laserController.addLaser(Colors.PURPLE);
@@ -57,7 +57,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 25,
       name: "Slo'mo'alizer",
       init: function() {
         that.game.activateShockWave("slomoalizer", 2);

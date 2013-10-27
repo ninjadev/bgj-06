@@ -16,7 +16,7 @@ function LaserController() {
 LaserController.prototype.addLaser = function(color) {
   var laser = new Laser(
     color,
-    this.lasers.length * Math.PI * 2 / 7,
+    Math.floor(0.5 + this.lasers.length / 2) * (this.lasers.length % 2 ? -1 : 1) * Math.PI * 2 / 9,
     1,
     0.5
   );
@@ -47,15 +47,19 @@ LaserController.prototype.start = function(e) {
 }
 
 LaserController.prototype.move = function(e) {
-  if (this.startingRotation === null) {
+  if ("pointer" == $("canvas").css('cursor')) {
     return;
   }
   var currentPoint = relMouseCoords(e);
   var dx = CENTER.x - currentPoint.x;
   var dy = CENTER.y - currentPoint.y;
   var currentAngle = Math.atan2(dx, dy);
-  var angleDelta = this.startingAngle - currentAngle;
-  this.rotation = this.startingRotation + angleDelta;
+  if (null === this.startingRotation) {
+    this.rotation = -currentAngle - Math.PI/2;
+  } else {
+    var angleDelta = this.startingAngle - currentAngle;
+    this.rotation = this.startingRotation + angleDelta;
+  }
 }
 
 LaserController.prototype.end = function(e) {
