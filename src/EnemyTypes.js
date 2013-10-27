@@ -16,44 +16,44 @@ var ENEMYTYPES = function () {
     dog: {
         sprites: {
             walking: ( function () {
-              var frames = []; 
+              var frames = [];
               for(var i=1;i<=8;i++){
                 frames.push(loadImage('res/dog/dog-walking-' + i + '.png'));
               } return frames;
             })()
           , dead: [loadImage('res/dog/dog-dead-1.png')]
         }
-      , bounty: 3
-      , hp: 10
-      , speed: 0.05
+      , bounty: 8
+      , hp: 18
+      , speed: 0.01
     },
     bear: {
         sprites: {
             walking: (function(){
-              var frames = []; 
+              var frames = [];
               for(var i=1;i<=4;i++){
                 frames.push(loadImage('res/pinkbear/pinkbear-walking-' + i + '.png'));
               } return frames;
             })()
           , dead: [loadImage('res/pinkbear/pinkbear-dead-1.png')]
         }
-      , bounty: 5
-      , hp: 15
-      , speed: 0.05
+      , bounty: 15
+      , hp: 25
+      , speed: 0.01
     },
     elephant: {
       sprites: {
         walking: (function(){
-          var frames = []; 
+          var frames = [];
           for(var i=1;i<=6;i++){
               frames.push(loadImage('res/elephant/elephant-walking-' + i + '.png'));
           } return frames;
         })(),
         dead: [loadImage('res/elephant/elephant-dead-1.png')]
       },
-      bounty: 7,
-      hp: 20,
-      speed: 0.01
+      bounty: 60,
+      hp: 150,
+      speed: 0.001
     }
   };
 };
