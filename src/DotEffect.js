@@ -1,16 +1,19 @@
-function DotEffect(dpt){
+function DotEffect(dpt, tickDuration){
   //dpt = damage per tick
   this.dpt = dpt;
+
+  this.duration = tickDuration;
 }
 
 DotEffect.prototype.onApply = function(enemy){
+  this.appliedT = sm.activeState.t;
 }
 
 DotEffect.prototype.onRemove = function(enemy){
 }
 
 
-DotEffect.prototype.render = function(ctx, enemy){
+DotEffect.prototype.render = function(ctx, enemy, t){
   var color = "green";
   var radius = 0.7*GU, innerRadius = 0.3*GU, outerRadius = 0.9*GU;
   var gradient = ctx.createRadialGradient(enemy.x*GU, enemy.y*GU, innerRadius, 
@@ -24,6 +27,9 @@ DotEffect.prototype.render = function(ctx, enemy){
   ctx.fill();
 }
 
-DotEffect.prototype.update = function(enemy){
+DotEffect.prototype.update = function(enemy, t){
   enemy.hit(this.dpt);
+  if(t - this.appliedT >= this.duration){
+    enemy.removeEffect(this);
+  }
 }

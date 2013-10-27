@@ -1,7 +1,7 @@
 function LaserController() {
   this.rotation = 0;
   this.lasers = [];
-  this.addLaser(Colors.RED);
+  this.addLaser(Colors.RED,0.5);
   this.startingRotation = null;
   this.startingAngle = null;
   var that = this;
@@ -13,12 +13,12 @@ function LaserController() {
   canvas.addEventListener("touchend", function(e) { that.end(e); });
 }
 
-LaserController.prototype.addLaser = function(color) {
+LaserController.prototype.addLaser = function(color, dmg) {
   var laser = new Laser(
     color,
     Math.floor(0.5 + this.lasers.length / 2) * (this.lasers.length % 2 ? -1 : 1) * Math.PI * 2 / 9,
     1,
-    0.5
+    dmg
   );
   this.lasers.push(laser);
   return laser;

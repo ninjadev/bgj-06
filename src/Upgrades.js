@@ -13,7 +13,7 @@ function Upgrades(game) {
       init: function() {
         that.game.laserController.addLaser(Colors.ORANGE);
       },
-      stock: 1
+      stock: 0
     },
     {
       cost: 20,
@@ -21,22 +21,22 @@ function Upgrades(game) {
       init: function() {
         that.game.laserController.addLaser(Colors.YELLOW);
       },
-      stock: 1
+      stock: 0
     },
     {
-      cost: 50,
+      cost: 0,
       name: "Green laser",
       init: function() {
-        var laser = that.game.laserController.addLaser(Colors.GREEN);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new DotEffect(0.05)));      },
+        var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
+        laser.addUpgrade(new UpgradeDebuffOnHit(new DotEffect(0.05, 100)));      },
       stock: 1
     },
     {
-      cost: 100,
+      cost: 0,
       name: "Blue laser",
       init: function() {
-        var laser = that.game.laserController.addLaser(Colors.BLUE);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new SpeedEffect(0.5)));
+        var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
+        laser.addUpgrade(new UpgradeDebuffOnHit(new SpeedEffect(0.5, 50)));
       },
       stock: 1
     },
@@ -46,7 +46,7 @@ function Upgrades(game) {
       init: function() {
         that.game.laserController.addLaser(Colors.PINK);
       },
-      stock: 1
+      stock: 0
     },
     {
       cost: 500,
@@ -54,7 +54,7 @@ function Upgrades(game) {
       init: function() {
         that.game.laserController.addLaser(Colors.PURPLE);
       },
-      stock: 1
+      stock: 0
     },
     {
       cost: 25,
@@ -99,6 +99,11 @@ Upgrades.prototype.render = function(){
   var template = Handlebars.compile(source, {noEscape: true});
   for (var i=0;i<this.upgrades.length;i++){
     var upgrade = this.upgrades[i];
+
+    //Do not render the ones that are out of stock.
+    if(upgrade.stock == 0){
+      continue;
+    }
     upgrade.id = i;
     upgrade.canPurchase = (upgrade.stock != 0 && this.game.cash.amount >= upgrade.cost);
     if (upgrade.stock < 0) {
