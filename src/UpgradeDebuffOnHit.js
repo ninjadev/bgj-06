@@ -1,5 +1,5 @@
-function UpgradeDebuffOnHit(effect){
-  this.debuff = effect;
+function UpgradeDebuffOnHit(returnNewEffect){
+  this.generateNewDebuff = returnNewEffect;
 }
 
 UpgradeDebuffOnHit.prototype.onApply = function(laser){
@@ -16,5 +16,7 @@ UpgradeDebuffOnHit.prototype.update = function(laser){
 }
 
 UpgradeDebuffOnHit.prototype.onEnemyHit = function(laser, enemy){
-  enemy.addEffect(this.debuff);
+  //this.function(laser, enemy);
+
+  enemy.addEffect(this.generateNewDebuff());
 }

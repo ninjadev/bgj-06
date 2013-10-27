@@ -131,8 +131,7 @@ Enemy.prototype.effectsUpdate = function(t){
 Enemy.prototype.addEffect = function(effect){
   for(var i = 0; i < this.effects.length; i++){
     if(this.effects[i] instanceof effect.constructor){
-      this.effects[i] = effect;
-      effect.onApply(this);
+      this.effects[i].onReapply(this, effect);
       return;
     }
   }

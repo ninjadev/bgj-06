@@ -28,7 +28,7 @@ function Upgrades(game) {
       name: "Green laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new DotEffect(0.05, 100)));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(0.2, 100, 50)}));
         that.game.achievements.give('green_laser');
       },
       stock: 1
@@ -38,7 +38,7 @@ function Upgrades(game) {
       name: "Blue laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new SpeedEffect(0.5, 50)));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 100, 40)}));
         that.game.achievements.give('blue_laser');
       },
       stock: 1
