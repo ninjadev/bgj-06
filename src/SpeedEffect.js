@@ -1,9 +1,11 @@
 // Copy this file, rename to name of state and add to StateManager
-function SpeedEffect(speedFactor){
+function SpeedEffect(speedFactor, tickDuration){
   this.speedFactor = speedFactor;
+  this.duration = tickDuration;
 }
 
 SpeedEffect.prototype.onApply = function(enemy){
+  this.appliedT = sm.activeState.t;
 }
 
 SpeedEffect.prototype.onRemove = function(enemy){
@@ -31,6 +33,10 @@ SpeedEffect.prototype.render = function(ctx, enemy){
   ctx.fill();
 }
 
-SpeedEffect.prototype.update = function(enemy){
+SpeedEffect.prototype.update = function(enemy, t){
+  console.log(t - this.appliedT);
   enemy.speed *= this.speedFactor;
+  if(t - this.appliedT >= this.duration){
+    enemy.removeEffect(this);
+  }
 }
