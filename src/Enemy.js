@@ -1,4 +1,4 @@
-function Enemy(x, y, enemyType) {
+function Enemy(x, y, enemyType, scaling) {
   this.x = x;
   this.y = y;
 
@@ -24,9 +24,10 @@ function Enemy(x, y, enemyType) {
     life: 100
   });
 
-  this.hp = enemyType.hp;
-  this.baseSpeed = enemyType.speed;
+  this.hp = enemyType.hp + (scaling * 100);
+  this.baseSpeed = enemyType.speed + scaling;
   this.killRadius = 0.0086*GU;
+  this.bounty = Math.round(enemyType.bounty + scaling*10);
 
   this.effects = [];
   //Example of how to add enemy
@@ -38,7 +39,6 @@ function Enemy(x, y, enemyType) {
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
-  this.bounty = enemyType.bounty;
 }
 
 Enemy.prototype.render = function(ctx){
@@ -176,7 +176,7 @@ Enemy.prototype.removeEffect = function(effect){
 }
 
 /** That factory **/
-Enemy.spawnRandom = function(enemyType){
+Enemy.spawnRandom = function(enemyType, scaling){
   var side = Math.floor(Math.random()*4);
   var x = 0;
   var y = 0;
@@ -198,5 +198,5 @@ Enemy.spawnRandom = function(enemyType){
     y = 9;
     break;
   }
-  return new Enemy(x,y,enemyType);
+  return new Enemy(x,y,enemyType, scaling);
 }

@@ -16,7 +16,7 @@ EnemyController.prototype.nextWave = function(t, cb){
     this.currentWave = {
       monsters: Object.keys(this.enemyTypes),
       numberOfMonsters: this.numberOfWaves*3,
-      scaling: this.numberOfWaves,
+      scaling: (this.numberOfWaves*this.numberOfWaves)/1337,
       duration: 10000 + 5000*this.numberOfWaves
     };
   }
@@ -38,7 +38,7 @@ EnemyController.prototype.update = function(t){
       if (waveTime > this.currentWave.numberOfMonstersSpawned*this.currentWave.interval) {
         this.currentWave.numberOfMonstersSpawned++;
         this.enemies.push(Enemy.spawnRandom(
-          this.generateEnemyType(this.currentWave.monsters)
+          this.generateEnemyType(this.currentWave.monsters), this.currentWave.scaling
         ));
       }
     }
