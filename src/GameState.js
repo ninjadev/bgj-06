@@ -60,6 +60,7 @@ GameState.prototype.pause = function(){
 
 GameState.prototype.resume = function(){
   this.upgrades = new Upgrades(this);
+  this.cash.setupView();
 }
 
 GameState.prototype.render = function(ctx){

@@ -51,12 +51,18 @@ button {
     width: 10%;
 }
 
+#wrapper {
+    position: absolute;
+}
+
 .cash {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: white;
-    width: 60px;
+    left: 60%;
+    top: 3%;
+    width: 25%;
+    color: #e5a102;
+    font-size: 350%;
+    text-align: right;
 }
 
 .health {
