@@ -24,6 +24,22 @@ function Achievements(){
             name: 'Blue laser',
             description: 'Nice! This laser can slow down your enemies.'
         },
+        orange_laser: {
+            name: 'Orange laser',
+            description: '(Orange the color, not orange the fruit.)'
+        },
+        purple_laser: {
+            name: 'Purple laser',
+            description: 'Not quite red, not quite blue. Maybe a little bit of both?'
+        },
+        red_laser: {
+            name: 'Red laser',
+            description: 'Sweet! You start the game with a red laser.'
+        },
+        yellow_laser: {
+            name: 'Yellow laser',
+            description: 'Like the yellow sports car, the yellow laser is the epitome of cool.'
+        },
         first_kill: {
             name: 'First kill',
             description: "It's not going to be the last one"
