@@ -23,4 +23,8 @@ Stats.prototype.addKill = function(){
   if (this.kills >= 1000) {
     this.achievements.give("thousand_kills");
   }
+
+  var ach = JSON.parse(getCookie('cuteanimals_stats'));
+  ach.kills += 1;
+  setCookie("cuteanimals_stats", JSON.stringify(ach));
 }
