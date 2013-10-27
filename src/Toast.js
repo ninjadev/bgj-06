@@ -1,6 +1,7 @@
 Toast = (function(){
     var toast_template;
     var active_toast;
+    var active_toast_container;
     var toast_queue = [];
     $(function(){
         toast_template = $('.toast.template');
@@ -8,9 +9,10 @@ Toast = (function(){
 
     function Toast(message){
         toast_queue.push(message);
-        if (active_toast == undefined) {
-          printMessage(toast_queue.shift());
+        if (active_toast_container != undefined) {
+            active_toast_container.hide().remove();
         }
+        printMessage(toast_queue.shift());
     }
 
     function printMessage(message) {
@@ -19,6 +21,7 @@ Toast = (function(){
             .removeClass('template');
         toast.find('.message').html(message);
         $('#wrapper').append(toast);
+        active_toast_container = toast;
         toast.fadeIn();
         toast.animate({
             'margin-top':'-20px'
@@ -34,6 +37,7 @@ Toast = (function(){
                 queue: false
             }, 'easeinout');
             active_toast = undefined;
+            active_toast_container = undefined;
             if (toast_queue.length > 0) {
               printMessage(toast_queue.shift());
             }
