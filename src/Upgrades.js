@@ -70,13 +70,13 @@ function Upgrades(game) {
     },
 
     {
-      cost: 0,
+      cost: 100,
       name: "Blue Laser",
       img: 'blue_laser.png',
       description: "Slow your enemies with this delightfully cold beam.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 50, 40)}));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.6, 10, 50)}));
         that.game.achievements.give('blue_laser');
       },
       stock: 1,
@@ -84,33 +84,91 @@ function Upgrades(game) {
     },
 
     {
-      cost: 100,
+      cost: 50,
       level: 1,
       name: "Blue Power 1",
       img: 'blue_laser.png',
       description: "Tweaking the blue mirrors you improve the slowing factor of the beam.",
       init: function() {
-        //TODO implement.
-        this.cost *= 1.9;
+        this.cost *= 4;
         this.level++;
         this.name = "Blue Power " + this.level;
+
+        //Please excuse the uglieness of this, on account of it being late in a hackathon.
+        var laser = that.game.laserController.blueLaser;
+        var upgradeExample = laser.upgrades[0].generateNewDebuff();
+        var maxSpeed = upgradeExample.maxSpeedFactor;
+        var duration = upgradeExample.duration;
+        var applicationsToMax = upgradeExample.applicationsToMax;
+
+        maxSpeed *= 0.7;
+        laser.upgrades[0].generateNewDebuff = function(){
+          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
+        }
+
+
+
       },
-      stock: 1,
+      stock: 10,
       dependencies: ["Blue Laser"]
     },
+
     {
-      cost: 100,
+      cost: 50,
       level: 1,
-      name: "Blue Duration 1",
+      name: "Snapfreeze 1",
+      description: "The enemies freezes faster.",
+      init: function() {
+        this.cost *= 4;
+        this.level++;
+        this.name = "Snapfreeze " + this.level;
+
+        //Please excuse the uglieness of this, on account of it being late in a hackathon.
+        var laser = that.game.laserController.blueLaser;
+        var upgradeExample = laser.upgrades[0].generateNewDebuff();
+        var maxSpeed = upgradeExample.maxSpeedFactor;
+        var duration = upgradeExample.duration;
+        var applicationsToMax = upgradeExample.applicationsToMax;
+
+        applicationsToMax *= 0.6;
+        laser.upgrades[0].generateNewDebuff = function(){
+          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
+        }
+
+
+
+      },
+      stock: 10,
+      dependencies: ["Blue Laser"]
+    },
+
+    {
+      cost: 50,
+      level: 1,
+      name: "Lingering Frost 1",
       img: 'blue_laser.png',
       description: "The cold stays longer.",
       init: function() {
-        //TODO implement.
-        this.cost *= 1.9;
+        this.cost *= 4;
         this.level++;
-        this.name = "Blue Duration " + this.level;
+        this.name = "Lingering Frost " + this.level;
+
+        //Please excuse the uglieness of this, on account of it being late in a hackathon.
+        var laser = that.game.laserController.blueLaser;
+        var upgradeExample = laser.upgrades[0].generateNewDebuff();
+        var maxSpeed = upgradeExample.maxSpeedFactor;
+        var duration = upgradeExample.duration;
+        var applicationsToMax = upgradeExample.applicationsToMax;
+
+        duration *= 1.3;
+        laser.upgrades[0].generateNewDebuff = function(){
+          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
+        }
+
+
+
       },
-      stock: 1,
+      stock: 10,
       dependencies: ["Blue Laser"]
     },
     {

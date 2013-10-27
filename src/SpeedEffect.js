@@ -5,7 +5,7 @@ function SpeedEffect(maxSpeedFactor, tickDuration, applicationsToMax){
   this.applications = 1;
   this.applicationsToMax = applicationsToMax;
 
-  if(this.applicationsToMax !== undefined){
+  if(this.applicationsToMax && this.applicationsToMax > 0){
     this.speedFactor = maxSpeedFactor * 1/applicationsToMax;
   }else{
     this.speedFactor = maxSpeedFactor;
@@ -35,7 +35,7 @@ SpeedEffect.prototype.onRemove = function(enemy){
 }
 
 SpeedEffect.prototype.recalculateSpeed = function(){
-  if(this.applicationsToMax !== undefined){
+  if(this.applicationsToMax && this.applicationsToMax > 0){
     this.speedFactor = 1 - (1 - this.maxSpeedFactor)
           * Math.min(1, this.applications/this.applicationsToMax);
   }else{
@@ -57,7 +57,7 @@ SpeedEffect.prototype.render = function(ctx, enemy){
   var radius = 0.7*GU, innerRadius = 0.3*GU, outerRadius = 0.9*GU;
 
   //Scale with power.
-  if(this.applicationsToMax !== undefined){
+  if(this.applicationsToMax && this.applicationsToMax > 0){
     radius *= Math.min(1, this.applications/this.applicationsToMax);
     outerRadius *= Math.min(1, this.applications/this.applicationsToMax);
     innerRadius *= Math.min(1, this.applications/this.applicationsToMax);
