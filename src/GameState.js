@@ -16,8 +16,8 @@ GameState.prototype.init = function(){
       that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
       that.achievements.give('first');
       createjs.Sound.play('res/coin.mp3|res/coin.ogg');
-      that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1});
-      that.cash.add(1);
+      that.spawnMoneyEffect({amount: that.getPotAmount(), x: CENTER.x, y: CENTER.y-1});
+      that.cash.add(that.getPotAmount());
       that.pot.click();
     }, {x:7.5, y:4, w:1, h:1}],
     [function(){
@@ -61,6 +61,14 @@ GameState.prototype.init = function(){
   audioIsMuted = false;
 }
 
+GameState.prototype.getPotAmount = function(){
+  var enemyCont = sm.activeState.enemies;
+  if(enemyCont && enemyCont.numberOfWaves > 1){
+    return 1+Math.floor(1.15^enemyCont.numberOfWaves);
+  }else{
+    return 1;
+  }
+}
 GameState.prototype.spawnMoneyEffect = function(options){
     this.moneyEffects.push(new MoneyEffect(options));
 }
@@ -121,7 +129,7 @@ GameState.prototype.update = function(){
         that.progressCircle.show();
         that.timeToWave = 15000;
       });
-    } 
+    }
 
     this.enemies.update(this.t);
     this.progressCircle.update((15000-this.timeToWave)/15000);
