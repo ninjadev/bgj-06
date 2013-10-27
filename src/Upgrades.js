@@ -28,7 +28,7 @@ function Upgrades(game) {
       init: function() {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeDamageMultiplier(1.20));
-        this.cost *= 1.8;
+        this.cost = Math.floor(this.cost * 1.8)
         this.level++;
         this.name = "Intensify Beam "+this.level;
       },
@@ -56,7 +56,7 @@ function Upgrades(game) {
       img: 'blue_laser.png',
       description: "Tweaking the blue mirrors you improve the beam.",
       init: function() {
-        this.cost *= 1.8;
+        this.cost = Math.floor(this.cost * 1.8)
         this.level++;
         this.name = "Blue Power " + this.level;
 
@@ -113,7 +113,7 @@ function Upgrades(game) {
       img: 'green_laser.png',
       description: "Increases the toxicity of the green light",
       init: function() {
-        this.cost *= 1.8;
+        this.cost = Math.floor(this.cost * 1.8)
         this.level++;
         this.name = "Green Power " + this.level;
 
