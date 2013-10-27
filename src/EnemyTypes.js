@@ -25,7 +25,7 @@ var ENEMYTYPES = function () {
         }
       , bounty: 8
       , hp: 18
-      , speed: 0.01
+      , speed: 0.025
     },
     bear: {
         sprites: {
@@ -52,8 +52,8 @@ var ENEMYTYPES = function () {
         dead: [loadImage('res/elephant/elephant-dead-1.png')]
       },
       bounty: 60,
-      hp: 150,
-      speed: 0.001
+      hp: 120,
+      speed: 0.004
     }
   };
 };
