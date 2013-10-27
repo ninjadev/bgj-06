@@ -47,6 +47,18 @@ function Achievements(){
         twenty_kills: {
             name: 'Twenty kills',
             description: 'Way to go!'
+        },
+        fifty_kills: {
+            name: 'Fifty kills',
+            description: '"Half-way to a hundred!"'
+        },
+        hundred_kills: {
+            name: 'Hundred kills',
+            description: 'You now have more kills than there are Luftballons.'
+        },
+        thousand_kills: {
+            name: 'Thousand kills',
+            description: 'Man, you are really killing it!'
         }
     };
 }
