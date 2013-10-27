@@ -1,5 +1,8 @@
 function Achievements(){
     var that = this;
+    /* warmup, should not make sound */
+    createjs.Sound.play('res/achievement-T.mp3|res/achievement-T.ogg');
+    createjs.Sound.play('res/achievement-S.mp3|res/achievement-S.ogg');
     $(function(){
         that.template = $('.achievement.template');
     });
@@ -59,6 +62,10 @@ function Achievements(){
         thousand_kills: {
             name: 'Thousand kills',
             description: 'Man, you are really killing it!'
+        },
+        afford_red_laser: {
+            name: 'Spend your first dollars',
+            description: 'Now, buy a red laser, so you can take case of thiefs.'
         }
     };
 }
@@ -75,4 +82,6 @@ Achievements.prototype.give = function(achievement_key){
     achievement_div.find('.name').text(achievement.name);
     achievement_div.find('.description').text(achievement.description);
     Toast(achievement_div[0].outerHTML);
+    var chord = Math.random() > 0.5 ? 'S' : 'T';
+    createjs.Sound.play('res/achievement-'+chord+'.mp3|res/achievement-'+chord+'.ogg');
 }

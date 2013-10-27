@@ -2,7 +2,7 @@ function LaserController() {
   this.rotation = 0;
   this.targetRotation = this.rotation;
   this.lasers = [];
-  this.redLaser = this.addLaser(Colors.RED, 0.5);
+  this.redLaser = null;
   this.greenLaser = null;
   this.blueLaser = null;
   this.startingRotation = null;

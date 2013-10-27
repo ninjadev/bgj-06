@@ -17,6 +17,10 @@ function Cash(achievements, game){
 Cash.prototype.add = function(amount){
   this.amount += amount;
   this.accumulatedAmount += amount;
+
+  if (this.accumulatedAmount >= 10) {
+    this.achievements.give('afford_red_laser');
+  }
   if (this.accumulatedAmount >= 100) {
     this.achievements.give('hundred');
   }
@@ -28,7 +32,7 @@ Cash.prototype.add = function(amount){
 }
 
 Cash.prototype.spend = function(amount){
-  if (this.amount < amount) {
+  if (!this.canSpend(amount)) {
     return false;
   }
   this.amount -= amount;
@@ -36,6 +40,11 @@ Cash.prototype.spend = function(amount){
   this.game.upgrades.render();
   return true;
 }
+
+Cash.prototype.canSpend = function(amount) {
+  return !(this.amount < amount);
+};
+
 Cash.prototype.render = function(){
   this.cash_display.find('.value').text('$' + this.amount);
 }

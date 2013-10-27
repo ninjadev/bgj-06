@@ -4,6 +4,16 @@ function Enemy(x, y, enemyType) {
 
   this.sprites = enemyType.sprites;
 
+  this.small_ps = new ParticleSystem({
+    color: {r:117, g: 68, b: 67},
+    blend_mode: 'source-over',
+    gravity: {x: 0, y: 0},
+    explode_random: {x: 0.1, y: 0.1},
+    size: 0.02,
+    friction: 0.6,
+    life: 100
+  });
+
   this.ps = new ParticleSystem({
     color: {r:117, g: 68, b: 67},
     blend_mode: 'source-over',
@@ -55,6 +65,7 @@ Enemy.prototype.render = function(ctx){
   ctx.drawImage(sprite, -sprite.width / 2, - sprite.height / 2);
   ctx.restore();
   this.ps.render(ctx); 
+  this.small_ps.render(ctx); 
 }
 
 Enemy.prototype.update = function(t){
@@ -62,6 +73,7 @@ Enemy.prototype.update = function(t){
   this.effectsUpdate(t);
 
   this.ps.update();
+  this.small_ps.update();
 
   if(this.dead){
     this.dead_time && this.dead_time--;
@@ -110,6 +122,7 @@ Enemy.prototype.renderEffects = function(ctx){
 
 Enemy.prototype.hit = function (damage) {
   this.hp -= damage;
+  this.small_ps.explode(this.x, this.y, 5);
 }
 
 Enemy.prototype.kill = function () {
@@ -118,6 +131,8 @@ Enemy.prototype.kill = function () {
   this.ps.explode(this.x, this.y, 35);
   sm.states.game.spawnMoneyEffect({x: this.x, y: this.y - 1, amount: this.bounty});
   sm.states.game.stats.addKill();
+  var sound_number = (Math.random()*4|0) + 1;
+  createjs.Sound.play('res/kill-'+sound_number+'.mp3|res/kill-'+sound_number+'.ogg');
 }
 
 Enemy.prototype.effectsUpdate = function(t){

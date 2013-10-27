@@ -8,6 +8,14 @@ function Upgrades(game) {
   var that = this;
   this.upgrades = [
     {
+      cost: 10,
+      name: "Red laser",
+      init: function() {
+        that.game.laserController.addLaser(Colors.RED, 0.5);
+      },
+      stock: 1
+    },
+    {
       cost: 0,
       name: "Green laser",
       init: function() {
@@ -15,7 +23,8 @@ function Upgrades(game) {
         laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(0.2, 100, 50)}));
         that.game.achievements.give('green_laser');
       },
-      stock: 1
+      stock: 1,
+      dependencies: ["Red laser"]
     },
     {
       cost: 0,
@@ -25,7 +34,8 @@ function Upgrades(game) {
         laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 50, 40)}));
         that.game.achievements.give('blue_laser');
       },
-      stock: 1
+      stock: 1,
+      dependencies: ["Red laser"]
     },
     {
       cost: 10,
@@ -36,7 +46,8 @@ function Upgrades(game) {
         //TODO: Make it a bit more safe than hardcoding index. Waiting for stiaje's awesome way to do it.
         that.upgrades[2].cost *= 10;
       },
-      stock: 10
+      stock: 10,
+      dependencies: ["Red laser"]
     },
     {
       cost: 25,
@@ -47,6 +58,7 @@ function Upgrades(game) {
       stock: -1
     },
   ];
+  this.purchased = [];
   this.upgrade_menu = $('.upgrades.template').clone()
     .removeClass('template');
   $('body').append(this.upgrade_menu);
@@ -60,17 +72,18 @@ function Upgrades(game) {
 
 Upgrades.prototype.purchase = function(index){
   var upgrade = this.upgrades[index];
-  if (upgrade.stock == 0) {
+
+  if (!this.canPurchase(upgrade)) {
     return false;
   }
-  if (!this.game.cash.spend(upgrade.cost)){
-    return false;
-  }
+
   if (upgrade.stock > 0) {
     upgrade.stock--;
   }
+  this.game.cash.spend(upgrade.cost);
   upgrade.init();
   this.render();
+  this.purchased.push(upgrade);
   console.log("Purchased upgrade %s", upgrade.name);
   return true;
 };
@@ -87,10 +100,36 @@ Upgrades.prototype.render = function(){
       continue;
     }
     upgrade.id = i;
-    upgrade.canPurchase = (upgrade.stock != 0 && this.game.cash.amount >= upgrade.cost);
+    upgrade.canPurchase = this.canPurchase(upgrade);
     if (upgrade.stock < 0) {
       upgrade.stock = "&infin;";
     }
     upgrade_container.append(template(upgrade));
   }
+};
+
+Upgrades.prototype.canPurchase = function(upgrade) {
+  if (upgrade.stock == 0) {
+    return false;
+  }
+  if (upgrade.dependencies) {
+    for (var i=0;i<upgrade.dependencies.length;i++) {
+      var dependency = upgrade.dependencies[i];
+      var name_match = false;
+      for (var j=0;j<this.purchased.length;j++) {
+        if (this.purchased[j].name == dependency) {
+          name_match = true;
+          break;
+        }
+      }
+      if (!name_match) {
+        return false;
+      }
+    }
+  }
+
+  if (!this.game.cash.canSpend(upgrade.cost)){
+    return false;
+  }
+  return true;
 };
