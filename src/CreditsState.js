@@ -26,7 +26,7 @@ CreditsState.prototype.render = function(ctx){
 CreditsState.prototype.update = function(){
 
     if(this.cooldown && KEYS[27]) { /* escape */
-      sm.changeState('menu', 'message', 'slide-left', 30);
+      sm.changeState('menu');
       this.cooldown = false;
     }
 }
