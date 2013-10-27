@@ -91,4 +91,8 @@ Achievements.prototype.give = function(achievement_key){
   Toast(achievement_div[0].outerHTML);
   var chord = Math.random() > 0.5 ? 'S' : 'T';
   createjs.Sound.play('res/achievement-'+chord+'.mp3|res/achievement-'+chord+'.ogg');
+
+  var ach = JSON.parse(getCookie('cuteanimals_stats'));
+  ach.achievements.push(''+achievement_key);
+  setCookie("cuteanimals_stats", JSON.stringify(ach));
 }

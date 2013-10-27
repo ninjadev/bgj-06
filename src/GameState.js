@@ -54,6 +54,13 @@ GameState.prototype.init = function(){
   this.audioButton = new AudioButton();
 
   this.specialWeaponController = new SpecialWeaponController();
+
+  var cookieSet = getCookie("cuteanimals_stats");
+  if(cookieSet === undefined) {
+    var emptyStats = JSON.parse('{"achievements":[], "kills":0, "music":true}');
+    setCookie("cuteanimals_stats", JSON.stringify(emptyStats));
+  }
+
   this.stats = new Stats(this.achievements);
 
   this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
@@ -147,7 +154,9 @@ GameState.prototype.gameOver = function() {
   createjs.Sound.play('res/Fail_game.mp3');
   this.audioButton.pause();
 
-
+  var stats = JSON.parse(getCookie("cuteanimals_stats"));
+  
   $('#overlay').removeClass('template');
   $('#game-over').removeClass('template');
+  $('#game-over').html("Game over!<br>Kills: " + stats.kills + "<br>Achivements: " + stats.achievements);
 }
