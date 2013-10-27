@@ -66,6 +66,10 @@ function Achievements(){
         afford_red_laser: {
             name: 'Spend your first dollars',
             description: 'Now, buy a red laser, so you can take case of thiefs.'
+        },
+        first_wave_completed: {
+            name: 'First wave completed',
+            description: "Alright, no enemies in sight. Click the pot to get more gold while you can!"
         }
     };
 }
