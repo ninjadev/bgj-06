@@ -63,7 +63,7 @@ function Upgrades(game) {
       cost: 25,
       name: "Slo'mo'alizer",
       init: function() {
-        that.game.activateShockWave("slomoalizer", 2);
+        that.game.activateSpecialWeapon("slomoalizer", 2);
       },
       stock: -1
     },

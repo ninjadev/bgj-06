@@ -6,7 +6,6 @@ function EnemyController(game) {
   this.enemies = [];
 }
 
-
 EnemyController.prototype.nextWave = function(t, cb){
   this.waveStartTime = t*20;
   this.numberOfWaves++;
@@ -68,4 +67,13 @@ EnemyController.prototype.render = function(ctx) {
 EnemyController.prototype.generateEnemyType = function(enemyTypes) {
   var enemyId = enemyTypes[Math.floor(Math.random()*enemyTypes.length)];
   return this.enemyTypes[enemyId];
+}
+
+EnemyController.prototype.slowDownWithinRadius = function(radius, factor, duration) {
+  for (var i=0;i<this.enemies.length;i++){
+    var enemy = this.enemies[i];
+      if (enemy.getDistanceToCenter() < radius) {
+        enemy.addEffect(new SpeedEffect(factor, duration));
+      }
+  }
 }

@@ -1,23 +1,24 @@
 /**
  *
- * @param string type, can be "slomoalizer"
- * @param array enemies
- * @param number duration in seconds
+ * @param string type, can be "slomoalizer", "shockWave" or "blast"
+ * @param EnemyController enemyController
+ * @param int duration (ticks)
  * @constructor
  */
-function ShockWave(type, enemies, duration) {
+function SpecialWeapon(type, enemyController, duration) {
   this.type = type;
-  this.enemies = enemies;
+  this.enemyController = enemyController;
   this.position = {
     x: CENTER.x,
     y: CENTER.y
   };
   this.radius = 0.5;
   this.impactInterval = 5;
-  this.duration = duration * 50;
+  this.duration = duration;
+  this.speedFactor = 0.3;
 }
 
-ShockWave.prototype.render = function() {
+SpecialWeapon.prototype.render = function() {
   this.sprite = this['sprite_' + this.type];
   ctx.save();
   var scaler = this.sprite.width * GU * 0.0000035 * this.radius;
@@ -27,16 +28,12 @@ ShockWave.prototype.render = function() {
   ctx.restore();
 }
 
-ShockWave.prototype.update = function(){
+SpecialWeapon.prototype.update = function(){
   this.radius += 0.2;
+
   if (this.impactInterval-- === 0) {
     this.impactInterval = 5;
-    for (var i=0;i<this.enemies.length;i++){
-      var enemy = this.enemies[i];
-      if (enemy.getDistanceToCenter() < this.radius) {
-        enemy.addEffect(new SpeedEffect(0.3/*, this.duration*/));
-      }
-    }
+    this.enemyController.slowDownWithinRadius(this.radius, this.speedFactor, this.duration)
   }
   return this.radius < 12;
 }
