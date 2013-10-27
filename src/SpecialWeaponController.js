@@ -7,7 +7,7 @@ function SpecialWeaponController(){
   this.weapons_container = $('.weapons.template').clone()
     .removeClass('template');
   $('#wrapper').append(this.weapons_container);
-  $("body").on("click", ".weapon-image", function(){
+  $("body").on("click touchstart", ".weapon-image", function(){
     var weapon = $(this).parent('.weapon');
     if (weapon.hasClass('loading')) {
       return;

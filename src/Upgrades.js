@@ -355,7 +355,7 @@ function Upgrades(game) {
   $('#wrapper').append(this.upgrade_menu);
 
   this.render();
-  $('body').on('click', '.upgrade-purchase', function(){
+  $('body').on('click touchstart', '.upgrade-purchase', function(){
     var index = $(this).parent('div').data('id');
     that.purchase(index);
   });
