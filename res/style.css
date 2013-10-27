@@ -180,3 +180,7 @@ strong {
 .weapon.loading img {
     opacity: 0.1;
 }
+
+.weapon img {
+    margin: 0;
+}
