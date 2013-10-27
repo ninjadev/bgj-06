@@ -109,12 +109,13 @@ function bootstrap(){
   /* add game states here */
 
   sm.addState("game", new GameState());
+  sm.addState("menu", new MenuState());
 
   document.body.appendChild(canvas);
 
   /* start the game */
 
-  sm.changeState("game");
+  sm.changeState("menu");
 
   console.log("bootstrapping loaded");
   loaded--;
@@ -217,6 +218,7 @@ function handleEvent(e){
       break;
     }
   }
+  clickables[i][1].hover && clickables[i][1].hover();
   $("canvas").css('cursor', hoverOverClickable ? "pointer" : "auto");
 }
 
