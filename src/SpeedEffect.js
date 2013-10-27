@@ -19,14 +19,22 @@ SpeedEffect.prototype.onApply = function(enemy){
 
 
 SpeedEffect.prototype.onReapply = function(enemy, newEffect){
-  this.applications++;
+  this.applications+=1;
+  this.appliedT = sm.activeState.t;
 
   //I'm trying to make sure that you never override with worse stats.
   if(newEffect.maxSpeedFactor > this.maxSpeedFactor){
       this.applicationsToMax = newEffect.applicationsToMax;
       this.maxSpeedFactor = newEffect.maxSpeedFactor;
     }
+    this.recalculateSpeed();
 
+}
+
+SpeedEffect.prototype.onRemove = function(enemy){
+}
+
+SpeedEffect.prototype.recalculateSpeed = function(){
   if(this.applicationsToMax !== undefined){
     this.speedFactor = 1 - (1 - this.maxSpeedFactor)
           * Math.min(1, this.applications/this.applicationsToMax);
@@ -35,15 +43,12 @@ SpeedEffect.prototype.onReapply = function(enemy, newEffect){
   }
 }
 
-SpeedEffect.prototype.onRemove = function(enemy){
-}
-
 SpeedEffect.prototype.render = function(ctx, enemy){
   var color;
   if(this.speedFactor < 1){
     color = "blue";
   }else{
-    color = "red";
+    color = "yellow";
   }
 
 
@@ -71,7 +76,11 @@ SpeedEffect.prototype.render = function(ctx, enemy){
 SpeedEffect.prototype.update = function(enemy, t){
   enemy.speed *= this.speedFactor;
   if(this.duration == undefined || this.duration <= 0) return;
-  if(t - this.appliedT >= this.duration){
-    enemy.removeEffect(this);
+  if(sm.activeState.t - this.appliedT >= this.duration){
+    this.applications -= 1;
+    this.recalculateSpeed();
+    if(this.applications <= 0){
+      enemy.removeEffect(this);
+    }
   }
 }

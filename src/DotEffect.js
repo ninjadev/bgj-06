@@ -17,6 +17,8 @@ DotEffect.prototype.onApply = function(enemy){
 
 DotEffect.prototype.onReapply = function(enemy, newEffect){
   this.applications++;
+  this.appliedT = sm.activeState.t;
+
 
   //I'm trying to make sure that you never override with worse stats.
   if(newEffect.maxDpt > this.maxDpt){
@@ -63,7 +65,7 @@ DotEffect.prototype.render = function(ctx, enemy, t){
 DotEffect.prototype.update = function(enemy, t){
   enemy.hit(this.dpt);
   if(this.duration == undefined || this.duration <= 0) return;
-  if(t - this.appliedT >= this.duration){
+  if(sm.activeState.t - this.appliedT >= this.duration){
     enemy.removeEffect(this);
   }
 }
