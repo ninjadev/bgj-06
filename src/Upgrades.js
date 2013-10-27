@@ -211,7 +211,7 @@ function Upgrades(game) {
     },
 
     {
-      cost: 0,
+      cost: 100,
       name: "Green Laser",
       img: 'green_laser.png',
       description: "Another color, woohoo! This one seems poisonous.",
@@ -225,7 +225,7 @@ function Upgrades(game) {
     },
 
     {
-      cost: 100,
+      cost: 150,
       level: 1,
       name: "Green Power 1",
       img: 'green_laser.png',
@@ -235,11 +235,47 @@ function Upgrades(game) {
         this.cost *= 1.9;
         this.level++;
         this.name = "Green Power " + this.level;
+
+        var laser = that.game.laserController.greenLaser;
+        var upgradeExample = laser.upgrades[0].generateNewDebuff();
+        var maxDpt = upgradeExample.maxDpt;
+        var duration = upgradeExample.duration;
+        var applicationsToMax = upgradeExample.applicationsToMax;
+
+        maxDpt *= 1.3;
+        laser.upgrades[0].generateNewDebuff = function(){
+          return new DotEffect(maxDpt, duration, applicationsToMax);
+        }
       },
       stock: -1,
       dependencies: ["Green Laser"]
     },
+  {
+      cost: 150,
+      level: 1,
+      name: "Rapid Toxicity 1",
+      img: 'green_laser.png',
+      description: "Green beam applies the poison faster",
+      init: function() {
+        //TODO implement.
+        this.cost *= 1.9;
+        this.level++;
+        this.name = "Rapid Toxicity " + this.level;
 
+        var laser = that.game.laserController.greenLaser;
+        var upgradeExample = laser.upgrades[0].generateNewDebuff();
+        var maxDpt = upgradeExample.maxDpt;
+        var duration = upgradeExample.duration;
+        var applicationsToMax = upgradeExample.applicationsToMax;
+
+        applications *= 0.8;
+        laser.upgrades[0].generateNewDebuff = function(){
+          return new DotEffect(maxDpt, duration, applicationsToMax);
+        }
+      },
+      stock: -1,
+      dependencies: ["Green Laser"]
+    },
     {
       cost: 100,
       level: 1,
