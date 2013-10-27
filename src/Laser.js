@@ -1,26 +1,26 @@
-function Laser(color, direction, speed, damage, sprite){
+function Laser(color, speed, damage, sprite){
   this.color = color;
+  this.offset = 0;
   this.speed = speed;
-  this.direction = direction;
   this.baseDamage = damage;
   //nextDamage is recalculated before each damage.
-  this.nextDamage = 0; 
+  this.nextDamage = 0;
   this.upgrades = [];
   this.endpoints = this.getEndpoints();
   this.sprite = sprite;
 }
 
-Laser.prototype.update = function(t, rotation){
-  this.endpoints = this.getEndpoints(rotation);
+Laser.prototype.update = function(t, humanControlled){
+  if (humanControlled) {
+    var dx = MOUSE.x-CENTER.x;
+    var dy = MOUSE.y-CENTER.y;
+    this.angle = Math.atan2(dy, dx);
+  } else {
+    this.angle = (t * this.speed) % 2 * Math.PI;
+  }
+  this.angle += this.offset;
   this.hittedEnemies = this.hits();
-}
-
-Laser.prototype.getEndpoints = function(rotation) {
-  var direction = this.direction + rotation;
-  return {
-    x: 8 + Math.cos(direction)*8,
-    y: 4.5 + Math.sin(direction)*8
-  };
+  this.endpoints = this.getEndpoints();
 }
 
 Laser.prototype.render = function(){
@@ -28,12 +28,8 @@ Laser.prototype.render = function(){
   var scaler = this.sprite.width * GU * 0.00002;
   ctx.translate(CENTER.x * GU, CENTER.y * GU);
   ctx.scale(scaler, scaler);
-  var dx = MOUSE.x-CENTER.x;
-  var dy = MOUSE.y-CENTER.y;
-  var angle=Math.atan2(dy, dx);
-  console.log(this.direction);
-  ctx.rotate(angle + Math.PI / 2 + this.direction / 4);
-  ctx.rotate(this.direction);
+
+  ctx.rotate(this.angle + Math.PI / 2);
   /*
   var x = -this.sprite.width * scaler / 2;
   var y = -this.sprite.height * scaler - 1.6*GU;
@@ -42,7 +38,14 @@ Laser.prototype.render = function(){
   var y = -this.sprite.height - 90;
   ctx.drawImage(this.sprite, x, y);
   ctx.restore();
-}
+};
+
+Laser.prototype.getEndpoints = function() {
+  return {
+    x: Math.cos(this.angle)*8+8,
+    y: Math.sin(this.angle)*8+4.5
+  };
+};
 
 Laser.prototype.hits = function () {
   var enemies = sm.states.game.enemies.enemies;

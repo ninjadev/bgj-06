@@ -76,7 +76,7 @@ function Upgrades(game) {
       description: "Slow your enemies with this delightfully cold beam.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.6, 10, 50)}));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.6, 10, 1)}));
         that.game.achievements.give('blue_laser');
       },
       stock: 1,
