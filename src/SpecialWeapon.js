@@ -18,6 +18,7 @@ function SpecialWeapon(type, image, factor, duration) {
   this.factor = factor;
   this.duration = duration;
   this.active = false;
+  this.loading = false;
   this.reset();
 }
 
