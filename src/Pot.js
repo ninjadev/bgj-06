@@ -13,8 +13,10 @@ function Pot(hp) {
 }
 
 Pot.prototype.setupView = function(){
-  $('.health').removeClass('template');
-  $('.health .value').html(this.hp);
+  this.$health = $('.health').clone().removeClass('template');
+  this.$health.children().eq(1).html(this.hp);
+
+  $('#wrapper').append(this.$health);
 }
 
 Pot.prototype.render = function() {
@@ -37,9 +39,10 @@ Pot.prototype.click = function() {
 Pot.prototype.lostLife = function() {
   this.hp--;
 
-  $('.health .value').html(this.hp);
+  this.$health.children().eq(1).html(this.hp);
+
   if(this.hp < 20){
-    $('.health').show();
+    this.$health.show();
   }
   if (this.hp < 1) {
     return false;
