@@ -118,6 +118,8 @@ Enemy.prototype.kill = function () {
   this.ps.explode(this.x, this.y, 35);
   sm.states.game.spawnMoneyEffect({x: this.x, y: this.y - 1, amount: this.bounty});
   sm.states.game.stats.addKill();
+  var sound_number = (Math.random()*4|0) + 1;
+  createjs.Sound.play('res/kill-'+sound_number+'.mp3|res/kill-'+sound_number+'.ogg');
 }
 
 Enemy.prototype.effectsUpdate = function(t){
