@@ -156,7 +156,6 @@ Enemy.prototype.getDistanceToCenter = function() {
   var movey = CENTER.y - this.y;
   return Math.sqrt(movex*movex + movey*movey);
 }
-
 //Removes a debuff of the same type as effect
 Enemy.prototype.removeEffect = function(effect){
   for(var i = 0; i < this.effects.length; i++){
