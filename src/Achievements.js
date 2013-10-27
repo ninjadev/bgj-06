@@ -9,7 +9,7 @@ function Achievements(){
     this.achievements = {
         welcome: {
           name: 'What is that?',
-          description: 'The end of the rainbow! And there\'s gold!',
+          description: 'The end of the rainbow! And there\'s gold! Clicky clicky!',
           custom_image: 'pot-o-gold'
         },
         first: {
