@@ -115,6 +115,19 @@ button {
     margin-top: -100px;
     text-align: center;
     background: white;
+    padding: 20px;
+}
+
+#game-over h1 {
+    font-size: 50px;
+}
+
+#game-over h2 {
+    padding-top: 20px;
+}
+
+#game-over h2 .kills {
+    font-size: 70px;
 }
 
 p {

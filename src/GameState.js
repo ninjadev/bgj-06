@@ -160,6 +160,7 @@ GameState.prototype.gameOver = function() {
   var stats = JSON.parse(getCookie("cuteanimals_stats"));
 
   $('#overlay').removeClass('template');
-  $('#game-over').removeClass('template');
-  $('#game-over').html("Game over!<br>Kills: " + stats.kills + "<br>Achivements: " + stats.achievements);
+
+  var gameOver = "<h1>Game over!</h><h2>Kills: <span class=kills>" + stats.kills + "</span></h2>";
+  $('#game-over').removeClass('template').html(gameOver);
 }
