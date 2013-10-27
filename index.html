@@ -74,7 +74,8 @@
 
     <div class="upgrades template">
         <h2>Upgrades</h2>
-        <ul class="upgrade-container"></ul>
+        <div class="img-upgrade-container"></div>
+        <div class="desc-upgrade-container"></div>
     </div>
 
     <div class="health template">
@@ -82,13 +83,19 @@
         <div class=value></div>
     </div>
 
-    <script id="upgrade-template" type="text/x-handlebars-template">
-        <li class="upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
-            <strong>{{ name }}</strong>
-            $<span>{{ cost }}</span>
-            Stock: {{ stock }}
-            <button class=upgrade-purchase>Purchase</button>
-        </li>
+    <script id="upgrade-img-template" type="text/x-handlebars-template">
+        <div class="tooltip upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
+            <img class=upgrade-purchase src=res/achievements/{{ img }} />
+        </div>
+    </script>
+
+    <script id="upgrade-desc-template" type="text/x-handlebars-template">
+        <div class=description data-id="{{ id }}">
+                <strong>{{ name }}</strong>
+                <span style=float:right;color:yellow>$ {{ cost }}</span>
+                <p>{{ description }}</p>
+            </div>
+        </div>
     </script>
 
     <div id=overlay class=template></div>
