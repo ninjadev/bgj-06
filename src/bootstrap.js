@@ -104,6 +104,7 @@ function bootstrap(){
   /* add game states here */
 
   sm.addState("game", new GameState());
+  sm.addState("achievements", new AchievementState());
   sm.addState("menu", new MenuState());
   sm.addState("credits", new CreditsState());
 

@@ -184,3 +184,41 @@ strong {
 .weapon img {
     margin: 0;
 }
+
+.achievements {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 5%;
+    bottom: 5%;
+    background: rgba(0,0,0,0.5);
+    font-size: 200%;
+    overflow: hidden;
+}
+.achievement-element {
+    padding: 1%;
+    clear: both;
+    overflow: hidden;
+}
+
+.achievements h1 {
+    padding: .6em 1em;
+    background: #01bbd2;
+    color: white;
+}
+.achievement-list {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.achievement-list .achievement-element:nth-child(even) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.achievement-avatar {
+    float: left;
+    width: 10%;
+    margin-right: 10px;
+}
