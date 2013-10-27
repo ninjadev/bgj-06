@@ -10,7 +10,7 @@ MoneyEffect.MAX_TIME_LEFT = 60;
 
 MoneyEffect.prototype.render = function(ctx){
     var ratio = this.time_left/MoneyEffect.MAX_TIME_LEFT;
-    ctx.fillStyle = 'rgba(84,82,0,' + (ratio) + ')';
+    ctx.fillStyle = 'rgba(140,120,20,' + (ratio) + ')';
     ctx.font = 'normal ' + (50 - ratio*40) + 'pt blackoutmidnight';
     ctx.textAlign = 'center';
     ctx.fillText(
