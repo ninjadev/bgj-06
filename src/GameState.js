@@ -37,6 +37,15 @@ GameState.prototype.init = function(){
     dead: [loadImage('res/pinkbear/pinkbear-dead-1.png')]
   }
 
+  this.elephant_sprites = {
+    walking: (function(){
+        var frames = []; for(var i=1;i<=6;i++){
+            frames.push(loadImage('res/elephant/elephant-walking-' + i + '.png'));
+        } return frames;
+    })(),
+    dead: [loadImage('res/elephant/elephant-dead-1.png')]
+  }
+
   this.moneyEffects = [];
 
   this.achievements = new Achievements();
@@ -58,7 +67,7 @@ GameState.prototype.init = function(){
     this.enemies[i] = Enemy.spawnRandom(
       this.enemyHP,
       this.enemySpeed,
-      this.dog_sprites,
+      this.elephant_sprites,
       this.enemyBounty);
   }
 
