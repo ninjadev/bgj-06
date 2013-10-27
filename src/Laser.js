@@ -36,7 +36,7 @@ Laser.prototype.render = function(){
 }
 
 Laser.prototype.hits = function () {
-  var enemies = sm.states.game.enemies;
+  var enemies = sm.states.game.enemies.enemies;
   for (var i = 0; i < enemies.length; i++){
     if (distToSegment({x: enemies[i].x, y: enemies[i].y}, CENTER, this.endpoints) < enemies[i].radius){
       this.nextDamage = this.baseDamage;
