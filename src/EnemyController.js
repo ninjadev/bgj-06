@@ -31,9 +31,13 @@ EnemyController.prototype.update = function(t){
     var waveTime = t*20-this.waveStartTime;
     this.timeLeftOfWave -= 20;
     if (this.timeLeftOfWave == 0) {
-      this.currentWave = undefined;
-      this.game.achievements.give('first_wave_completed');
-      this.cb();
+      if (this.enemies.length > 0) {
+        this.timeLeftOfWave = 20;
+      } else {
+        this.currentWave = undefined;
+        this.game.achievements.give('first_wave_completed');
+        this.cb();
+      }
     } else {
       if (waveTime > this.currentWave.numberOfMonstersSpawned*this.currentWave.interval) {
         this.currentWave.numberOfMonstersSpawned++;
