@@ -256,7 +256,6 @@ Upgrades.prototype.purchase = function(index){
   upgrade.init();
   this.render();
   this.purchased.push(upgrade.name);
-  console.log("Purchased upgrade %s", upgrade.name);
   return true;
 };
 
