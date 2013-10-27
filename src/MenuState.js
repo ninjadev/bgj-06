@@ -57,12 +57,16 @@ MenuState.prototype.resume = function(){
 }
 
 MenuState.prototype.render = function(ctx){
+
   ctx.save();
-  var scaler = 16*GU/this.bg_img.width;
+  var scaler = 16*GU/this.bg_img.width + 1 + 0.01*Math.sin(t/125);
+  ctx.translate(16*GU/2, 9*GU/2);
   ctx.scale(scaler, scaler);
+  ctx.translate(-this.bg_img.width/2, -this.bg_img.height/2);
   ctx.drawImage(this.bg_img, 0, 0);
   ctx.restore();
   ctx.save();
+
   scaler = 16*GU/this.vignette_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.vignette_img, 0, 0);
