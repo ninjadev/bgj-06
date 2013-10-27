@@ -50,9 +50,6 @@ SpecialWeapon.prototype.update = function(){
   return this.radius < SpecialWeapon.maxRadius;
 }
 
-/**
- * @param x between 0 and 1
- */
 SpecialWeapon.prototype.getTransparency = function() {
   var t = this.radius / SpecialWeapon.maxRadius;
   return 1 - t * t;
