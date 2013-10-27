@@ -1,5 +1,6 @@
 function Laser(color, speed, damage, sprite){
   this.color = color;
+  this.offset = 0;
   this.speed = speed;
   this.baseDamage = damage;
   //nextDamage is recalculated before each damage.
@@ -17,6 +18,7 @@ Laser.prototype.update = function(t, humanControlled){
   } else {
     this.angle = (t * this.speed) % 2 * Math.PI;
   }
+  this.angle += this.offset;
   this.hittedEnemies = this.hits();
   this.endpoints = this.getEndpoints();
 }

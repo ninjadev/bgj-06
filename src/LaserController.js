@@ -22,6 +22,7 @@ LaserController.prototype.addLaser = function(color, dmg) {
   switch(color){
   case Colors.GREEN:
     this.greenLaser = laser;
+    this.greenLaser.offset = 0.05;
     break;
   case Colors.BLUE:
     this.blueLaser = laser;
@@ -38,7 +39,7 @@ LaserController.prototype.update = function(t){
       this.redLaser.update(t, true);
   }
   if(this.greenLaser){
-      this.greenLaser.update(t, false);
+      this.greenLaser.update(t, true);
   }
   if(this.blueLaser){
       this.blueLaser.update(-t, false);
