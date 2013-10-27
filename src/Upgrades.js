@@ -8,22 +8,6 @@ function Upgrades(game) {
   var that = this;
   this.upgrades = [
     {
-      cost: 10,
-      name: "Orange laser",
-      init: function() {
-        that.game.laserController.addLaser(Colors.ORANGE);
-      },
-      stock: 0
-    },
-    {
-      cost: 20,
-      name: "Yellow laser",
-      init: function() {
-        that.game.laserController.addLaser(Colors.YELLOW);
-      },
-      stock: 0
-    },
-    {
       cost: 0,
       name: "Green laser",
       init: function() {
@@ -44,20 +28,15 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 200,
-      name: "Pink laser",
+      cost: 10,
+      name: "Intensify beam",
       init: function() {
-        that.game.laserController.addLaser(Colors.PINK);
+        var laser = that.game.laserController.redLaser;
+        laser.addUpgrade(new UpgradeDamageMultiplier(2.0));
+        //TODO: Make it a bit more safe than hardcoding index. Waiting for stiaje's awesome way to do it.
+        that.upgrades[2].cost *= 10;
       },
-      stock: 0
-    },
-    {
-      cost: 500,
-      name: "Purple laser",
-      init: function() {
-        that.game.laserController.addLaser(Colors.PURPLE);
-      },
-      stock: 0
+      stock: 10
     },
     {
       cost: 25,

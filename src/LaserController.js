@@ -1,7 +1,9 @@
 function LaserController() {
   this.rotation = 0;
   this.lasers = [];
-  this.addLaser(Colors.RED,0.5);
+  this.redLaser = this.addLaser(Colors.RED,0.5);
+  this.greenLaser = null;
+  this.blueLaser = null;
   this.startingRotation = null;
   this.startingAngle = null;
   var that = this;
@@ -21,6 +23,17 @@ LaserController.prototype.addLaser = function(color, dmg) {
     dmg
   );
   this.lasers.push(laser);
+  switch(color){
+  case Colors.GREEN:
+    this.greenLaser = laser;
+    break;
+  case Colors.BLUE:
+    this.blueLaser = laser;
+    break;
+  case Colors.RED:
+    this.redLaser = laser;
+    break;
+  }
   return laser;
 }
 
