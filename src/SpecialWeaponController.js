@@ -6,10 +6,18 @@ function SpecialWeaponController(){
   this.template = Handlebars.compile(source);
   this.weapons_container = $('.weapons.template').clone()
     .removeClass('template');
-  $('body').append(this.weapons_container);
-  $("body").on("click", ".weapon-button", function(){
-    var index = $(this).parent('.weapon').data('id');
+  $('#wrapper').append(this.weapons_container);
+  $("body").on("click", ".weapon-image", function(){
+    var weapon = $(this).parent('.weapon');
+    if (weapon.hasClass('loading')) {
+      return;
+    }
+    var index = weapon.data('id');
     that.activate(index);
+    weapon.addClass('loading');
+    setTimeout(function(){
+      weapon.removeClass('loading');
+    }, 10000);
   });
 }
 

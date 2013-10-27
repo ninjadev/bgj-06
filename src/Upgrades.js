@@ -331,7 +331,9 @@ function Upgrades(game) {
       description: "Awesome triggeable super ability.",
       init: function() {
         //that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
-        that.game.specialWeaponController.add(new SpecialWeapon("slomoalizer", 0.1, 2.5*50, 10));
+        that.game.specialWeaponController.add(
+          new SpecialWeapon("slomoalizer", this.img, 0.1, 2.5*50, 10)
+        );
       },
       stock: 1,
       dependencies: ["Blue Laser"]
@@ -342,7 +344,7 @@ function Upgrades(game) {
       img: 'blast.png',
       init: function() {
         //that.game.activateSpecialWeapon("blast", -1, 0.7*50);
-        that.game.specialWeaponController.add(new SpecialWeapon("blast", -1, 0.7*50, 10));
+        that.game.specialWeaponController.add(new SpecialWeapon("blast", this.img, -1, 0.7*50, 10));
       },
       stock: 1
     }
