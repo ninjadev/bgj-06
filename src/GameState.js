@@ -71,6 +71,7 @@ GameState.prototype.pause = function(){
 
 GameState.prototype.resume = function(){
   this.upgrades = new Upgrades(this);
+  this.achievements.give('welcome');
   this.cash.setupView();
   this.pot.setupView();
 }
