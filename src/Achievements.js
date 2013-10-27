@@ -15,6 +15,22 @@ function Achievements(){
         grand: {
             name: 'A grand',
             description: 'You have totally earned a grand! Awesome!'
+        },
+        green_laser: {
+            name: 'Green laser',
+            description: 'Congratulations! You can poison enemies with this weapon.'
+        },
+        blue_laser: {
+            name: 'Blue laser',
+            description: 'Nice! This laser can slow down your enemies.'
+        },
+        first_kill: {
+            name: 'First kill',
+            description: "It's not going to be the last one"
+        },
+        twenty_kills: {
+            name: 'Twenty kills',
+            description: 'Way to go!'
         }
     };
 }

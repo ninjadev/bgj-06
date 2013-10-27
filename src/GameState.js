@@ -76,6 +76,7 @@ GameState.prototype.init = function(){
   this.audioButton = new AudioButton();
   this.upgrades = new Upgrades(this);
   this.shockWave = null;
+  this.stats = new Stats(this.achievements);
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
