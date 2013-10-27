@@ -28,6 +28,10 @@ GameState.prototype.init = function(){
   ];
   this.t = 0;
 
+  this.green_laser_beam = loadImage('res/green_laser_beam.png');
+  this.blue_laser_beam = loadImage('res/blue_laser_beam.png');
+  this.red_laser_beam = loadImage('res/red_laser_beam.png');
+
   this.bg = loadImage('res/bg.png');
   this.vignette = loadImage('res/vignette.png');
 

@@ -1,4 +1,4 @@
-function Laser(color, direction, speed, damage){
+function Laser(color, direction, speed, damage, sprite){
   this.color = color;
   this.speed = speed;
   this.direction = direction;
@@ -7,6 +7,7 @@ function Laser(color, direction, speed, damage){
   this.nextDamage = 0; 
   this.upgrades = [];
   this.endpoints = this.getEndpoints();
+  this.sprite = sprite;
 }
 
 Laser.prototype.update = function(t, rotation){
@@ -24,15 +25,22 @@ Laser.prototype.getEndpoints = function(rotation) {
 
 Laser.prototype.render = function(){
   ctx.save();
-  ctx.strokeStyle = this.color;
-  ctx.beginPath();
-  ctx.moveTo(CENTER.x*GU, CENTER.y*GU);
-  ctx.lineTo(
-    this.endpoints.x*GU,
-    this.endpoints.y*GU
-  );
-  ctx.stroke();
-  ctx.closePath();
+  var scaler = this.sprite.width * GU * 0.00002;
+  ctx.translate(CENTER.x * GU, CENTER.y * GU);
+  ctx.scale(scaler, scaler);
+  var dx = MOUSE.x-CENTER.x;
+  var dy = MOUSE.y-CENTER.y;
+  var angle=Math.atan2(dy, dx);
+  console.log(this.direction);
+  ctx.rotate(angle + Math.PI / 2 + this.direction / 4);
+  ctx.rotate(this.direction);
+  /*
+  var x = -this.sprite.width * scaler / 2;
+  var y = -this.sprite.height * scaler - 1.6*GU;
+  */
+  var x = -this.sprite.width / 2;
+  var y = -this.sprite.height - 90;
+  ctx.drawImage(this.sprite, x, y);
   ctx.restore();
 }
 

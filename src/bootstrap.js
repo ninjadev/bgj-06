@@ -191,9 +191,11 @@ document.addEventListener('click', handleEvent);
 document.addEventListener('touchstart', handleEvent);
 document.addEventListener('touchmove', function(e){e.preventDefault();e.stopPropagation();return false;});
 
+
 function handleEvent(e){
   e.preventDefault();
   mouseXY = relMouseCoords(e);
+  MOUSE = mouseXY;
   var eventType = (e.type === "mousemove" || e.type === "touchmove" ? "hover" : "click");
   var clickables;
   if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
