@@ -125,7 +125,8 @@ strong {
     padding:10px 0;
 }
 
-.upgrade img {
+.upgrade img,
+.weapon img {
     float: left;
     width: 64px;  
     height: 64px;  
@@ -164,8 +165,18 @@ strong {
 
 .weapons {
     position: absolute;
-    left: 10px;
-    bottom: 20px;
-    background: white;
+    left: 1%;
+    bottom: 2%;
+    padding: 1%;
     z-index: 2000;
+    background: rgba(0,0,0,0.5);
+    color: white;
+}
+
+.weapon {
+    display: inline-block;
+}
+
+.weapon.loading img {
+    opacity: 0.1;
 }

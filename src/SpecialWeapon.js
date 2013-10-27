@@ -7,8 +7,9 @@ SpecialWeapon.maxRadius = 5;
  * @param int duration (ticks)
  * @constructor
  */
-function SpecialWeapon(type, factor, duration) {
+function SpecialWeapon(type, image, factor, duration) {
   this.type = type;
+  this.image = image;
   this.enemyController = sm.states.game.enemies;
   this.position = {
     x: CENTER.x,
