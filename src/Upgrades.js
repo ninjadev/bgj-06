@@ -9,53 +9,208 @@ function Upgrades(game) {
   this.upgrades = [
     {
       cost: 10,
-      name: "Red laser",
+      name: "Red Laser",
+      description: "Using your lucky prism and some mirrors,"
+              +" you harness the red power of the rainbow to destroy"
+              +" your enemies.",
       init: function() {
         that.game.laserController.addLaser(Colors.RED, 0.5);
       },
       stock: 1
     },
     {
-      cost: 0,
-      name: "Green laser",
+      cost: 10,
+      level: 1,
+      name: "Intensify Beam 1",
+      description: "Tweak the mirrors to get a 20% damage bonus to your red beam.",
       init: function() {
-        var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(0.2, 100, 50)}));
-        that.game.achievements.give('green_laser');
+        var laser = that.game.laserController.redLaser;
+        laser.addUpgrade(new UpgradeDamageMultiplier(1.20));
+        this.cost *= 10;
+        this.level++;
+        this.name = "Intensify Beam "+this.level;
       },
-      stock: 1,
-      dependencies: ["Red laser"]
+      stock: 10,
+      dependencies: ["Red Laser"]
     },
     {
+      cost: 1000,
+      name: "Double Beam",
+      description: "Splits the red beam into two equally powerful beams. Effectively giving you twice the damage",
+      init: function() {
+        var laser = that.game.laserController.redLaser;
+        //TODO: Implement
+      },
+      stock: 10,
+      dependencies: ["Intensify Beam 3"]
+    },
+    {
+      cost: 1000,
+      name: "Tripple Beam",
+      description: "Splits the red beam into three equally powerful beams. Effectively giving you tripple damage",
+      init: function() {
+        var laser = that.game.laserController.redLaser;
+        //TODO: Implement
+      },
+      stock: 10,
+      dependencies: ["Double Beam"]
+    },
+    {
+      cost: 1000,
+      name: "Butt Beam",
+      description: "A mirror mishap made a beam come out from behind. Turns out it's pretty useful. ",
+      init: function() {
+        var laser = that.game.laserController.redLaser;
+        //TODO: Implement
+      },
+      stock: 10,
+      dependencies: ["Tripple Beam"]
+    },
+
+    {
       cost: 0,
-      name: "Blue laser",
+      name: "Blue Laser",
+      description: "Slow your enemies with this delightfully cold beam.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
         laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new SpeedEffect(0.01, 50, 40)}));
         that.game.achievements.give('blue_laser');
       },
       stock: 1,
-      dependencies: ["Red laser"]
+      dependencies: ["Red Laser"]
+    },
+
+    {
+      cost: 100,
+      level: 1,
+      name: "Blue Power 1",
+      description: "Tweaking the blue mirrors you improve the slowing factor of the beam.",
+      init: function() {
+        //TODO implement.
+        this.cost *= 1.9;
+        this.level++;
+        this.name = "Blue Power " + this.level;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser"]
     },
     {
-      cost: 10,
-      name: "Intensify beam",
+      cost: 100,
+      level: 1,
+      name: "Blue Duration 1",
+      description: "The cold stays longer.",
       init: function() {
-        var laser = that.game.laserController.redLaser;
-        laser.addUpgrade(new UpgradeDamageMultiplier(2.0));
-        //TODO: Make it a bit more safe than hardcoding index. Waiting for stiaje's awesome way to do it.
-        that.upgrades[2].cost *= 10;
+        //TODO implement.
+        this.cost *= 1.9;
+        this.level++;
+        this.name = "Blue Duration " + this.level;
       },
-      stock: 10,
-      dependencies: ["Red laser"]
+      stock: 1,
+      dependencies: ["Blue Laser"]
     },
+    {
+      cost: 10000,
+      level: 1,
+      name: "Cold Rotation",
+      description: "Hire a leprechaun to turn the blue beam for you.",
+      init: function() {
+        //TODO implement.
+      },
+      stock: 1,
+      dependencies: ["Blue Power 3"]
+    },
+
+    {
+      cost: 10000,
+      level: 1,
+      name: "Instant Stun",
+      description: "Intensify the blue beam so that the animals stop for "
+          +" a while when they see it the first time.",
+      init: function() {
+      },
+      stock: 1,
+      dependencies: ["Blue Power 3", "Blue Duration 2"]
+    },
+
+    {
+      cost: 100,
+      level: 1,
+      name: "Cold Pulses 1",
+      description: "Fancy mirror magic makes pulsating cold rings around your pot.",
+      init: function() {
+        //TODO implement.
+        this.cost *= 1.9;
+        this.level++;
+        this.name = "Cold Pulses " + this.level;
+      },
+      stock: 1,
+      dependencies: ["Blue Power 5"]
+    },
+
+    {
+      cost: 0,
+      name: "Green Laser",
+      description: "Another color, woohoo! This one seems poisonous.",
+      init: function() {
+        var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(0.2, 100, 50)}));
+        that.game.achievements.give('green_laser');
+      },
+      stock: 1,
+      dependencies: ["Blue Laser"]
+    },
+
+    {
+      cost: 100,
+      level: 1,
+      name: "Green Power 1",
+      description: "Increases the toxicity of the green light",
+      init: function() {
+        //TODO implement.
+        this.cost *= 1.9;
+        this.level++;
+        this.name = "Green Power " + this.level;
+      },
+      stock: -1,
+      dependencies: ["Green Laser"]
+    },
+
+    {
+      cost: 100,
+      level: 1,
+      name: "Contagious Beam 1",
+      description: "Oh noes! It's contagious :/",
+      init: function() {
+        //TODO implement.
+        this.cost *= 10;
+        this.level++;
+        this.name = "Contagious Beam " + this.level;
+      },
+      stock: 3,
+      dependencies: ["Green Laser"]
+    },
+
+    {
+      cost: 10000,
+      level: 1,
+      name: "Green Rotation",
+      description: "Hire leprechauns to turn the green beam.",
+      init: function() {
+        //TODO implement.
+      },
+      stock: 1,
+      dependencies: ["Green Power 3"]
+    },
+
     {
       cost: 25,
       name: "Slo'mo'alizer",
+      description: "Awesome triggeable super ability.",
       init: function() {
         that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
       },
-      stock: -1
+      stock: -1,
+      dependencies: ["Blue Laser"]
     },
     {
       cost: 10,
@@ -91,7 +246,7 @@ Upgrades.prototype.purchase = function(index){
   this.game.cash.spend(upgrade.cost);
   upgrade.init();
   this.render();
-  this.purchased.push(upgrade);
+  this.purchased.push(upgrade.name);
   console.log("Purchased upgrade %s", upgrade.name);
   return true;
 };
@@ -103,8 +258,8 @@ Upgrades.prototype.render = function(){
   for (var i=0;i<this.upgrades.length;i++){
     var upgrade = this.upgrades[i];
 
-    //Do not render the ones that are out of stock.
-    if(upgrade.stock == 0){
+    //Do not render the ones that are not available.
+    if(!this.unlocked(upgrade)){
       continue;
     }
     upgrade.id = i;
@@ -116,7 +271,7 @@ Upgrades.prototype.render = function(){
   }
 };
 
-Upgrades.prototype.canPurchase = function(upgrade) {
+Upgrades.prototype.unlocked = function(upgrade){
   if (upgrade.stock == 0) {
     return false;
   }
@@ -125,7 +280,7 @@ Upgrades.prototype.canPurchase = function(upgrade) {
       var dependency = upgrade.dependencies[i];
       var name_match = false;
       for (var j=0;j<this.purchased.length;j++) {
-        if (this.purchased[j].name == dependency) {
+        if (this.purchased[j] == dependency) {
           name_match = true;
           break;
         }
@@ -136,6 +291,14 @@ Upgrades.prototype.canPurchase = function(upgrade) {
     }
   }
 
+  return true;
+
+}
+
+Upgrades.prototype.canPurchase = function(upgrade) {
+  if (!this.unlocked(upgrade)){
+    return false;
+  }
   if (!this.game.cash.canSpend(upgrade.cost)){
     return false;
   }
