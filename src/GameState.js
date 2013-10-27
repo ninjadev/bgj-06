@@ -19,33 +19,6 @@ GameState.prototype.init = function(){
   this.bg = loadImage('res/bg.png');
   this.vignette = loadImage('res/vignette.png');
 
-  this.dog_sprites = {
-    walking: (function(){
-        var frames = []; for(var i=1;i<=8;i++){
-            frames.push(loadImage('res/dog/dog-walking-' + i + '.png'));
-        } return frames;
-    })(),
-    dead: [loadImage('res/dog/dog-dead-1.png')]
-  }
-
-  this.pinkbear_sprites = {
-    walking: (function(){
-        var frames = []; for(var i=1;i<=4;i++){
-            frames.push(loadImage('res/pinkbear/pinkbear-walking-' + i + '.png'));
-        } return frames;
-    })(),
-    dead: [loadImage('res/pinkbear/pinkbear-dead-1.png')]
-  }
-
-  this.elephant_sprites = {
-    walking: (function(){
-        var frames = []; for(var i=1;i<=6;i++){
-            frames.push(loadImage('res/elephant/elephant-walking-' + i + '.png'));
-        } return frames;
-    })(),
-    dead: [loadImage('res/elephant/elephant-dead-1.png')]
-  }
-
   this.moneyEffects = [];
 
   this.achievements = new Achievements();
@@ -57,19 +30,8 @@ GameState.prototype.init = function(){
   this.rainbow = new Rainbow();
   this.cash = new Cash(this.achievements, this);
 
-  this.spawnRate = 100;
-  this.enemyHP = 10;
-  this.enemySpeed = 0.03;
-  this.enemyBounty = 10;
-
-  this.enemies = [];
-  for(var i = 0; i < 3; i++){
-    this.enemies[i] = Enemy.spawnRandom(
-      this.enemyHP,
-      this.enemySpeed,
-      this.elephant_sprites,
-      this.enemyBounty);
-  }
+  this.enemies = new EnemyController(this);
+  this.timeToWave = 3000;
 
   this.laserController = new LaserController();
 
@@ -101,13 +63,10 @@ GameState.prototype.render = function(ctx){
   this.rainbow.render();
   this.audioButton.render();
 
-  for (var i=0;i<this.enemies.length;i++){
-    var enemy = this.enemies[i];
-    enemy.render(ctx);
-  }
-
   this.laserController.render();
   this.pot.render();
+
+  this.enemies.render(ctx);
 
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
@@ -120,34 +79,23 @@ GameState.prototype.render = function(ctx){
 }
 
 GameState.prototype.update = function(){
+  var that = this;
   this.t++;
 
   if (!this.isGameOver) {
-    if(this.t % this.spawnRate == 0){
-      this.enemies.push(
-        Enemy.spawnRandom(
-          this.enemyHP,
-          this.enemySpeed,
-          Math.random() > 0.5 ? this.dog_sprites : this.pinkbear_sprites,
-          this.enemyBounty
-        )
-      )
-    }
 
-    for (var i=0;i<this.enemies.length;i++){
-      var enemy = this.enemies[i];
-      if (!enemy.update(this.t)) {
-        this.enemies[i] = this.enemies[this.enemies.length - 1];
-        this.enemies.pop();
-        if (!this.pot.lostLife()) {
-          this.gameOver();       
-          break;
-        }
-      }
-    }
+    if (this.timeToWave > 0){
+      this.timeToWave -= 20;
+    } else if (this.enemies.timeLeftOfWave == 0) {
+      this.enemies.nextWave(this.t, function () {
+        that.timeToWave = 15000;
+      });
+    } 
 
-  this.rainbow.update(t);
-  this.laserController.update(t);
+    this.enemies.update(this.t);
+
+    this.rainbow.update(t);
+    this.laserController.update(t);
 
     for (var i=0;i<this.moneyEffects.length;i++){
       var moneyEffect = this.moneyEffects[i];

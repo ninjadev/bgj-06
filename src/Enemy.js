@@ -1,11 +1,11 @@
-function Enemy(x, y, hp, speed, sprites, bounty){
+function Enemy(x, y, enemyType) {
   this.x = x;
   this.y = y;
 
-  this.sprites = sprites;
+  this.sprites = enemyType.sprites;
 
-  this.hp = hp;
-  this.baseSpeed = speed;
+  this.hp = enemyType.hp;
+  this.baseSpeed = enemyType.speed;
   this.killRadius = 0.0086*GU;
 
   this.effects = [];
@@ -18,7 +18,7 @@ function Enemy(x, y, hp, speed, sprites, bounty){
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
-  this.bounty = bounty;
+  this.bounty = enemyType.bounty;
 }
 
 Enemy.prototype.render = function(ctx){
@@ -53,8 +53,8 @@ Enemy.prototype.update = function(t){
   if(this.dead){
     this.dead_time && this.dead_time--;
     if(!this.dead_time){
-      var index = sm.states.game.enemies.indexOf(this);
-      sm.states.game.enemies.splice(index, 1);
+      var index = sm.states.game.enemies.enemies.indexOf(this);
+      sm.states.game.enemies.enemies.splice(index, 1);
       sm.states.game.cash.add(this.bounty);
     }
     return true;
@@ -93,31 +93,6 @@ Enemy.prototype.renderEffects = function(ctx){
   for(var i = 0; i < this.effects.length; i++){
     this.effects[i].render(ctx, this);
   }
-}
-
-Enemy.spawnRandom = function(hp, speed, sprites, bounty){
-  var side = Math.floor(Math.random()*4);
-  var x = 0;
-  var y = 0;
-  switch(side){
-  case 0:
-    x = 0;
-    y = Math.random()*9;
-    break;
-  case 1:
-    x = Math.random()*15;
-    y = 0;
-    break;
-  case 2:
-    x = 16;
-    y = Math.random()*9;
-    break;
-  case 3:
-    x = Math.random()*15;
-    y = 9;
-    break;
-  }
-  return new Enemy(x,y,hp,speed, sprites, bounty)
 }
 
 Enemy.prototype.hit = function (damage) {
@@ -170,4 +145,30 @@ Enemy.prototype.removeEffect = function(effect){
       return;
     }
   }
+}
+
+/** That factory **/
+Enemy.spawnRandom = function(enemyType){
+  var side = Math.floor(Math.random()*4);
+  var x = 0;
+  var y = 0;
+  switch(side){
+  case 0:
+    x = 0;
+    y = Math.random()*9;
+    break;
+  case 1:
+    x = Math.random()*15;
+    y = 0;
+    break;
+  case 2:
+    x = 16;
+    y = Math.random()*9;
+    break;
+  case 3:
+    x = Math.random()*15;
+    y = 9;
+    break;
+  }
+  return new Enemy(x,y,enemyType);
 }
