@@ -44,6 +44,7 @@
         <script src=src/Waves.js></script>
         <script src=src/EnemyTypes.js></script>
         <script src=src/ProgressCircle.js></script>
+        <script src=src/SpecialWeaponController.js></script>
 
     </head>
     <body onload="bootstrap()">
@@ -80,6 +81,8 @@
         <div class=value></div>
     </div>
 
+    <div class="weapons template"></div>
+
     <script id="upgrade-img-template" type="text/x-handlebars-template">
         <div class="tooltip upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
             <img class=upgrade-purchase src=res/achievements/{{ img }} />
@@ -92,6 +95,18 @@
                 <span style=float:right;color:yellow>$ {{ cost }}</span>
                 <p>{{ description }}</p>
             </div>
+        </div>
+    </script>
+
+    <script id="weapons-list-template" type="text/x-handlebars-template">
+        <div class="weapons-list">
+            {{#each weapons}}
+                <div class="weapon" data-id="{{@index}}">
+                    <button class="weapon-button">
+                        {{ type }}
+                    </button>
+                </div>
+            {{/each}}
         </div>
     </script>
 

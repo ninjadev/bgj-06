@@ -44,7 +44,8 @@ GameState.prototype.init = function(){
   this.laserController = new LaserController();
 
   this.audioButton = new AudioButton();
-  this.specialWeapon = null;
+
+  this.specialWeaponController = new SpecialWeaponController();
   this.stats = new Stats(this.achievements);
 
   this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
@@ -89,9 +90,7 @@ GameState.prototype.render = function(ctx){
     moneyEffect.render(ctx);
   }
 
-  if (null !== this.specialWeapon) {
-    this.specialWeapon.render();
-  }
+  this.specialWeaponController.render();
 }
 
 GameState.prototype.update = function(){
@@ -127,11 +126,7 @@ GameState.prototype.update = function(){
     }
 
     this.pot.update();
-    if (null !== this.specialWeapon) {
-      if (!this.specialWeapon.update()) {
-        this.specialWeapon = null;
-      }
-    }
+    this.specialWeaponController.update();
   }
 }
 
@@ -141,8 +136,4 @@ GameState.prototype.gameOver = function() {
   
   $('#overlay').removeClass('template');
   $('#game-over').removeClass('template');
-}
-
-GameState.prototype.activateSpecialWeapon = function(type, factor, duration) {
-  this.specialWeapon = new SpecialWeapon(type, this.enemies, factor, duration, 12);
 }

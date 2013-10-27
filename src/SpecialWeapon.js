@@ -5,19 +5,24 @@
  * @param int duration (ticks)
  * @constructor
  */
-function SpecialWeapon(type, enemyController, factor, duration, maxRadius) {
+function SpecialWeapon(type, factor, duration, maxRadius) {
   this.type = type;
-  this.enemyController = enemyController;
+  this.enemyController = sm.states.game.enemies;
   this.position = {
     x: CENTER.x,
     y: CENTER.y
   };
   this.maxRadius = maxRadius;
-  this.radius = 0.5;
-  this.impactInterval = 5;
   this.factor = factor;
   this.duration = duration;
+  this.active = false;
+  this.reset();
 }
+
+SpecialWeapon.prototype.reset = function() {
+  this.radius = 0.5;
+  this.impactInterval = 5;
+};
 
 SpecialWeapon.prototype.render = function() {
   this.sprite = this['sprite_' + this.type];
