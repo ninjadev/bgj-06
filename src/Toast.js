@@ -18,7 +18,7 @@ Toast = (function(){
         var toast = toast_template.clone()
             .removeClass('template');
         toast.find('.message').html(message);
-        $('body').append(toast);
+        $('#wrapper').append(toast);
         toast.fadeIn();
         toast.animate({
             'margin-top':'-20px'

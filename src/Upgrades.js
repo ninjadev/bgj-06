@@ -294,7 +294,7 @@ function Upgrades(game) {
   this.purchased = [];
   this.upgrade_menu = $('.upgrades.template').clone()
     .removeClass('template');
-  $('body').append(this.upgrade_menu);
+  $('#wrapper').append(this.upgrade_menu);
 
   this.render();
   $('body').on('click', '.upgrade-purchase', function(){

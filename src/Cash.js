@@ -8,11 +8,14 @@ function Cash(achievements, game){
   this.game = game;
   this.accumulatedAmount = 0;
   this.amount = 0;
+}
+
+Cash.prototype.setupView = function(){
   this.cash_display = $('.cash.template').clone()
     .removeClass('template');
-  $('body').append(this.cash_display);
+  $('#wrapper').append(this.cash_display);
   this.render();
-}
+};
 
 Cash.prototype.add = function(amount){
   this.amount += amount;

@@ -52,21 +52,32 @@ button {
     width: 10%;
 }
 
+#wrapper {
+    position: absolute;
+}
+
 .cash {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: white;
-    width: 60px;
+    left: 60%;
+    top: 3%;
+    width: 25%;
+    color: #e5a102;
+    font-size: 350%;
+    text-align: right;
 }
 
 .health {
     position: absolute;
-    top: 10px;
-    background: white;
-    width: 180px;
-    left: 50%;
-    margin-left: -90px;
+    top: 58%;
+    width: 20%;
+    left: 40%;
+    text-align: center;
+    color: #d6116e;
+    display: none;
+}
+
+.health img {
+    width: 4%;
 }
 
 .health .value {
@@ -124,11 +135,11 @@ strong {
 
 .upgrades {
     overflow: hidden;
-    padding: 20px;
+    padding: 1%;
     position: absolute;
-    width: 400px;
-    top: 40px;
-    left: 10px;
+    width: 20%;
+    top: 2%;
+    left: 1%;
     background: rgba(0,0,0,0.5);
     color: white;
 }

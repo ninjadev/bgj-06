@@ -69,12 +69,6 @@ function bootstrap(){
   canvas = document.createElement("canvas");
   ctx = canvas.getContext("2d");
   canvas.style.zIndex = 999;
-  glowcanvas = document.createElement("canvas");
-  glowctx = glowcanvas.getContext("2d");
-  blurcanvas = document.createElement("canvas");
-  blurctx = blurcanvas.getContext("2d");
-  scanlinecanvas = document.createElement("canvas");
-  scanlinectx = scanlinecanvas.getContext("2d");
   game_data = readData();
 
   sm = new StateManager();
@@ -132,6 +126,11 @@ function resize(e){
   canvas.width = 16*GU;
   canvas.height = 9*GU;
   canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 "+((window.innerWidth-16*GU)/2)+"px";
+  var wrapper = document.getElementById('wrapper');
+  wrapper.style.margin = canvas.style.margin;
+  wrapper.style.width = 16*GU+'px';
+  wrapper.style.height = 9*GU+'px';
+  wrapper.style.zIndex = 999999999;
 }
 
 function saveData(data) {
