@@ -3,6 +3,33 @@ function GameState(){
 
 GameState.prototype.init = function(){
 
+
+  this.green_laser_beam = loadImage('res/green_laser_beam.png');
+  this.blue_laser_beam = loadImage('res/blue_laser_beam.png');
+  this.red_laser_beam = loadImage('res/red_laser_beam.png');
+
+  this.bg = loadImage('res/bg.png');
+  this.vignette = loadImage('res/vignette.png');
+
+}
+
+GameState.prototype.getPotAmount = function(){
+  var enemyCont = sm.activeState.enemies;
+  if(enemyCont && enemyCont.numberOfWaves > 1){
+    return 1+Math.floor(1.15^enemyCont.numberOfWaves);
+  }else{
+    return 1;
+  }
+}
+GameState.prototype.spawnMoneyEffect = function(options){
+    this.moneyEffects.push(new MoneyEffect(options));
+}
+
+
+GameState.prototype.pause = function(){
+}
+
+GameState.prototype.resume = function(){
   /* warmup, should not make sound */
   createjs.Sound.play('res/coin.mp3|res/coin.ogg');
   createjs.Sound.play('res/kill-1.mp3|res/kill-1.ogg');
@@ -28,14 +55,6 @@ GameState.prototype.init = function(){
       createjs.Sound.setMute(audioIsMuted);
     }, {x:15, y:0, w:1, h:1}]
   ];
-  this.t = 0;
-
-  this.green_laser_beam = loadImage('res/green_laser_beam.png');
-  this.blue_laser_beam = loadImage('res/blue_laser_beam.png');
-  this.red_laser_beam = loadImage('res/red_laser_beam.png');
-
-  this.bg = loadImage('res/bg.png');
-  this.vignette = loadImage('res/vignette.png');
 
   this.moneyEffects = [];
 
@@ -68,17 +87,8 @@ GameState.prototype.init = function(){
   this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
 
   audioIsMuted = false;
-}
 
-GameState.prototype.spawnMoneyEffect = function(options){
-    this.moneyEffects.push(new MoneyEffect(options));
-}
-
-
-GameState.prototype.pause = function(){
-}
-
-GameState.prototype.resume = function(){
+  this.t = 0;
   this.upgrades = new Upgrades(this);
   this.achievements.give('welcome');
   this.cash.setupView();
@@ -158,9 +168,18 @@ GameState.prototype.gameOver = function() {
   this.audioButton.pause();
 
   var stats = JSON.parse(getCookie("cuteanimals_stats"));
+  
+  var gameOver = "<h1>Game over!</h><h2>Kills: <span class=kills>" +
+    stats.kills + "</span></h2><button id=play-again>Play again?</button>";
 
-  $('#overlay').removeClass('template');
+  var $overlay = $('#overlay').clone().removeClass('template');
+  var $gameOver = $('#game-over').clone().removeClass('template').html(gameOver);
 
-  var gameOver = "<h1>Game over!</h><h2>Kills: <span class=kills>" + stats.kills + "</span></h2>";
-  $('#game-over').removeClass('template').html(gameOver);
+  $('#wrapper').append($overlay, $gameOver);
+
+  $('#play-again').on("click", function() {
+    $('#wrapper').empty();
+    sm.addState("menu", new MenuState());
+    sm.changeState("menu");
+  });
 }

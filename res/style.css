@@ -130,6 +130,15 @@ button {
     font-size: 70px;
 }
 
+#game-over #play-again {
+    padding: 10px;
+    font-size: 30px;
+}
+
+#game-over #play-again:hover {
+    cursor: pointer;
+}
+
 p {
     font-family: sans-serif;
     padding: 10px 0;
