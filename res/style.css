@@ -6,7 +6,7 @@
 }
 html,body {
     overflow:hidden;
-    background:white;
+    background:black;
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
