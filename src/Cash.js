@@ -49,5 +49,5 @@ Cash.prototype.canSpend = function(amount) {
 };
 
 Cash.prototype.render = function(){
-  this.cash_display.find('.value').text('$' + this.amount);
+  this.cash_display.find('.value').text('$' + Math.floor(this.amount));
 }
