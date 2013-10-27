@@ -104,7 +104,7 @@ function Upgrades(game) {
       description: "Another color, woohoo! This one seems poisonous.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(1.0, 100, 100)}));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(1.0, 100, 200)}));
         that.game.achievements.give('green_laser');
       },
       stock: 1,
