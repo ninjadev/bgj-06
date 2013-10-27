@@ -5,7 +5,7 @@
  * @param int duration (ticks)
  * @constructor
  */
-function SpecialWeapon(type, enemyController, duration) {
+function SpecialWeapon(type, enemyController, factor, duration) {
   this.type = type;
   this.enemyController = enemyController;
   this.position = {
@@ -14,8 +14,8 @@ function SpecialWeapon(type, enemyController, duration) {
   };
   this.radius = 0.5;
   this.impactInterval = 5;
+  this.factor = factor;
   this.duration = duration;
-  this.speedFactor = 0.3;
 }
 
 SpecialWeapon.prototype.render = function() {
@@ -33,7 +33,13 @@ SpecialWeapon.prototype.update = function(){
 
   if (this.impactInterval-- === 0) {
     this.impactInterval = 5;
-    this.enemyController.slowDownWithinRadius(this.radius, this.speedFactor, this.duration)
+    if ("slomoalizer" === this.type) {
+      this.enemyController.slowDownWithinRadius(this.radius, this.factor, this.duration)
+    } else if ("blast" === this.type) {
+      //this.enemyController.blastWithinRadius(this.radius, this.factor)
+    } else if ("shockWave" === this.type) {
+      //this.enemyController.shockWithinRadius(this.radius, this.factor)
+    }
   }
   return this.radius < 12;
 }

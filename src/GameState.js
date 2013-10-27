@@ -126,7 +126,6 @@ GameState.prototype.gameOver = function() {
   $('#game-over').removeClass('template');
 }
 
-GameState.prototype.activateSpecialWeapon = function(type, duration) {
-  this.specialWeapon = new SpecialWeapon(type, this.enemies, duration);
-  console.log(this.enemies);
+GameState.prototype.activateSpecialWeapon = function(type, factor, duration) {
+  this.specialWeapon = new SpecialWeapon(type, this.enemies, factor, duration);
 }

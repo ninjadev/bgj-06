@@ -69,11 +69,11 @@ EnemyController.prototype.generateEnemyType = function(enemyTypes) {
   return this.enemyTypes[enemyId];
 }
 
-EnemyController.prototype.slowDownWithinRadius = function(radius, factor, duration) {
+EnemyController.prototype.slowDownWithinRadius = function(radius, speedFactor, tickDuration) {
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
       if (enemy.getDistanceToCenter() < radius) {
-        enemy.addEffect(new SpeedEffect(factor, duration));
+        enemy.addEffect(new SpeedEffect(speedFactor, tickDuration));
       }
   }
 }
