@@ -105,6 +105,7 @@ function bootstrap(){
 
   sm.addState("game", new GameState());
   sm.addState("menu", new MenuState());
+  sm.addState("credits", new CreditsState());
 
   document.body.appendChild(canvas);
 
