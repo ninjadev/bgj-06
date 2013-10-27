@@ -4,6 +4,16 @@ function Enemy(x, y, enemyType) {
 
   this.sprites = enemyType.sprites;
 
+  this.ps = new ParticleSystem({
+    color: {r:117, g: 68, b: 67},
+    blend_mode: 'source-over',
+    gravity: {x: 0, y: 0},
+    explode_random: {x: 0.5, y: 0.5},
+    size: 0.02,
+    friction: 0.6,
+    life: 100
+  });
+
   this.hp = enemyType.hp;
   this.baseSpeed = enemyType.speed;
   this.killRadius = 0.0086*GU;
@@ -44,11 +54,14 @@ Enemy.prototype.render = function(ctx){
 
   ctx.drawImage(sprite, -sprite.width / 2, - sprite.height / 2);
   ctx.restore();
+  this.ps.render(ctx); 
 }
 
 Enemy.prototype.update = function(t){
   this.speed = this.baseSpeed;
   this.effectsUpdate(t);
+
+  this.ps.update();
 
   if(this.dead){
     this.dead_time && this.dead_time--;
@@ -102,6 +115,7 @@ Enemy.prototype.hit = function (damage) {
 Enemy.prototype.kill = function () {
   this.dead = true;
   this.dead_time = 100;
+  this.ps.explode(this.x, this.y, 35);
   sm.states.game.spawnMoneyEffect({x: this.x, y: this.y - 1, amount: this.bounty});
   sm.states.game.stats.addKills(1);
 }
