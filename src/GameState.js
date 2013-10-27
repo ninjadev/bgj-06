@@ -58,6 +58,10 @@ GameState.prototype.render = function(ctx){
   var scaler = 16*GU/this.bg.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.bg, 0, 0);
+  ctx.restore();
+  ctx.save();
+  scaler = 16*GU/this.vignette.width;
+  ctx.scale(scaler, scaler);
   ctx.drawImage(this.vignette, 0, 0);
   ctx.restore();
   this.rainbow.render();

@@ -61,6 +61,10 @@ MenuState.prototype.render = function(ctx){
   var scaler = 16*GU/this.bg_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.bg_img, 0, 0);
+  ctx.restore();
+  ctx.save();
+  scaler = 16*GU/this.vignette_img.width;
+  ctx.scale(scaler, scaler);
   ctx.drawImage(this.vignette_img, 0, 0);
   ctx.drawImage(this.bg_title_img, 0, 0);
   ctx.restore();
