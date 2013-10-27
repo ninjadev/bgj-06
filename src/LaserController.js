@@ -21,6 +21,7 @@ LaserController.prototype.addLaser = function(color) {
     0.5
   );
   this.lasers.push(laser);
+  return laser;
 }
 
 LaserController.prototype.update = function(t){
