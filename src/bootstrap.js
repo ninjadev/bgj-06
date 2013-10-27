@@ -131,6 +131,8 @@ function resize(e){
   wrapper.style.margin = canvas.style.margin;
   wrapper.style.width = 16*GU+'px';
   wrapper.style.height = 9*GU+'px';
+  wrapper.style.fontSize = 0.15*GU+'px';
+  console.log(wrapper.style.fontSize);
   wrapper.style.zIndex = 999999999;
 }
 

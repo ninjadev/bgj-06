@@ -28,7 +28,7 @@ button {
     background: white;
     padding: 2%;
     text-align: center;
-    font-size: 40px;
+    font-size: 300%;
     display: none;
     background: rgba(0,0,0,0.5);
     color: white;
@@ -44,7 +44,8 @@ button {
 }
 
 .achievement .description {
-    font-size: 20px;
+    font-size: 50%;
+    padding: 2% 0;
 }
 
 .achievement .image {
@@ -82,7 +83,7 @@ button {
 }
 
 .health .value {
-    font-size: 18px;
+    font-size: 100%;
 }
 
 @font-face {
