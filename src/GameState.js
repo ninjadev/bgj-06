@@ -44,7 +44,6 @@ GameState.prototype.init = function(){
   this.laserController = new LaserController();
 
   this.audioButton = new AudioButton();
-  this.upgrades = new Upgrades(this);
   this.specialWeapon = null;
   this.stats = new Stats(this.achievements);
 
@@ -60,7 +59,7 @@ GameState.prototype.pause = function(){
 }
 
 GameState.prototype.resume = function(){
-
+  this.upgrades = new Upgrades(this);
 }
 
 GameState.prototype.render = function(ctx){

@@ -10,6 +10,7 @@ function Upgrades(game) {
     {
       cost: 10,
       name: "Red Laser",
+      img: 'red_laser.png',
       description: "Using your lucky prism and some mirrors,"
               +" you harness the red power of the rainbow to destroy"
               +" your enemies.",
@@ -22,6 +23,7 @@ function Upgrades(game) {
       cost: 10,
       level: 1,
       name: "Intensify Beam 1",
+      img: 'red_laser.png',
       description: "Tweak the mirrors to get a 20% damage bonus to your red beam.",
       init: function() {
         var laser = that.game.laserController.redLaser;
@@ -70,6 +72,7 @@ function Upgrades(game) {
     {
       cost: 0,
       name: "Blue Laser",
+      img: 'blue_laser.png',
       description: "Slow your enemies with this delightfully cold beam.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
@@ -84,6 +87,7 @@ function Upgrades(game) {
       cost: 100,
       level: 1,
       name: "Blue Power 1",
+      img: 'blue_laser.png',
       description: "Tweaking the blue mirrors you improve the slowing factor of the beam.",
       init: function() {
         //TODO implement.
@@ -98,6 +102,7 @@ function Upgrades(game) {
       cost: 100,
       level: 1,
       name: "Blue Duration 1",
+      img: 'blue_laser.png',
       description: "The cold stays longer.",
       init: function() {
         //TODO implement.
@@ -150,6 +155,7 @@ function Upgrades(game) {
     {
       cost: 0,
       name: "Green Laser",
+      img: 'green_laser.png',
       description: "Another color, woohoo! This one seems poisonous.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
@@ -164,6 +170,7 @@ function Upgrades(game) {
       cost: 100,
       level: 1,
       name: "Green Power 1",
+      img: 'green_laser.png',
       description: "Increases the toxicity of the green light",
       init: function() {
         //TODO implement.
@@ -178,6 +185,7 @@ function Upgrades(game) {
     {
       cost: 100,
       level: 1,
+      img: 'green_laser.png',
       name: "Contagious Beam 1",
       description: "Oh noes! It's contagious :/",
       init: function() {
@@ -205,6 +213,7 @@ function Upgrades(game) {
     {
       cost: 25,
       name: "Slo'mo'alizer",
+      img: 'slowmolize.png',
       description: "Awesome triggeable super ability.",
       init: function() {
         that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
@@ -215,6 +224,7 @@ function Upgrades(game) {
     {
       cost: 10,
       name: "Blast",
+      img: 'blast.png',
       init: function() {
         that.game.activateSpecialWeapon("blast", -1, 0.7*50);
       },
@@ -228,7 +238,7 @@ function Upgrades(game) {
 
   this.render();
   $('body').on('click', '.upgrade-purchase', function(){
-    var index = $(this).parent('li').data('id');
+    var index = $(this).parent('div').data('id');
     that.purchase(index);
   });
 }
@@ -252,9 +262,12 @@ Upgrades.prototype.purchase = function(index){
 };
 
 Upgrades.prototype.render = function(){
-  var upgrade_container = this.upgrade_menu.find('.upgrade-container').empty();
-  var source = $("#upgrade-template").html();
-  var template = Handlebars.compile(source, {noEscape: true});
+  var img_upgrade_container = this.upgrade_menu.find('.img-upgrade-container').empty();
+  var desc_upgrade_container = this.upgrade_menu.find('.desc-upgrade-container').empty();
+  var img_source = $("#upgrade-img-template").html();
+  var desc_source = $("#upgrade-desc-template").html();
+  var img_template = Handlebars.compile(img_source, {noEscape: true});
+  var desc_template = Handlebars.compile(desc_source, {noEscape: true});
   for (var i=0;i<this.upgrades.length;i++){
     var upgrade = this.upgrades[i];
 
@@ -267,7 +280,30 @@ Upgrades.prototype.render = function(){
     if (upgrade.stock < 0) {
       upgrade.stock = "&infin;";
     }
-    upgrade_container.append(template(upgrade));
+    img_upgrade_container.append(img_template(upgrade));
+  }
+
+  for (var i=0;i<this.upgrades.length;i++){
+    var upgrade = this.upgrades[i];
+
+    //Do not render the ones that are out of stock.
+    if(upgrade.stock == 0){
+      continue;
+    }
+    desc_upgrade_container.append(desc_template(upgrade));
+    img_upgrade_container.find('.tooltip').each(function(i,el){
+      var id = $(el).attr('data-id');
+      var description = desc_upgrade_container.find('.description[data-id='+id+']');
+      $(el).mouseover(function(){
+        description.show();
+      }).mouseleave(function(){
+        description.hide();
+      });
+
+      $(el).click(function(){
+
+      });
+    });
   }
 };
 

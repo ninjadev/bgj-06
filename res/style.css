@@ -6,7 +6,7 @@
 }
 html,body {
     overflow:hidden;
-    background:black;
+    background:white;
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
@@ -59,14 +59,6 @@ button {
     width: 60px;
 }
 
-.upgrades {
-    position: absolute;
-    top: 40px;
-    left: 10px;
-    background: white;
-    width: 140px;
-}
-
 .health {
     position: absolute;
     top: 10px;
@@ -109,4 +101,50 @@ button {
     margin-top: -100px;
     text-align: center;
     background: white;
+}
+
+p {
+    font-family: sans-serif;
+    padding: 10px 0;
+}
+
+strong {
+    padding:10px 0;
+}
+
+.upgrade img {
+    float: left;
+    width: 64px;  
+    height: 64px;  
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.upgrades {
+    overflow: hidden;
+    padding: 20px;
+    position: absolute;
+    width: 400px;
+    top: 40px;
+    left: 10px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+}
+
+.upgrades .description {
+    display: none;
+    padding-top: 20px;
+}
+
+.upgrade {
+    opacity: 0.1;
+}
+
+.can-purchase {
+    opacity:1;
+}
+
+.img-upgrade-container {
+    overflow: hidden;
 }
