@@ -143,7 +143,7 @@ GameState.prototype.update = function(){
     this.progressCircle.update((5000-this.timeToWave)/5000);
 
     this.rainbow.update(t);
-    this.laserController.update(t);
+    this.laserController.update(this.t);
 
     for (var i=0;i<this.moneyEffects.length;i++){
       var moneyEffect = this.moneyEffects[i];
