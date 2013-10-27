@@ -17,7 +17,7 @@ MenuState.prototype.init = function(){
       that.select(0);
     }}],
     [function(){
-      sm.changeState('game');
+      sm.changeState('achievements');
     }, {x:0.5, y:3.3, w:16, h:1.5, hover: function(){
       that.select(1);
     }}],

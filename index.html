@@ -23,6 +23,7 @@
         <script src=src/GameState.js></script>
         <script src=src/MenuState.js></script>
         <script src=src/CreditsState.js></script>
+        <script src=src/AchievementState.js></script>
         <script src=src/LaserController.js></script>
         <script src=src/Laser.js></script>
         <script src=src/Pot.js></script>
@@ -107,6 +108,20 @@
             {{#each weapons}}
                 <div class="weapon" data-id="{{@index}}">
                     <img class=weapon-image src=res/achievements/{{ image }} />
+                </div>
+            {{/each}}
+        </div>
+    </script>
+
+
+    <script id="achievements-list-template" type="text/x-handlebars-template">
+        <h1>Achievements</h1>
+        <div class="achievement-list">
+            {{#each achievements}}
+                <div class="achievement-element">
+                    <img class=achievement-avatar src=res/achievements/{{ custom_image }}.png />
+                    <h2>{{ name }}:</h2>
+                    {{ description }}
                 </div>
             {{/each}}
         </div>
