@@ -84,6 +84,7 @@ function bootstrap(){
   AudioButton.prototype.sprite_on = loadImage("res/audio_on.png");
   AudioButton.prototype.sprite_off = loadImage("res/audio_off.png");
   SpecialWeapon.prototype.sprite_slomoalizer = loadImage("res/slomoalizer.png");
+  SpecialWeapon.prototype.sprite_blast = loadImage("res/blast.png");
 
   dt = 0;
   t = 0;

@@ -145,5 +145,5 @@ GameState.prototype.gameOver = function() {
 }
 
 GameState.prototype.activateSpecialWeapon = function(type, factor, duration) {
-  this.specialWeapon = new SpecialWeapon(type, this.enemies, factor, duration);
+  this.specialWeapon = new SpecialWeapon(type, this.enemies, factor, duration, 12);
 }
