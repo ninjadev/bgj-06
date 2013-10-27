@@ -7,7 +7,7 @@ function LaserController() {
   this.blueLaser = null;
   this.startingRotation = null;
   this.startingAngle = null;
-  this.maxSpeed = Math.PI / 80; //per tick
+  this.maxSpeed = Math.PI / 60; //per tick
   var that = this;
   canvas.addEventListener("mousedown", function (e) {
     that.start(e);
@@ -97,6 +97,10 @@ LaserController.prototype.end = function (e) {
 
 LaserController.prototype.rotateTowardsTargetRotation = function () {
   var angleDelta = this.targetRotation - this.rotation;
+  if (Math.abs(angleDelta) > Math.PI) {
+    angleDelta = 2 * Math.PI - Math.abs(angleDelta);
+  }
   var sandwiched = clamp(-this.maxSpeed, angleDelta, this.maxSpeed);
-  this.rotation += sandwiched;
+  this.rotation = (this.rotation + sandwiched) % (2 * Math.PI);
+  this.targetRotation = this.targetRotation % (2 * Math.PI);
 }
