@@ -80,7 +80,6 @@ GameState.prototype.resume = function(){
 GameState.prototype.render = function(ctx){
   this.rainbow.render();
   this.audioButton.render();
-  this.pot.render();
 
   for (var i=0;i<this.enemies.length;i++){
     var enemy = this.enemies[i];
@@ -88,6 +87,7 @@ GameState.prototype.render = function(ctx){
   }
 
   this.laserController.render();
+  this.pot.render();
 
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
