@@ -5,14 +5,20 @@ function MoneyEffect(options){
     this.time_left = MoneyEffect.MAX_TIME_LEFT;
 }
 
-MoneyEffect.MAX_TIME_LEFT = 10;
+MoneyEffect.MAX_TIME_LEFT = 60;
 
 
 MoneyEffect.prototype.render = function(ctx){
     var ratio = this.time_left/MoneyEffect.MAX_TIME_LEFT;
-    ctx.fillStyle = 'rgba(255,255,0,' + (ratio) + ')';
-    ctx.font = 'normal ' + (50 - ratio*40) + 'pt sans-serif';
+    ctx.fillStyle = 'rgba(84,82,0,' + (ratio) + ')';
+    ctx.font = 'normal ' + (50 - ratio*40) + 'pt blackoutmidnight';
     ctx.textAlign = 'center';
+    ctx.fillText(
+        (this.amount > 0 ? '+' : '') + this.amount,
+        (this.x+0.02)*GU,
+        (ratio*0.2 + this.y + 0.02)*GU
+    );
+    ctx.fillStyle = 'rgba(240,228,40,' + (ratio) + ')';
     ctx.fillText(
         (this.amount > 0 ? '+' : '') + this.amount,
         this.x*GU,
