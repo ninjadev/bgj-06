@@ -3,11 +3,19 @@ function GameState(){
 
 GameState.prototype.init = function(){
 
+  /* warmup, should not make sound */
+  createjs.Sound.play('res/coin.mp3|res/coin.ogg');
+  createjs.Sound.play('res/kill-1.mp3|res/kill-1.ogg');
+  createjs.Sound.play('res/kill-2.mp3|res/kill-2.ogg');
+  createjs.Sound.play('res/kill-3.mp3|res/kill-3.ogg');
+  createjs.Sound.play('res/kill-4.mp3|res/kill-4.ogg');
+
   var that = this;
   this.elements = [
     [function(){
       that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
       that.achievements.give('first');
+      createjs.Sound.play('res/coin.mp3|res/coin.ogg');
       that.spawnMoneyEffect({amount: 1, x: CENTER.x, y: CENTER.y-1});
       that.cash.add(1);
       that.pot.click();
