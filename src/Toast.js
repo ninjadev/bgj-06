@@ -40,7 +40,7 @@ Toast = (function(){
             toast.fadeOut(500, function(){
                 toast.remove();
             });
-        }, 3000 + 32 * (message.length - 20));
+        }, 3000 + 32 * (message.length - 200));
     }
 
     return Toast;
