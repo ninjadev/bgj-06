@@ -43,8 +43,7 @@ function Upgrades(game) {
       init: function() {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeDamageMultiplier(2.0));
-        //TODO: Make it a bit more safe than hardcoding index. Waiting for stiaje's awesome way to do it.
-        that.upgrades[2].cost *= 10;
+        this.cost *= 10;
       },
       stock: 10,
       dependencies: ["Red laser"]
