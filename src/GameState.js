@@ -66,6 +66,7 @@ GameState.prototype.init = function(){
 
   this.audioButton = new AudioButton();
   this.upgrades = new Upgrades(this);
+  this.shockWave = null;
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
@@ -101,6 +102,10 @@ GameState.prototype.render = function(ctx){
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
     moneyEffect.render(ctx);
+  }
+
+  if (null !== this.shockWave) {
+    this.shockWave.render();
   }
 }
 
@@ -143,6 +148,11 @@ GameState.prototype.update = function(){
     }
 
     this.pot.update();
+    if (null !== this.shockWave) {
+      if (!this.shockWave.update()) {
+        this.shockWave = null;
+      }
+    }
   }
 }
 
@@ -152,4 +162,9 @@ GameState.prototype.gameOver = function() {
   
   $('#overlay').removeClass('template');
   $('#game-over').removeClass('template');
+}
+
+GameState.prototype.activateShockWave = function(type, duration) {
+  this.shockWave = new ShockWave(type, this.enemies, duration);
+  console.log(this.enemies);
 }

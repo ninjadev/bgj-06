@@ -63,8 +63,8 @@ Enemy.prototype.update = function(){
   //Make a vector from enemy to center
   var movex = CENTER.x - this.x;
   var movey = CENTER.y - this.y;
-  var len = Math.sqrt(movex*movex + movey*movey);
-
+  var len = this.getDistanceToCenter();
+  
   if (len < this.killRadius) {
     return false;
   }
@@ -149,4 +149,10 @@ Enemy.prototype.addEffect = function(effect){
 
   this.effects.push(effect);
   effect.onApply(this);
+}
+
+Enemy.prototype.getDistanceToCenter = function() {
+  var movex = CENTER.x - this.x;
+  var movey = CENTER.y - this.y;
+  return Math.sqrt(movex*movex + movey*movey);
 }

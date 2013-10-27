@@ -1,9 +1,14 @@
+/**
+ *
+ * @param GameState game
+ * @constructor
+ */
 function Upgrades(game) {
   this.game = game;
   var that = this;
   this.upgrades = [
     {
-      cost: 10,
+      cost: 100,
       name: "Orange laser",
       init: function() {
         that.game.laserController.addLaser(Colors.ORANGE);
@@ -11,7 +16,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 200,
       name: "Yellow laser",
       init: function() {
         that.game.laserController.addLaser(Colors.YELLOW);
@@ -19,7 +24,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 500,
       name: "Green laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN);
@@ -27,7 +32,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 1000,
       name: "Blue laser",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE);
@@ -36,7 +41,7 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 2000,
       name: "Pink laser",
       init: function() {
         that.game.laserController.addLaser(Colors.PINK);
@@ -44,12 +49,20 @@ function Upgrades(game) {
       stock: 1
     },
     {
-      cost: 10,
+      cost: 5000,
       name: "Purple laser",
       init: function() {
         that.game.laserController.addLaser(Colors.PURPLE);
       },
       stock: 1
+    },
+    {
+      cost: 10,
+      name: "Slo'mo'alizer",
+      init: function() {
+        that.game.activateShockWave("slomoalizer", 2);
+      },
+      stock: -1
     },
   ];
   this.upgrade_menu = $('.upgrades.template').clone()
@@ -83,11 +96,14 @@ Upgrades.prototype.purchase = function(index){
 Upgrades.prototype.render = function(){
   var upgrade_container = this.upgrade_menu.find('.upgrade-container').empty();
   var source = $("#upgrade-template").html();
-  var template = Handlebars.compile(source);
+  var template = Handlebars.compile(source, {noEscape: true});
   for (var i=0;i<this.upgrades.length;i++){
     var upgrade = this.upgrades[i];
     upgrade.id = i;
     upgrade.canPurchase = (upgrade.stock != 0 && this.game.cash.amount >= upgrade.cost);
+    if (upgrade.stock < 0) {
+      upgrade.stock = "&infin;";
+    }
     upgrade_container.append(template(upgrade));
   }
 };
