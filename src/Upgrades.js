@@ -213,6 +213,7 @@ function Upgrades(game) {
     {
       cost: 25,
       name: "Slo'mo'alizer",
+      img: 'slowmolize.png',
       description: "Awesome triggeable super ability.",
       init: function() {
         that.game.activateSpecialWeapon("slomoalizer", 0.1, 2.5*50);
