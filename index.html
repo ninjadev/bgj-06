@@ -44,13 +44,18 @@
                 border:0;
                 outline:0;
             }
-            html,body{
+            html,body {
                 overflow:hidden;
                 background:black;
                 user-select: none;
                 -ms-user-select: none;
                 -moz-user-select: none;
                 -webkit-user-select: none;
+                font-family: 'blackoutmidnight';
+            }
+
+            button {
+                font-family: 'blackoutmidnight';
             }
 
             .toast {
@@ -114,7 +119,15 @@
             .health .value {
                 font-size: 18px;
             }
-             
+
+            @font-face {
+                font-family: 'blackoutmidnight';
+                src: url('res/fonts/blackout-nor-webfont.eot');
+                src: url('res/fonts/blackout-nor-webfont.eot') format('embedded-opentype'),url('res/fonts/blackout-nor-webfont.woff') format('woff'),url('res/fonts/blackout-nor-webfont.ttf') format('truetype'),url('res/fonts/blackout-nor-webfont.svg') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
         </style>
     </head>
     <body onload="bootstrap()">
