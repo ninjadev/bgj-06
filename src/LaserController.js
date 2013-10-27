@@ -20,7 +20,10 @@ LaserController.prototype.addLaser = function(color, dmg) {
     color,
     Math.floor(0.5 + this.lasers.length / 2) * (this.lasers.length % 2 ? -1 : 1) * Math.PI * 2 / 9,
     1,
-    dmg
+    dmg,
+    { "#00ff00": sm.states.game.green_laser_beam,
+      "#0000ff": sm.states.game.blue_laser_beam,
+      "#ff0000": sm.states.game.red_laser_beam }[color]
   );
   this.lasers.push(laser);
   switch(color){

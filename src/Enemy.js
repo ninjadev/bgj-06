@@ -5,7 +5,7 @@ function Enemy(x, y, enemyType, scaling) {
   this.sprites = enemyType.sprites;
 
   this.small_ps = new ParticleSystem({
-    color: {r:117, g: 68, b: 67},
+    color: {r:234, g: 48, b: 1},
     blend_mode: 'source-over',
     gravity: {x: 0, y: 0},
     explode_random: {x: 0.1, y: 0.1},
@@ -146,8 +146,10 @@ Enemy.prototype.renderEffects = function(ctx){
 }
 
 Enemy.prototype.hit = function (damage) {
-  this.hp -= damage;
-  this.small_ps.explode(this.x, this.y, 5);
+  if(!this.dead){
+    this.hp -= damage;
+    this.small_ps.explode(this.x, this.y, 5);
+  }
 }
 
 Enemy.prototype.kill = function () {
