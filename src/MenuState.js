@@ -51,9 +51,18 @@ MenuState.prototype.select = function(selected){
 }
 
 MenuState.prototype.pause = function(){
+    document.removeEventListener(this.fullscreenHandler);
 }
 
 MenuState.prototype.resume = function(){
+    var that = this;
+  this.fullscreenHandler = document.addEventListener('keypress', function(e){
+      if(e.keyCode == 13 && that.selected == 0){
+        document.body.requestFullscreen && document.body.requestFullscreen();
+        document.body.webkitRequestFullscreen && document.body.webkitRequestFullscreen(); 
+        document.body.mozRequestFullscreen && document.body.mozRequestFullScreen();
+      }
+  });
 }
 
 MenuState.prototype.render = function(ctx){
@@ -78,7 +87,7 @@ MenuState.prototype.render = function(ctx){
   ctx.restore();
 
   ctx.fillStyle = '#8742d1';
-  ctx.fillRect(0, this.y*GU, 16*GU, 0.93*GU);
+  ctx.fillRect(0, this.y*GU, 16*GU, GU);
 
   ctx.save();
   var scaler = 16*GU/this.bg_img.width;
