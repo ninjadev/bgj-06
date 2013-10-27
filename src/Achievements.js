@@ -62,6 +62,10 @@ function Achievements(){
         thousand_kills: {
             name: 'Thousand kills',
             description: 'Man, you are really killing it!'
+        },
+        afford_red_laser: {
+            name: 'Spend your first dollars',
+            description: 'Now, buy a red laser, so you can take case of thiefs.'
         }
     };
 }

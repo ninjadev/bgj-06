@@ -17,6 +17,10 @@ function Cash(achievements, game){
 Cash.prototype.add = function(amount){
   this.amount += amount;
   this.accumulatedAmount += amount;
+
+  if (this.accumulatedAmount >= 10) {
+    this.achievements.give('afford_red_laser');
+  }
   if (this.accumulatedAmount >= 100) {
     this.achievements.give('hundred');
   }
@@ -38,7 +42,7 @@ Cash.prototype.spend = function(amount){
 }
 
 Cash.prototype.canSpend = function(amount) {
-  return (this.amount < amount);
+  return !(this.amount < amount);
 };
 
 Cash.prototype.render = function(){

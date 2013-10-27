@@ -97,7 +97,9 @@ GameState.prototype.update = function(){
   if (!this.isGameOver) {
 
     if (this.timeToWave > 0){
-      this.timeToWave -= 20;
+      if (null != this.laserController.redLaser) {
+        this.timeToWave -= 20;
+      }
     } else if (this.enemies.timeLeftOfWave == 0) {
       this.enemies.nextWave(this.t, function () {
         that.timeToWave = 15000;
