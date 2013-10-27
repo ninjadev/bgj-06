@@ -51,8 +51,6 @@ GameState.prototype.init = function(){
 
   this.laserController = new LaserController();
 
-  this.audioButton = new AudioButton();
-
   this.specialWeaponController = new SpecialWeaponController();
 
   var cookieSet = getCookie("cuteanimals_stats");
@@ -60,6 +58,8 @@ GameState.prototype.init = function(){
     var emptyStats = JSON.parse('{"achievements":[], "kills":0, "music":true}');
     setCookie("cuteanimals_stats", JSON.stringify(emptyStats));
   }
+
+  this.audioButton = new AudioButton();
 
   this.stats = new Stats(this.achievements);
 
