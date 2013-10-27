@@ -20,7 +20,11 @@ GameState.prototype.init = function(){
       that.cash.add(1);
       that.pot.click();
     }, {x:7.5, y:4, w:1, h:1}],
-    [function(){that.audioButton.toggleActivated();}, {x:15, y:0, w:1, h:1}]
+    [function(){
+      audioIsMuted = !audioIsMuted;
+      that.audioButton.setActivated(!audioIsMuted);
+      createjs.Sound.setMute(audioIsMuted);
+    }, {x:15, y:0, w:1, h:1}]
   ];
   this.t = 0;
 
@@ -49,6 +53,8 @@ GameState.prototype.init = function(){
   this.stats = new Stats(this.achievements);
 
   this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
+
+  audioIsMuted = false;
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
