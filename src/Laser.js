@@ -32,6 +32,7 @@ Laser.prototype.render = function(){
     this.endpoints.y*GU
   );
   ctx.stroke();
+  ctx.closePath();
   ctx.restore();
 }
 
