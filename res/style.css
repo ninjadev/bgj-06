@@ -149,3 +149,11 @@ strong {
 .img-upgrade-container {
     overflow: hidden;
 }
+
+.weapons {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+    background: white;
+    z-index: 2000;
+}
