@@ -45,9 +45,11 @@ SpeedEffect.prototype.recalculateSpeed = function(){
 
 SpeedEffect.prototype.render = function(ctx, enemy){
   var color;
-  if(this.speedFactor < 1){
+  if (this.speedFactor < 0){
+    color = "orange";
+  } else if (this.speedFactor < 1){
     color = "blue";
-  }else{
+  } else {
     color = "yellow";
   }
 
