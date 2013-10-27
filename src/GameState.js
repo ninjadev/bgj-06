@@ -10,14 +10,16 @@ GameState.prototype.init = function(){
   createjs.Sound.play('res/kill-3.mp3|res/kill-3.ogg');
   createjs.Sound.play('res/kill-4.mp3|res/kill-4.ogg');
 
+  this.goldPerClick = 1;
+
   var that = this;
   this.elements = [
     [function(){
       that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
       that.achievements.give('first');
       createjs.Sound.play('res/coin.mp3|res/coin.ogg');
-      that.spawnMoneyEffect({amount: that.getPotAmount(), x: CENTER.x, y: CENTER.y-1});
-      that.cash.add(that.getPotAmount());
+      that.spawnMoneyEffect({amount: Math.floor(that.goldPerClick), x: CENTER.x, y: CENTER.y-1});
+      that.cash.add(Math.floor(that.goldPerClick));
       that.pot.click();
     }, {x:7.5, y:4, w:1, h:1}],
     [function(){
@@ -68,14 +70,6 @@ GameState.prototype.init = function(){
   audioIsMuted = false;
 }
 
-GameState.prototype.getPotAmount = function(){
-  var enemyCont = sm.activeState.enemies;
-  if(enemyCont && enemyCont.numberOfWaves > 1){
-    return 1+Math.floor(1.15^enemyCont.numberOfWaves);
-  }else{
-    return 1;
-  }
-}
 GameState.prototype.spawnMoneyEffect = function(options){
     this.moneyEffects.push(new MoneyEffect(options));
 }
@@ -164,7 +158,7 @@ GameState.prototype.gameOver = function() {
   this.audioButton.pause();
 
   var stats = JSON.parse(getCookie("cuteanimals_stats"));
-  
+
   $('#overlay').removeClass('template');
   $('#game-over').removeClass('template');
   $('#game-over').html("Game over!<br>Kills: " + stats.kills + "<br>Achivements: " + stats.achievements);
