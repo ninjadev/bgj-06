@@ -24,8 +24,8 @@ function Achievements(){
             description: 'Congratulations! You can poison enemies with this weapon.'
         },
         blue_laser: {
-            name: 'Blue laser',
-            description: 'Nice! This laser can slow down your enemies.'
+            name: 'Blu-ray',
+            description: 'Nice! This laser can slow down your enemies'
         },
         orange_laser: {
             name: 'Orange laser',

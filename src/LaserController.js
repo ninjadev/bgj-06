@@ -7,12 +7,12 @@ function LaserController() {
   this.startingRotation = null;
   this.startingAngle = null;
   var that = this;
-  canvas.addEventListener("mousedown", function(e) { that.start(e); });
-  canvas.addEventListener("touchstart", function(e) { that.start(e); });
-  canvas.addEventListener("mousemove", function(e) { that.move(e); });
-  canvas.addEventListener("touchmove", function(e) { that.move(e); });
-  canvas.addEventListener("mouseup", function(e) { that.end(e); });
-  canvas.addEventListener("touchend", function(e) { that.end(e); });
+  document.addEventListener("mousedown", function(e) { that.start(e); });
+  document.addEventListener("touchstart", function(e) { that.start(e); });
+  document.addEventListener("mousemove", function(e) { that.move(e); });
+  document.addEventListener("touchmove", function(e) { that.move(e); });
+  document.addEventListener("mouseup", function(e) { that.end(e); });
+  document.addEventListener("touchend", function(e) { that.end(e); });
 }
 
 LaserController.prototype.addLaser = function(color, dmg) {
