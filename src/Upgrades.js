@@ -28,7 +28,7 @@ function Upgrades(game) {
       init: function() {
         sm.activeState.goldPerClick += 1;
         sm.activeState.goldPerClick *= 1.1;
-        this.cost *= 1.3;
+        this.cost = Math.floor(this.cost * 1.3);
         this.cost += 100;
         this.level++;
         this.name = "Shovel "+this.level;
@@ -41,7 +41,7 @@ function Upgrades(game) {
       level: 1,
       name: "Intensify Beam 1",
       img: 'red_laser.png',
-      description: "Tweak the mirrors to get a 20% damage bonus to your red beam.",
+      description: "Bigger mirrors are better. Get 20% damage bonus to your red beam.",
       init: function() {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeDamageMultiplier(1.20));
@@ -98,18 +98,6 @@ function Upgrades(game) {
       dependencies: ["Blue Laser"]
     },
     {
-      cost: 10000,
-      level: 1,
-      name: "Cold Rotation",
-      img: 'blue_rotate.png',
-      description: "Hire a leprechaun to turn the blue beam for you.",
-      init: function() {
-        //TODO implement.
-      },
-      stock: 0,
-      dependencies: ["Blue Power 3"]
-    },
-    {
       cost: 100,
       name: "Green Laser",
       img: 'green_laser.png',
@@ -149,18 +137,6 @@ function Upgrades(game) {
       },
       stock: -1,
       dependencies: ["Green Laser"]
-    },
-    {
-      cost: 10000,
-      level: 1,
-      name: "Green Rotation",
-      img: 'green_rotate.png',
-      description: "Hire leprechauns to turn the green beam.",
-      init: function() {
-        //TODO implement.
-      },
-      stock: 0,
-      dependencies: ["Green Power 3"]
     },
     {
       cost: 250,
@@ -227,7 +203,7 @@ function Upgrades(game) {
       cost: 1000,
       name: "Slowmolizer",
       img: 'slowmolize.png',
-      description: "Awesome triggeable super ability.",
+      description: "Slow all of the fucking beasts around.",
       init: function() {
         that.game.specialWeaponController.add(
           new SpecialWeapon("slomoalizer", this.img, 0.1, 2.5*50, 10)
@@ -239,6 +215,7 @@ function Upgrades(game) {
     {
       cost: 10000,
       name: "Blast",
+      description: "Push them away.",
       img: 'blast.png',
       init: function() {
         //that.game.activateSpecialWeapon("blast", -1, 0.7*50);
