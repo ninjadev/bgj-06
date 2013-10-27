@@ -39,7 +39,7 @@ GameState.prototype.init = function(){
   this.cash = new Cash(this.achievements, this);
 
   this.enemies = new EnemyController(this);
-  this.timeToWave = 3000;
+  this.timeToWave = 20;
 
   this.laserController = new LaserController();
 
@@ -47,6 +47,8 @@ GameState.prototype.init = function(){
   this.upgrades = new Upgrades(this);
   this.specialWeapon = null;
   this.stats = new Stats(this.achievements);
+
+  this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
 }
 
 GameState.prototype.spawnMoneyEffect = function(options){
@@ -81,6 +83,7 @@ GameState.prototype.render = function(ctx){
   this.pot.render();
 
   this.enemies.render(ctx);
+  this.progressCircle.render(ctx);
 
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
@@ -103,12 +106,15 @@ GameState.prototype.update = function(){
         this.timeToWave -= 20;
       }
     } else if (this.enemies.timeLeftOfWave == 0) {
+      this.progressCircle.hide();
       this.enemies.nextWave(this.t, function () {
+        that.progressCircle.show();
         that.timeToWave = 15000;
       });
     } 
 
     this.enemies.update(this.t);
+    this.progressCircle.update((15000-this.timeToWave)/15000);
 
     this.rainbow.update(t);
     this.laserController.update(t);
