@@ -126,10 +126,9 @@ strong {
 
 .upgrade img {
     float: left;
-    width: 64px;  
-    height: 64px;  
-    margin-right: 10px;
-    margin-top: 10px;
+    width: 20%;
+    margin-right: 3%;
+    margin-top: 3%;
     cursor: pointer;
 }
 
