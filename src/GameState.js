@@ -47,7 +47,7 @@ GameState.prototype.init = function(){
   this.cash = new Cash(this.achievements, this);
 
   this.enemies = new EnemyController(this);
-  this.timeToWave = 20;
+  this.timeToWave = 1000;
 
   this.laserController = new LaserController();
 
