@@ -46,9 +46,9 @@ Enemy.prototype.render = function(ctx){
   ctx.restore();
 }
 
-Enemy.prototype.update = function(){
+Enemy.prototype.update = function(t){
   this.speed = this.baseSpeed;
-  this.effectsUpdate();
+  this.effectsUpdate(t);
 
   if(this.dead){
     this.dead_time && this.dead_time--;
@@ -130,9 +130,9 @@ Enemy.prototype.kill = function () {
   this.dead_time = 100;
 }
 
-Enemy.prototype.effectsUpdate = function(){
+Enemy.prototype.effectsUpdate = function(t){
   for(var i = 0; i < this.effects.length; i++){
-    this.effects[i].update(this);
+    this.effects[i].update(this,t);
   }
 }
 
@@ -149,4 +149,19 @@ Enemy.prototype.addEffect = function(effect){
 
   this.effects.push(effect);
   effect.onApply(this);
+}
+
+
+//Removes a debuff of the same type as effect
+Enemy.prototype.removeEffect = function(effect){
+  for(var i = 0; i < this.effects.length; i++){
+    if(this.effects[i] instanceof effect.constructor){
+      this.effects[i].onRemove();
+
+      //Swap with last element and remove it.
+      this.effects[i] = this.effects[this.effects.length - 1]; 
+      this.effects.pop();
+      return;
+    }
+  }
 }

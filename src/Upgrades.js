@@ -22,16 +22,16 @@ function Upgrades(game) {
       cost: 10,
       name: "Green laser",
       init: function() {
-        var laser = that.game.laserController.addLaser(Colors.GREEN);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new DotEffect(0.05)));      },
+        var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
+        laser.addUpgrade(new UpgradeDebuffOnHit(new DotEffect(0.05, 100)));      },
       stock: 1
     },
     {
       cost: 10,
       name: "Blue laser",
       init: function() {
-        var laser = that.game.laserController.addLaser(Colors.BLUE);
-        laser.addUpgrade(new UpgradeDebuffOnHit(new SpeedEffect(0.5)));
+        var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
+        laser.addUpgrade(new UpgradeDebuffOnHit(new SpeedEffect(0.5, 50)));
       },
       stock: 1
     },
