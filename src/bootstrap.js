@@ -97,7 +97,7 @@ function bootstrap(){
     KEYS[e.keyCode] = false;
   });
 
-  canvas.addEventListener("mousemove", handleEvent);
+  document.addEventListener("mousemove", handleEvent);
 
   resize();
 
@@ -218,7 +218,7 @@ function handleEvent(e){
     }
   }
   clickables[i] && clickables[i][1].hover && clickables[i][1].hover();
-  $("canvas").css('cursor', hoverOverClickable ? "pointer" : "auto");
+  $("body").css('cursor', hoverOverClickable ? "pointer" : "auto");
 }
 
 window.onresize = resize;
