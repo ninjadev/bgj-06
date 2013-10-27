@@ -28,7 +28,7 @@ Cash.prototype.add = function(amount){
 }
 
 Cash.prototype.spend = function(amount){
-  if (this.amount < amount) {
+  if (!this.canSpend(amount)) {
     return false;
   }
   this.amount -= amount;
@@ -36,6 +36,11 @@ Cash.prototype.spend = function(amount){
   this.game.upgrades.render();
   return true;
 }
+
+Cash.prototype.canSpend = function(amount) {
+  return (this.amount < amount);
+};
+
 Cash.prototype.render = function(){
   this.cash_display.find('.value').text('$' + this.amount);
 }

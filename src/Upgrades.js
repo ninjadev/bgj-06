@@ -47,6 +47,7 @@ function Upgrades(game) {
       stock: -1
     },
   ];
+  this.purchased = [];
   this.upgrade_menu = $('.upgrades.template').clone()
     .removeClass('template');
   $('body').append(this.upgrade_menu);
@@ -60,17 +61,18 @@ function Upgrades(game) {
 
 Upgrades.prototype.purchase = function(index){
   var upgrade = this.upgrades[index];
-  if (upgrade.stock == 0) {
+
+  if (!this.canPurchase(upgrade)) {
     return false;
   }
-  if (!this.game.cash.spend(upgrade.cost)){
-    return false;
-  }
+
   if (upgrade.stock > 0) {
     upgrade.stock--;
   }
+  this.game.cash.spend(upgrade.cost);
   upgrade.init();
   this.render();
+  this.purchased.push(upgrade);
   console.log("Purchased upgrade %s", upgrade.name);
   return true;
 };
@@ -87,10 +89,36 @@ Upgrades.prototype.render = function(){
       continue;
     }
     upgrade.id = i;
-    upgrade.canPurchase = (upgrade.stock != 0 && this.game.cash.amount >= upgrade.cost);
+    upgrade.canPurchase = this.canPurchase(upgrade);
     if (upgrade.stock < 0) {
       upgrade.stock = "&infin;";
     }
     upgrade_container.append(template(upgrade));
   }
+};
+
+Upgrades.prototype.canPurchase = function(upgrade) {
+  if (upgrade.stock == 0) {
+    return false;
+  }
+  if (upgrade.dependencies) {
+    for (var i=0;i<upgrade.dependencies.length;i++) {
+      var dependency = upgrade.dependencies[i];
+      var name_match = false;
+      for (var j=0;j<this.purchased.length;j++) {
+        if (this.purchased[j].name == dependency) {
+          name_match = true;
+          break;
+        }
+      }
+      if (!name_match) {
+        return false;
+      }
+    }
+  }
+
+  if (!this.game.cash.canSpend(upgrade.cost)){
+    return false;
+  }
+  return true;
 };
