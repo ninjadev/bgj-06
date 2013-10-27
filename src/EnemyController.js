@@ -36,6 +36,7 @@ EnemyController.prototype.update = function(t){
       } else {
         this.currentWave = undefined;
         this.game.achievements.give('first_wave_completed');
+        this.numberOfWaves == 2 && this.game.achievements.give('good_luck');
         this.cb();
       }
     } else {

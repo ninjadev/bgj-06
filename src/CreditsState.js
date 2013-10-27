@@ -9,6 +9,7 @@ CreditsState.prototype.pause = function(){
 }
 
 CreditsState.prototype.resume = function(){
+    this.cooldown = true;
 }
 
 CreditsState.prototype.render = function(ctx){
@@ -24,7 +25,8 @@ CreditsState.prototype.render = function(ctx){
 
 CreditsState.prototype.update = function(){
 
-    if(KEYS[27]) { /* escape */
-        sm.changeState('menu');
+    if(this.cooldown && KEYS[27]) { /* escape */
+      sm.changeState('menu', 'message', 'slide-left', 30);
+      this.cooldown = false;
     }
 }

@@ -16,6 +16,11 @@ function Achievements(){
             name: 'First click',
             description: 'Gold is so nice! Keep it all for yourself.'
         },
+        good_luck: {
+          name: 'Good going!',
+          description: 'I\'m going to leave you to it now, good luck and have fun! Remember to buy upgrades!',
+          custom_image: 'blue_laser'
+        },
         hundred: {
             name: 'Hundred coins',
             description: 'Yay! You have earned 100 coins! I remember my first 100...'

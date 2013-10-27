@@ -22,7 +22,7 @@ MenuState.prototype.init = function(){
       that.select(1);
     }}],
     [function(){
-      sm.changeState('credits');
+      sm.changeState('credits', 'message', 'slide-left', 30);
     }, {x:0.5, y:4.8, w:16, h:1.5, hover: function(){
       that.select(2);
     }}]
@@ -118,7 +118,7 @@ MenuState.prototype.update = function(){
     }
     if(KEYS[13]){ /* key enter */
       this.key_cooldown = 10;
-      sm.changeState(['game', 'game', 'credits'][this.selected]);
+      sm.changeState(['game', 'game', 'credits'][this.selected], 'message', 'slide-left', 30);
     }
   }
 }
