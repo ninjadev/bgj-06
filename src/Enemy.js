@@ -46,9 +46,9 @@ Enemy.prototype.render = function(ctx){
   ctx.restore();
 }
 
-Enemy.prototype.update = function(){
+Enemy.prototype.update = function(t){
   this.speed = this.baseSpeed;
-  this.effectsUpdate();
+  this.effectsUpdate(t);
 
   if(this.dead){
     this.dead_time && this.dead_time--;
@@ -64,7 +64,7 @@ Enemy.prototype.update = function(){
   var movex = CENTER.x - this.x;
   var movey = CENTER.y - this.y;
   var len = this.getDistanceToCenter();
-  
+
   if (len < this.killRadius) {
     return false;
   }
@@ -130,9 +130,9 @@ Enemy.prototype.kill = function () {
   sm.states.game.spawnMoneyEffect({x: this.x, y: this.y - 1, amount: this.bounty});
 }
 
-Enemy.prototype.effectsUpdate = function(){
+Enemy.prototype.effectsUpdate = function(t){
   for(var i = 0; i < this.effects.length; i++){
-    this.effects[i].update(this);
+    this.effects[i].update(this,t);
   }
 }
 
@@ -155,4 +155,18 @@ Enemy.prototype.getDistanceToCenter = function() {
   var movex = CENTER.x - this.x;
   var movey = CENTER.y - this.y;
   return Math.sqrt(movex*movex + movey*movey);
+}
+
+//Removes a debuff of the same type as effect
+Enemy.prototype.removeEffect = function(effect){
+  for(var i = 0; i < this.effects.length; i++){
+    if(this.effects[i] instanceof effect.constructor){
+      this.effects[i].onRemove();
+
+      //Swap with last element and remove it.
+      this.effects[i] = this.effects[this.effects.length - 1];
+      this.effects.pop();
+      return;
+    }
+  }
 }

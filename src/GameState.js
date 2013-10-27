@@ -126,7 +126,7 @@ GameState.prototype.update = function(){
 
     for (var i=0;i<this.enemies.length;i++){
       var enemy = this.enemies[i];
-      if (!enemy.update()) {
+      if (!enemy.update(this.t)) {
         this.enemies[i] = this.enemies[this.enemies.length - 1];
         this.enemies.pop();
         if (!this.pot.lostLife()) {
@@ -136,7 +136,7 @@ GameState.prototype.update = function(){
       }
     }
 
-  this.rainbow.update();
+  this.rainbow.update(t);
   this.laserController.update(t);
 
     for (var i=0;i<this.moneyEffects.length;i++){
