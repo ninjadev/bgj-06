@@ -217,6 +217,7 @@ function handleEvent(e){
       break;
     }
   }
+  clickables[i][1].hover && clickables[i][1].hover();
   $("canvas").css('cursor', hoverOverClickable ? "pointer" : "auto");
 }
 
