@@ -273,6 +273,9 @@ Upgrades.prototype.purchase = function(index){
   upgrade.init();
   this.render();
   this.purchased.push(upgrade.name);
+
+  Toast('Upgraded: ' + upgrade.name + '!');
+
   return true;
 };
 
