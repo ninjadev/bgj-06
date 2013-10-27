@@ -26,7 +26,7 @@ button {
     margin: 0 auto;
     width:100%;
     background: white;
-    padding: 20px;
+    padding: 2%;
     text-align: center;
     font-size: 40px;
     display: none;
@@ -49,7 +49,7 @@ button {
 
 .achievement .image {
     float:left;
-    margin-right: 10px;
+    margin-right: 1%;
     width: 10%;
 }
 
@@ -128,10 +128,9 @@ strong {
 .upgrade img,
 .weapon img {
     float: left;
-    width: 64px;  
-    height: 64px;  
-    margin-right: 10px;
-    margin-top: 10px;
+    width: 20%;
+    margin-right: 3%;
+    margin-top: 3%;
     cursor: pointer;
 }
 
@@ -148,7 +147,7 @@ strong {
 
 .upgrades .description {
     display: none;
-    padding-top: 20px;
+    padding-top: 5%;
 }
 
 .upgrade {
