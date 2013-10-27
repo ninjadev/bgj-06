@@ -1,0 +1,112 @@
+*{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+}
+html,body {
+    overflow:hidden;
+    background:black;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    font-family: 'blackoutmidnight';
+}
+
+button {
+    font-family: 'blackoutmidnight';
+}
+
+.toast {
+    position: fixed;
+    top: 75%;
+    margin: 0 auto;
+    width:100%;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 40px;
+    display: none;
+    background: rgba(0,0,0,0.5);
+    color: white;
+}
+
+.template {
+    display: none;
+}
+
+.achievement {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.achievement .description {
+    font-size: 20px;
+}
+
+.achievement .image {
+    float:left;
+    margin-right: 10px;
+    width: 10%;
+}
+
+.cash {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    width: 60px;
+}
+
+.upgrades {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    background: white;
+    width: 140px;
+}
+
+.health {
+    position: absolute;
+    top: 10px;
+    background: white;
+    width: 180px;
+    left: 50%;
+    margin-left: -90px;
+}
+
+.health .value {
+    font-size: 18px;
+}
+
+@font-face {
+    font-family: 'blackoutmidnight';
+    src: url('fonts/blackout-nor-webfont.eot');
+    src: url('fonts/blackout-nor-webfont.eot') format('embedded-opentype'),url('fonts/blackout-nor-webfont.woff') format('woff'),url('fonts/blackout-nor-webfont.ttf') format('truetype'),url('fonts/blackout-nor-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#overlay {
+    z-index: 1000;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.5);
+}
+
+#game-over {
+    z-index: 1001;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 200px;
+    margin-left: -150px;
+    margin-top: -100px;
+    text-align: center;
+    background: white;
+}
