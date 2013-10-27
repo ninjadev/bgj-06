@@ -24,7 +24,8 @@ function Enemy(x, y, enemyType, scaling) {
     life: 100
   });
 
-  this.hp = enemyType.hp + (scaling * 100);
+  this.maxHP = enemyType.hp + (scaling * 100);
+  this.hp = this.maxHP;
   this.baseSpeed = enemyType.speed + scaling;
   this.killRadius = 0.0086*GU;
   this.bounty = Math.round(enemyType.bounty + scaling*10);
@@ -59,10 +60,34 @@ Enemy.prototype.render = function(ctx){
   }else{
     ctx.scale(scaler, scaler);
   }
+  
+  if( this.hp > 0  && this.hp != this.maxHP) {
+    var rightSide = 1;
+    if (this.x > CENTER.x) {
+      rightSide = -1;
+    }
 
+    ctx.fillStyle = 'rgb(9, 9, 9)';
+    ctx.beginPath();
+    ctx.rect(rightSide * (-sprite.width * 0.0068*GU), -sprite.height*0.007955*GU,
+        rightSide * (sprite.width + 0.09*GU), 20);
+    ctx.closePath();
+    ctx.fill();
+
+    var percent = this.hp/this.maxHP;
+    ctx.beginPath();
+    ctx.fillStyle = 'rgb(1, 233, 61)';
+    ctx.lineWidth = 0;
+    ctx.rect(rightSide * (-sprite.width * 0.0068*GU), -sprite.height*0.007955*GU,
+        rightSide * (sprite.width + 0.09*GU)*percent, 20);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
   ctx.rotate((CENTER.y - this.y) / 8);
 
   ctx.drawImage(sprite, -sprite.width / 2, - sprite.height / 2);
+
   ctx.restore();
   this.ps.render(ctx); 
   this.small_ps.render(ctx); 
