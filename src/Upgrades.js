@@ -22,16 +22,16 @@ function Upgrades(game) {
     {
       cost: 50,
       level: 1,
-      name: "Shovel 1",
+      name: "Gold-digging Shovel",
       img: 'pot-o-gold.png',
       description: "Use another shovel to get more gold per click.",
       init: function() {
         sm.activeState.goldPerClick += 1;
         sm.activeState.goldPerClick *= 1.1;
-        this.cost = Math.floor(this.cost * 1.3);
+        this.cost *= 1.3;
         this.cost += 100;
         this.level++;
-        this.name = "Shovel "+this.level;
+        this.name = "Gold-digging Shovel "+this.level;
       },
       stock: -1,
       dependencies: ["Red Laser"]
@@ -39,15 +39,15 @@ function Upgrades(game) {
     {
       cost: 50,
       level: 1,
-      name: "Intensify Beam 1",
+      name: "Mirror prism enhancer",
       img: 'red_laser.png',
-      description: "Bigger mirrors are better. Get 20% damage bonus to your red beam.",
+      description: "Tweak the mirrors to get a 20% damage bonus to your red beam.",
       init: function() {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeDamageMultiplier(1.20));
         this.cost = Math.floor(this.cost * 1.8)
         this.level++;
-        this.name = "Intensify Beam "+this.level;
+        this.name = "Mirror Prism Enhancer "+this.level;
       },
       stock: 10,
       dependencies: ["Red Laser"]
@@ -69,13 +69,13 @@ function Upgrades(game) {
     {
       cost: 50,
       level: 1,
-      name: "Blue Power 1",
+      name: "Frost Coating on Mirrors",
       img: 'blue_laser.png',
       description: "Tweaking the blue mirrors you improve the beam.",
       init: function() {
         this.cost = Math.floor(this.cost * 1.8)
         this.level++;
-        this.name = "Blue Power " + this.level;
+        this.name = "Frost Coating on Mirrors " + this.level;
 
         //Please excuse the uglieness of this, on account of it being late in a hackathon.
         var laser = that.game.laserController.blueLaser;
@@ -114,7 +114,7 @@ function Upgrades(game) {
     {
       cost: 150,
       level: 1,
-      name: "Green Power 1",
+      name: "Sludge-coated prism splitters",
       img: 'green_laser.png',
       description: "Increases the toxicity of the green light",
       init: function() {
@@ -139,10 +139,22 @@ function Upgrades(game) {
       dependencies: ["Green Laser"]
     },
     {
+      cost: 10000,
+      level: 1,
+      name: "Green Rotation",
+      img: 'green_rotate.png',
+      description: "Hire leprechauns to turn the green beam.",
+      init: function() {
+        //TODO implement.
+      },
+      stock: 0,
+      dependencies: ["Green Power 3"]
+    },
+    {
       cost: 250,
-      name: "Shockwave range 1",
+      name: "Shockwave instruction manual",
       img: 'shockwave_range.png',
-      description: "Increase the range of shock waves",
+      description: "Increase the range of shock waves by reading nifty tricks in a dusty old instruction manual.",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
@@ -152,58 +164,58 @@ function Upgrades(game) {
 
     {
       cost: 500,
-      name: "Shockwave range 2",
+      name: "Attach boom-blaster to shockwave device",
       img: 'shockwave_range.png',
-      description: "Increase the range of shock waves",
+      description: "Increase the range of shock waves.",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shockwave range 1"]
+      dependencies: ["Blue Laser", "Shockwave instruction manual"]
     },
 
     {
       cost: 1000,
-      name: "Shockwave range 3",
+      name: "Install Macromedia Plugin(tm)",
       img: 'shockwave_range.png',
       description: "Increase the range of shockwaves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shockwave range 2"]
+      dependencies: ["Blue Laser", "Attach boom-blaster to shockwave device"]
     },
 
 
     {
       cost: 2000,
-      name: "Shockwave range 4",
+      name: "Harness the power of earthquakes",
       img: 'shockwave_range.png',
-      description: "Increase the range of shockwaves",
+      description: "Increase the range of shockwaves.",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shockwave range 3"]
+      dependencies: ["Blue Laser", "Install Macromedia Plugin(tm)"]
     },
 
     {
       cost: 5000,
-      name: "Shockwave range 5",
+      name: "Assume a shock and awe-striking posture",
       img: 'shockwave_range.png',
-      description: "Increase the range of shockwaves",
+      description: "Increase the range of shockwaves.",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Shockwave range 4"]
+      dependencies: ["Harness the power of earthquakes"]
     },
 
     {
       cost: 1000,
       name: "Slowmolizer",
       img: 'slowmolize.png',
-      description: "Slow all of the fucking beasts around.",
+      description: "Awesome triggeable super ability.",
       init: function() {
         that.game.specialWeaponController.add(
           new SpecialWeapon("slomoalizer", this.img, 0.1, 2.5*50, 10)
@@ -215,7 +227,6 @@ function Upgrades(game) {
     {
       cost: 10000,
       name: "Blast",
-      description: "Push them away.",
       img: 'blast.png',
       init: function() {
         //that.game.activateSpecialWeapon("blast", -1, 0.7*50);
