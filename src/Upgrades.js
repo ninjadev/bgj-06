@@ -85,7 +85,7 @@ function Upgrades(game) {
         var applicationsToMax = upgradeExample.applicationsToMax;
 
         maxSpeed *= 0.8;
-        applications = Math.max(10,0.8*applications);
+        applications = Math.max(1,0.8*applications);
         duration = Math.min(500, duration*1.2);
         laser.upgrades[0].generateNewDebuff = function(){
           return new SpeedEffect(maxSpeed, duration, applicationsToMax);
@@ -104,7 +104,7 @@ function Upgrades(game) {
       description: "Another color, woohoo! This one seems poisonous.",
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.GREEN, 0);
-        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(0.2, 100, 50)}));
+        laser.addUpgrade(new UpgradeDebuffOnHit(function(){return new DotEffect(1.0, 100, 100)}));
         that.game.achievements.give('green_laser');
       },
       stock: 1,
@@ -112,7 +112,7 @@ function Upgrades(game) {
     },
 
     {
-      cost: 150,
+      cost: 50,
       level: 1,
       name: "Sludge-coated prism splitters",
       img: 'green_laser.png',
@@ -128,7 +128,7 @@ function Upgrades(game) {
         var duration = upgradeExample.duration;
         var applicationsToMax = upgradeExample.applicationsToMax;
 
-        maxDpt *= 1.337;
+        maxDpt *= 1.15;
         applications = Math.max(10,0.8*applications);
         duration = Math.min(500, duration*1.2);
         laser.upgrades[0].generateNewDebuff = function(){
