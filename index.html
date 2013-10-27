@@ -114,7 +114,29 @@
             .health .value {
                 font-size: 18px;
             }
-             
+
+            #overlay {
+                z-index: 1000;
+                position: fixed;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                background: rgba(0,0,0,0.5);
+            }
+            
+            #game-over {
+                z-index: 1001;
+                position:absolute;
+                left: 50%;
+                top: 50%;
+                width: 300px;
+                height: 200px;
+                margin-left: -150px;
+                margin-top: -100px;
+                text-align: center;
+                background: white;
+            }
         </style>
     </head>
     <body onload="bootstrap()">
@@ -158,6 +180,9 @@
             <button class=upgrade-purchase>Purchase</button>
         </li>
     </script>
+
+    <div id=overlay class=template></div>
+    <div id=game-over class=template><h1>Game over!</h1></div>
 
     </body>
 </html>

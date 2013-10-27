@@ -139,5 +139,8 @@ GameState.prototype.update = function(){
 
 GameState.prototype.gameOver = function() {
   this.isGameOver = true;
-  alert('Game over');
+  this.audioButton.pause();
+  
+  $('#overlay').removeClass('template');
+  $('#game-over').removeClass('template');
 }
