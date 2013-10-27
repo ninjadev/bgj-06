@@ -168,7 +168,6 @@ function getCookie(c_name) {
 function relMouseCoords(e){
   if (e.type !== "touchstart") {
     e.preventDefault();
-    e.stopPropagation();
   }
   var totalOffsetX = 0;
   var totalOffsetY = 0;
