@@ -76,8 +76,12 @@ GameState.prototype.resume = function(){
 
   var cookieSet = getCookie("cuteanimals_stats");
   if(cookieSet === undefined) {
-    var emptyStats = JSON.parse('{"achievements":[], "kills":0, "music":true}');
+    var emptyStats = JSON.parse('{"achievements":[], "kills":0, "music":true, "all_time_kills":0}');
     setCookie("cuteanimals_stats", JSON.stringify(emptyStats));
+  } else {
+    cookieSet = JSON.parse(cookieSet);
+    cookieSet.kills = 0;
+    setCookie("cuteanimals_stats", JSON.stringify(cookieSet));
   }
 
   this.audioButton = new AudioButton();
@@ -170,7 +174,7 @@ GameState.prototype.gameOver = function() {
   var stats = JSON.parse(getCookie("cuteanimals_stats"));
   
   var gameOver = "<h1>Game over!</h><h2>Kills: <span class=kills>" +
-    stats.kills + "</span></h2><button id=play-again>Play again?</button>";
+    stats.kills + "</span></h2><h2>All time kills: <span class=kills>" + stats.all_time_kills + "</span></h2><button id=play-again>Play again?</button>";
 
   var $overlay = $('#overlay').clone().removeClass('template');
   var $gameOver = $('#game-over').clone().removeClass('template').html(gameOver);

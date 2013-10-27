@@ -26,5 +26,6 @@ Stats.prototype.addKill = function(){
 
   var ach = JSON.parse(getCookie('cuteanimals_stats'));
   ach.kills += 1;
+  ach.all_time_kills += 1;
   setCookie("cuteanimals_stats", JSON.stringify(ach));
 }
