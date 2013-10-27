@@ -57,6 +57,14 @@ function Upgrades(game) {
       },
       stock: -1
     },
+    {
+      cost: 10,
+      name: "Blast",
+      init: function() {
+        that.game.activateSpecialWeapon("blast", -1, 0.7*50);
+      },
+      stock: -1
+    }
   ];
   this.purchased = [];
   this.upgrade_menu = $('.upgrades.template').clone()
