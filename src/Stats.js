@@ -3,8 +3,8 @@ function Stats(achievements){
   this.kills = 0;
 }
 
-Stats.prototype.addKills = function(kills){
-  this.kills += kills;
+Stats.prototype.addKill = function(){
+  this.kills++;
   if (this.kills >= 1) {
     this.achievements.give("first_kill");
   }
