@@ -22,7 +22,7 @@ MenuState.prototype.init = function(){
       that.select(1);
     }}],
     [function(){
-      sm.changeState('credits', 'message', 'slide-left', 30);
+      sm.changeState('credits');
     }, {x:0.5, y:4.8, w:16, h:1.5, hover: function(){
       that.select(2);
     }}]
