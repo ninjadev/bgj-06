@@ -63,8 +63,10 @@ GameState.prototype.resume = function(){
 
 GameState.prototype.render = function(ctx){
   ctx.save();
-  var scaler = 16*GU/this.bg.width;
+  var scaler = 16*GU/this.bg.width + 1 + 0.01*Math.sin(t/125);
+  ctx.translate(16*GU/2, 9*GU/2);
   ctx.scale(scaler, scaler);
+  ctx.translate(-this.bg.width/2, -this.bg.height/2);
   ctx.drawImage(this.bg, 0, 0);
   ctx.restore();
   ctx.save();
