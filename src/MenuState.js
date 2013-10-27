@@ -9,7 +9,24 @@ MenuState.prototype.init = function(){
 
   this.key_cooldown = 0;
 
-  this.elements = [];
+  var that = this;
+  this.elements = [
+    [function(){
+      sm.changeState('game');
+    }, {x:0.5, y:1.8, w:16, h:1.5, hover: function(){
+      that.select(0);
+    }}],
+    [function(){
+      sm.changeState('game');
+    }, {x:0.5, y:3.3, w:16, h:1.5, hover: function(){
+      that.select(1);
+    }}],
+    [function(){
+      sm.changeState('game');
+    }, {x:0.5, y:4.8, w:16, h:1.5, hover: function(){
+      that.select(2);
+    }}]
+  ];
 
   this.y_values = [1.8, 3.3, 4.8];
   this.y_time = 1;
@@ -26,7 +43,9 @@ MenuState.prototype.setY = function(y){
 }
 
 MenuState.prototype.select = function(selected){
-    console.log(selected);
+  if(this.selected == selected) {
+    return;
+  }
   this.selected = selected;
   this.setY(this.y_values[this.selected]);
 }
@@ -58,7 +77,7 @@ MenuState.prototype.render = function(ctx){
 
 MenuState.prototype.update = function(){
   this.key_cooldown && this.key_cooldown--;
-  this.y_time += 0.032;
+  this.y_time += 0.12;
   if(this.y_time < 1){
     this.y = smoothstep(this.start_y, this.end_y, this.y_time);
   }else if (this.y_time > 1){
