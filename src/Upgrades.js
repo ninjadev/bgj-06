@@ -269,8 +269,64 @@ function Upgrades(game) {
     },
 
     {
+      cost: 250,
+      name: "Shock wave range 1",
+      description: "Increase the range of shock waves",
+      init: function() {
+        SpecialWeapon.maxRadius += 1;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser"]
+    },
+
+    {
+      cost: 500,
+      name: "Shock wave range 2",
+      description: "Increase the range of shock waves",
+      init: function() {
+        SpecialWeapon.maxRadius += 1;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser", "Shock wave range 1"]
+    },
+
+    {
+      cost: 1000,
+      name: "Shock wave range 3",
+      description: "Increase the range of shock waves",
+      init: function() {
+        SpecialWeapon.maxRadius += 1;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser", "Shock wave range 2"]
+    },
+
+
+    {
+      cost: 2000,
+      name: "Shock wave range 4",
+      description: "Increase the range of shock waves",
+      init: function() {
+        SpecialWeapon.maxRadius += 1;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser", "Shock wave range 3"]
+    },
+
+    {
+      cost: 5000,
+      name: "Shock wave range 5",
+      description: "Increase the range of shock waves",
+      init: function() {
+        SpecialWeapon.maxRadius += 1;
+      },
+      stock: 1,
+      dependencies: ["Blue Laser", "Shock wave range 4"]
+    },
+
+    {
       cost: 25,
-      name: "Slo'mo'alizer",
+      name: "Slowmolizer",
       img: 'slowmolize.png',
       description: "Awesome triggeable super ability.",
       init: function() {
