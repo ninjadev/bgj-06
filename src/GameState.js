@@ -144,8 +144,10 @@ GameState.prototype.update = function(){
 
 GameState.prototype.gameOver = function() {
   this.isGameOver = true;
+  createjs.Sound.play('res/Fail_game.mp3');
   this.audioButton.pause();
-  
+
+
   $('#overlay').removeClass('template');
   $('#game-over').removeClass('template');
 }
