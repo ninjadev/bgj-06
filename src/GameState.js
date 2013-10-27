@@ -26,8 +26,11 @@ GameState.prototype.init = function(){
 
   this.bg = loadImage('res/bg.png');
   this.vignette = loadImage('res/vignette.png');
+  this.cursor = loadImage('res/achievements/cursor.png');
 
   this.moneyEffects = [];
+  this.clickers = [];
+  this.timeToAutoClick = 1000;
 
   this.achievements = new Achievements();
 
@@ -89,6 +92,10 @@ GameState.prototype.render = function(ctx){
     moneyEffect.render(ctx);
   }
 
+  for (var i = 0; i < this.clickers.length; i++) {
+    this.clickers[i].render();
+  }
+
   if (null !== this.specialWeapon) {
     this.specialWeapon.render();
   }
@@ -132,6 +139,15 @@ GameState.prototype.update = function(){
         this.specialWeapon = null;
       }
     }
+
+    if (this.timeToAutoClick > 0) {
+      this.timeToAutoClick -= 20;
+    } else {
+      for (var i = 0; i < this.clickers.length; i++){
+        this.clickers[i].update();
+      }
+      this.timeToAutoClick = 1000;
+    }
   }
 }
 
@@ -145,4 +161,8 @@ GameState.prototype.gameOver = function() {
 
 GameState.prototype.activateSpecialWeapon = function(type, factor, duration) {
   this.specialWeapon = new SpecialWeapon(type, this.enemies, factor, duration, 12);
+}
+
+GameState.prototype.addClicker = function () {
+  this.clickers.push(new Autoclicker(this));
 }

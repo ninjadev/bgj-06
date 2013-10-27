@@ -229,6 +229,15 @@ function Upgrades(game) {
         that.game.activateSpecialWeapon("blast", -1, 0.7*50);
       },
       stock: -1
+    },
+    {
+      cost: 0,
+      name: "Cursor",
+      img: "cursor.png",
+      init: function () {
+        that.game.addClicker();
+      },
+      stock: 1
     }
   ];
   this.purchased = [];
