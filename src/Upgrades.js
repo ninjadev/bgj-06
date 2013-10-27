@@ -36,40 +36,6 @@ function Upgrades(game) {
       dependencies: ["Red Laser"]
     },
     {
-      cost: 1000,
-      name: "Double Beam",
-      description: "Splits the red beam into two equally powerful beams. Effectively giving you twice the damage",
-      init: function() {
-        var laser = that.game.laserController.redLaser;
-        //TODO: Implement
-      },
-      stock: 0,
-      dependencies: ["Intensify Beam 3"]
-    },
-    {
-      cost: 1000,
-      name: "Tripple Beam",
-      description: "Splits the red beam into three equally powerful beams. Effectively giving you tripple damage",
-      init: function() {
-        var laser = that.game.laserController.redLaser;
-        //TODO: Implement
-      },
-      stock: 0,
-      dependencies: ["Double Beam"]
-    },
-    {
-      cost: 1000,
-      name: "Butt Beam",
-      description: "A mirror mishap made a beam come out from behind. Turns out it's pretty useful. ",
-      init: function() {
-        var laser = that.game.laserController.redLaser;
-        //TODO: Implement
-      },
-      stock: 0,
-      dependencies: ["Tripple Beam"]
-    },
-
-    {
       cost: 100,
       name: "Blue Laser",
       img: 'blue_laser.png',
@@ -126,34 +92,6 @@ function Upgrades(game) {
       stock: 0,
       dependencies: ["Blue Power 3"]
     },
-
-    {
-      cost: 10000,
-      level: 1,
-      name: "Instant Stun",
-      description: "Intensify the blue beam so that the animals stop for "
-          +" a while when they see it the first time.",
-      init: function() {
-      },
-      stock: 0,
-      dependencies: ["Blue Power 3", "Blue Duration 2"]
-    },
-
-    {
-      cost: 100,
-      level: 1,
-      name: "Cold Pulses 1",
-      description: "Fancy mirror magic makes pulsating cold rings around your pot.",
-      init: function() {
-        //TODO implement.
-        this.cost *= 1.9;
-        this.level++;
-        this.name = "Cold Pulses " + this.level;
-      },
-      stock: 0,
-      dependencies: ["Blue Power 5"]
-    },
-
     {
       cost: 100,
       name: "Green Laser",
@@ -207,10 +145,10 @@ function Upgrades(game) {
       stock: 0,
       dependencies: ["Green Power 3"]
     },
-
     {
       cost: 250,
-      name: "Shock wave range 1",
+      name: "Shockwave range 1",
+      img: 'shockwave_range.png',
       description: "Increase the range of shock waves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
@@ -221,47 +159,51 @@ function Upgrades(game) {
 
     {
       cost: 500,
-      name: "Shock wave range 2",
+      name: "Shockwave range 2",
+      img: 'shockwave_range.png',
       description: "Increase the range of shock waves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shock wave range 1"]
+      dependencies: ["Blue Laser", "Shockwave range 1"]
     },
 
     {
       cost: 1000,
-      name: "Shock wave range 3",
-      description: "Increase the range of shock waves",
+      name: "Shockwave range 3",
+      img: 'shockwave_range.png',
+      description: "Increase the range of shockwaves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shock wave range 2"]
+      dependencies: ["Blue Laser", "Shockwave range 2"]
     },
 
 
     {
       cost: 2000,
-      name: "Shock wave range 4",
-      description: "Increase the range of shock waves",
+      name: "Shockwave range 4",
+      img: 'shockwave_range.png',
+      description: "Increase the range of shockwaves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Blue Laser", "Shock wave range 3"]
+      dependencies: ["Blue Laser", "Shockwave range 3"]
     },
 
     {
       cost: 5000,
-      name: "Shock wave range 5",
-      description: "Increase the range of shock waves",
+      name: "Shockwave range 5",
+      img: 'shockwave_range.png',
+      description: "Increase the range of shockwaves",
       init: function() {
         SpecialWeapon.maxRadius += 1;
       },
       stock: 1,
-      dependencies: ["Shock wave range 4"]
+      dependencies: ["Shockwave range 4"]
     },
 
     {
