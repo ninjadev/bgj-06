@@ -51,7 +51,7 @@ MenuState.prototype.select = function(selected){
 }
 
 MenuState.prototype.pause = function(){
-    document.removeEventListener(this.fullscreenHandler);
+    document.removeEventListener('keypress', this.fullscreenHandler);
 }
 
 MenuState.prototype.resume = function(){
