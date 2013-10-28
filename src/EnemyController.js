@@ -4,14 +4,15 @@ function EnemyController(game) {
   this.timeLeftOfWave = 0;
   this.game = game;
   this.enemies = [];
+  this.WAVES = WAVES.slice();
 }
 
 EnemyController.prototype.nextWave = function(t, cb){
   this.waveStartTime = t*20;
   this.numberOfWaves++;
   this.cb = cb;
-  if (WAVES.length > 0) {
-    this.currentWave = WAVES.shift();
+  if (this.WAVES.length > 0) {
+    this.currentWave = this.WAVES.shift();
   } else {
     this.currentWave = {
       monsters: Object.keys(this.enemyTypes),
