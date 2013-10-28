@@ -16,7 +16,7 @@ EnemyController.prototype.nextWave = function(t, cb){
     this.currentWave = {
       monsters: Object.keys(this.enemyTypes),
       numberOfMonsters: this.numberOfWaves*3,
-      scaling: Math.pow(1.15,this.numberOfWaves),
+      scaling: this.numberOfWaves/400,
       duration: 10000 + 5000*this.numberOfWaves
     };
   }
