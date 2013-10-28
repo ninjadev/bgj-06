@@ -259,10 +259,11 @@ Upgrades.prototype.purchase = function(index){
   }
   this.game.cash.spend(upgrade.cost);
   upgrade.init();
-  this.render();
+
   this.purchased.push(upgrade.name);
 
   Toast('Upgraded: ' + upgrade.name + '!');
+  this.render();
 
   return true;
 };
