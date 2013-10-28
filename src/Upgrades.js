@@ -6,6 +6,8 @@
 function Upgrades(game) {
   this.game = game;
   var that = this;
+  var cost_scaling = 150;
+  var cost_square_scaling = 5;
   this.upgrades = [
     {
       cost: 10,
@@ -21,14 +23,14 @@ function Upgrades(game) {
     },
     {
       cost: 50,
-      level: 1,
+      level: 2,
       name: "Gold-digging Shovel",
       img: 'pot-o-gold.png',
       description: "Use another shovel to get more gold per click.",
       init: function() {
-        sm.activeState.goldPerClick += this.level;
+        sm.activeState.goldPerClick = this.level;
         this.level++;
-        this.cost = this.level*65;
+        this.cost = this.level*(cost_scaling+this.level*cost_square_scaling);
         this.name = "Gold-digging Shovel "+this.level;
       },
       stock: -1,
@@ -44,7 +46,7 @@ function Upgrades(game) {
         var laser = that.game.laserController.redLaser;
         laser.addUpgrade(new UpgradeAddBaseDamage(0.1));
         this.level++;
-        this.cost = this.level*65;
+        this.cost = this.level*(cost_scaling+this.level*cost_square_scaling);
         this.name = "Mirror Prism Enhancer "+this.level;
       },
       stock: -1,
@@ -72,7 +74,7 @@ function Upgrades(game) {
       description: "Tweaking the blue mirrors you improve the beam.",
       init: function() {
         this.level++;
-        this.cost = this.level*65;
+        this.cost = this.level*(cost_scaling+this.level*cost_square_scaling);
         this.name = "Frost Coating on Mirrors " + this.level;
 
         //Please excuse the uglieness of this, on account of it being late in a hackathon.
@@ -117,7 +119,7 @@ function Upgrades(game) {
       description: "Increases the toxicity of the green light. Increases max dps by 10 dps, and increases duration by 20% ",
       init: function() {
         this.level++;
-        this.cost = this.level*65;
+        this.cost = this.level*(cost_scaling+this.level*cost_square_scaling);
         this.name = "Green Power " + this.level;
 
         var laser = that.game.laserController.greenLaser;
