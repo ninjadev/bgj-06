@@ -50,9 +50,7 @@ GameState.prototype.resume = function(){
       that.pot.click();
     }, {x:7.5, y:4, w:1, h:1}],
     [function(){
-      audioIsMuted = !audioIsMuted;
-      that.audioButton.setActivated(!audioIsMuted);
-      createjs.Sound.setMute(audioIsMuted);
+      that.audioButton.toggleActivated();
     }, {x:15, y:0, w:1, h:1}]
   ];
 
