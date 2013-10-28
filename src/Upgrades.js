@@ -261,11 +261,12 @@ Upgrades.prototype.purchase = function(index){
   }
   this.game.cash.spend(upgrade.cost);
   upgrade.init();
-  this.render();
+
   this.purchased.push(upgrade.name);
 
   Toast('Upgraded: ' + upgrade.name + '!');
   createjs.Sound.play('res/coin.mp3|res/coin.ogg');
+  this.render();
 
   return true;
 };
