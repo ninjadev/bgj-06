@@ -24,11 +24,11 @@ function Enemy(x, y, enemyType, scaling) {
     life: 100
   });
 
-  this.maxHP = enemyType.hp + (scaling * 100);
+  this.maxHP = enemyType.hp + (enemyType.hp * scaling * 100);
   this.hp = this.maxHP;
   this.baseSpeed = enemyType.speed;
   this.killRadius = 0.0086*GU;
-  this.bounty = Math.round(enemyType.bounty + scaling*enemyType.bounty);
+  this.bounty = Math.round(enemyType.bounty + 200*scaling*enemyType.bounty);
 
   this.effects = [];
   //Example of how to add enemy
