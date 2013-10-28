@@ -7,7 +7,7 @@ function Upgrades(game) {
   this.game = game;
   var that = this;
   var cost_scaling = 200;
-  var cost_square_scaling = 10.5;
+  var cost_square_scaling = 30;
   this.upgrades = [
     {
       cost: 10,
