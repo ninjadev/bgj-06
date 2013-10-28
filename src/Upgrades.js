@@ -85,7 +85,7 @@ function Upgrades(game) {
         var applicationsToMax = upgradeExample.applicationsToMax;
 
         maxSpeed *= 0.8;
-        applications = Math.max(1,0.8*applications);
+        applicationsToMax = Math.max(1,0.8*applications);
         duration = Math.min(500, duration*1.3);
         laser.upgrades[0].generateNewDebuff = function(){
           return new SpeedEffect(maxSpeed, duration, applicationsToMax);
