@@ -263,6 +263,7 @@ Upgrades.prototype.purchase = function(index){
   this.purchased.push(upgrade.name);
 
   Toast('Upgraded: ' + upgrade.name + '!');
+  createjs.Sound.play('res/coin.mp3|res/coin.ogg');
 
   return true;
 };
