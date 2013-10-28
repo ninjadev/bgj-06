@@ -1,5 +1,6 @@
 function SpecialWeaponController(){
   this.weapons = [];
+  this.cooldown = [];
   var that = this;
 
   var source = $("#weapons-list-template").html();
@@ -57,15 +58,17 @@ SpecialWeaponController.prototype.renderList = function() {
   this.weapons_container.html(this.template({weapons: this.weapons}));
 };
 
-SpecialWeaponController.prototype.activate = function(weapon, index) {
+SpecialWeaponController.prototype.activate = function(weaponDOM, index) {
+  var weapon = this.weapons[index];
   if (weapon.loading) {
     return;
   }
   weapon.loading = true;
-  weapon.addClass('loading');
-  setTimeout(function(){
+  weaponDOM.addClass('loading');
+  clearTimeout(this.cooldown[index]);
+  this.cooldown[index] = setTimeout(function(){
     weapon.loading = false;
-    weapon.removeClass('loading');
+    weaponDOM.removeClass('loading');
   }, 10000);
   this.weapons[index].active = true;
 };
