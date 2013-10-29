@@ -12,7 +12,7 @@ Rainbow.prototype.psTimerInterval = 12;
 
 Rainbow.prototype.render = function() {
   ctx.save();
-  var scaler = this.sprite.width * GU * 0.000005;
+  var scaler = this.sprite.width * GU * 0.00002;
   ctx.translate(this.position.x * GU, this.position.y * GU);
   ctx.scale(scaler, scaler*2);
   ctx.drawImage(this.sprite, -this.sprite.width / 2, -this.sprite.height);
@@ -24,7 +24,7 @@ Rainbow.prototype.update = function(){
   this.ps.update();
   this.ps_timer--;
   if(!this.ps_timer){
-        this.ps_timer = this.psTimerInterval;
-        this.ps.explode(CENTER.x, CENTER.y, 2);
+    this.ps_timer = this.psTimerInterval;
+    this.ps.explode(CENTER.x, CENTER.y, 2);
   }
 }
