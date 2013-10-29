@@ -5,9 +5,9 @@ function SpecialWeaponController(){
 
   var source = $("#weapons-list-template").html();
   this.template = Handlebars.compile(source);
-  this.weapons_container = $('.weapons.template').clone()
+  this.$weapons_container = $('.weapons.template').clone()
     .removeClass('template');
-  $('#wrapper').append(this.weapons_container);
+  $('#wrapper').append(this.$weapons_container);
   $("body").on("click touchstart", ".weapon-image", function(){
     var weapon = $(this).parent('.weapon');
     that.activate(weapon, weapon.data('id'));
@@ -55,7 +55,7 @@ SpecialWeaponController.prototype.render = function(){
 
 
 SpecialWeaponController.prototype.renderList = function() {
-  this.weapons_container.html(this.template({weapons: this.weapons}));
+  this.$weapons_container.html(this.template({weapons: this.weapons})).show();
 };
 
 SpecialWeaponController.prototype.activate = function(weaponDOM, index) {
