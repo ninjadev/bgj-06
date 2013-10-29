@@ -186,6 +186,7 @@ strong {
 }
 
 .weapons {
+    display: none;
     position: absolute;
     left: 1%;
     bottom: 2%;
@@ -204,7 +205,7 @@ strong {
 }
 
 .weapon img {
-    margin: 0;
+    margin-top: 0;
 }
 
 .achievements {
@@ -217,6 +218,7 @@ strong {
     font-size: 200%;
     overflow: hidden;
 }
+
 .achievement-element {
     padding: 1%;
     clear: both;
