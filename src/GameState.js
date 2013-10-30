@@ -117,13 +117,13 @@ GameState.prototype.render = function(ctx){
 
   this.enemies.render(ctx);
   this.progressCircle.render(ctx);
-  this.audioButton.render();
 
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
     moneyEffect.render(ctx);
   }
 
+  this.audioButton.render();
   this.specialWeaponController.render();
 }
 
