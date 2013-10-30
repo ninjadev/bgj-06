@@ -105,6 +105,7 @@ GameState.prototype.render = function(ctx){
   ctx.translate(-this.bg.width/2, -this.bg.height/2);
   ctx.drawImage(this.bg, 0, 0);
   ctx.restore();
+
   ctx.save();
   scaler = 16*GU/this.vignette.width;
   ctx.scale(scaler, scaler);

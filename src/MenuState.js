@@ -82,9 +82,9 @@ MenuState.prototype.render = function(ctx){
   ctx.restore();
 
   ctx.save();
-  var scaler = 0.591*16*GU/this.bg_title_img.width;
+  scaler = 16*GU/this.bg_title_img.width;
   ctx.scale(scaler, scaler);
-  ctx.drawImage(this.bg_title_img, 16*GU, 20.35*GU);
+  ctx.drawImage(this.bg_title_img, 0, 0);
   ctx.restore();
 
   ctx.fillStyle = '#8742d1';
