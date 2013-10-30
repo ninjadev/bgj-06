@@ -111,13 +111,13 @@ GameState.prototype.render = function(ctx){
   ctx.drawImage(this.vignette, 0, 0);
   ctx.restore();
   this.rainbow.render();
-  this.audioButton.render();
 
   this.laserController.render();
   this.pot.render();
 
   this.enemies.render(ctx);
   this.progressCircle.render(ctx);
+  this.audioButton.render();
 
   for (var i=0;i<this.moneyEffects.length;i++){
     var moneyEffect = this.moneyEffects[i];
