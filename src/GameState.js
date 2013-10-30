@@ -111,7 +111,6 @@ GameState.prototype.render = function(ctx){
   ctx.drawImage(this.vignette, 0, 0);
   ctx.restore();
   this.rainbow.render();
-  this.audioButton.render();
 
   this.laserController.render();
   this.pot.render();
@@ -124,6 +123,7 @@ GameState.prototype.render = function(ctx){
     moneyEffect.render(ctx);
   }
 
+  this.audioButton.render();
   this.specialWeaponController.render();
 }
 
