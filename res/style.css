@@ -1,16 +1,18 @@
-*{
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
 }
-html,body {
-    overflow:hidden;
-    background:black;
+
+html, body {
+    overflow: hidden;
+    background: black;
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     font-family: 'blackoutmidnight';
     cursor: default;
 }
@@ -24,13 +26,12 @@ button {
     top: 75%;
     left: 0;
     margin: 0 auto;
-    width:100%;
-    background: white;
+    width: 100%;
     padding: 2%;
     text-align: center;
     font-size: 300%;
     display: none;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
 }
 
@@ -49,7 +50,7 @@ button {
 }
 
 .achievement .image {
-    float:left;
+    float: left;
     margin-right: 1%;
     width: 10%;
 }
@@ -89,7 +90,7 @@ button {
 @font-face {
     font-family: 'blackoutmidnight';
     src: url('fonts/blackout-nor-webfont.eot');
-    src: url('fonts/blackout-nor-webfont.eot') format('embedded-opentype'),url('fonts/blackout-nor-webfont.woff') format('woff'),url('fonts/blackout-nor-webfont.ttf') format('truetype'),url('fonts/blackout-nor-webfont.svg') format('svg');
+    src: url('fonts/blackout-nor-webfont.eot') format('embedded-opentype'), url('fonts/blackout-nor-webfont.woff') format('woff'), url('fonts/blackout-nor-webfont.ttf') format('truetype'), url('fonts/blackout-nor-webfont.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -97,16 +98,16 @@ button {
 #overlay {
     z-index: 1000;
     position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 #game-over {
     z-index: 1001;
-    position:absolute;
+    position: absolute;
     left: 50%;
     top: 50%;
     width: 300px;
@@ -145,7 +146,7 @@ p {
 }
 
 strong {
-    padding:10px 0;
+    padding: 10px 0;
 }
 
 .upgrade img,
@@ -164,7 +165,7 @@ strong {
     width: 20%;
     top: 2%;
     left: 1%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
 }
 
@@ -178,7 +179,7 @@ strong {
 }
 
 .can-purchase {
-    opacity:1;
+    opacity: 1;
 }
 
 .img-upgrade-container {
@@ -191,7 +192,7 @@ strong {
     bottom: 2%;
     padding: 1%;
     z-index: 2000;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     width: 20%;
 }
@@ -213,10 +214,11 @@ strong {
     right: 10%;
     top: 5%;
     bottom: 5%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     font-size: 200%;
     overflow: hidden;
 }
+
 .achievement-element {
     padding: 1%;
     clear: both;
@@ -228,6 +230,7 @@ strong {
     background: #01bbd2;
     color: white;
 }
+
 .achievement-list {
     overflow: auto;
     width: 100%;
