@@ -1,9 +1,9 @@
-function Stats(achievements){
+function Stats(achievements) {
   this.achievements = achievements;
   this.kills = 0;
-}
+};
 
-Stats.prototype.addKill = function(){
+Stats.prototype.addKill = function() {
   this.kills++;
   if (this.kills >= 1) {
     this.achievements.give("first_kill");
@@ -28,4 +28,4 @@ Stats.prototype.addKill = function(){
   ach.kills += 1;
   ach.all_time_kills += 1;
   setCookie("cuteanimals_stats", JSON.stringify(ach));
-}
+};
