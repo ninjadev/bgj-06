@@ -1,7 +1,7 @@
 function MenuState() {
 }
 
-MenuState.prototype.init = function () {
+MenuState.prototype.init = function() {
   this.bg_img = loadImage('res/bg.png');
   this.vignette_img = loadImage('res/vignette.png');
   this.menu_img = loadImage('res/menu.png');
@@ -11,19 +11,19 @@ MenuState.prototype.init = function () {
 
   var that = this;
   this.elements = [
-    [function () {
+    [function() {
       sm.changeState('game');
-    }, {x: 0.5, y: 1.8, w: 16, h: 1.5, hover: function () {
+    }, {x: 0.5, y: 1.8, w: 16, h: 1.5, hover: function() {
       that.select(0);
     }}],
-    [function () {
+    [function() {
       sm.changeState('achievements');
-    }, {x: 0.5, y: 3.3, w: 16, h: 1.5, hover: function () {
+    }, {x: 0.5, y: 3.3, w: 16, h: 1.5, hover: function() {
       that.select(1);
     }}],
-    [function () {
+    [function() {
       sm.changeState('credits');
-    }, {x: 0.5, y: 4.8, w: 16, h: 1.5, hover: function () {
+    }, {x: 0.5, y: 4.8, w: 16, h: 1.5, hover: function() {
       that.select(2);
     }}]
   ];
@@ -36,13 +36,13 @@ MenuState.prototype.init = function () {
   this.selected = 0;
 }
 
-MenuState.prototype.setY = function (y) {
+MenuState.prototype.setY = function(y) {
   this.start_y = this.y;
   this.end_y = y;
   this.y_time = 0;
 }
 
-MenuState.prototype.select = function (selected) {
+MenuState.prototype.select = function(selected) {
   if (this.selected == selected) {
     return;
   }
@@ -50,13 +50,13 @@ MenuState.prototype.select = function (selected) {
   this.setY(this.y_values[this.selected]);
 }
 
-MenuState.prototype.pause = function () {
+MenuState.prototype.pause = function() {
   document.removeEventListener('keypress', this.fullscreenHandler);
 }
 
-MenuState.prototype.resume = function () {
+MenuState.prototype.resume = function() {
   var that = this;
-  this.fullscreenHandler = document.addEventListener('keypress', function (e) {
+  this.fullscreenHandler = document.addEventListener('keypress', function(e) {
     if (e.keyCode == 13 && that.selected == 0) {
       document.body.requestFullscreen && document.body.requestFullscreen();
       document.body.webkitRequestFullscreen && document.body.webkitRequestFullscreen();
@@ -65,7 +65,7 @@ MenuState.prototype.resume = function () {
   });
 }
 
-MenuState.prototype.render = function (ctx) {
+MenuState.prototype.render = function(ctx) {
 
   ctx.save();
   var scaler = 16 * GU / this.bg_img.width + 1 + 0.01 * Math.sin(t / 125);
@@ -96,7 +96,7 @@ MenuState.prototype.render = function (ctx) {
   ctx.restore();
 }
 
-MenuState.prototype.update = function () {
+MenuState.prototype.update = function() {
   this.key_cooldown && this.key_cooldown--;
   this.y_time += 0.12;
   if (this.y_time < 1) {

@@ -7,7 +7,7 @@ function EnemyController(game) {
   this.WAVES = WAVES.slice();
 }
 
-EnemyController.prototype.nextWave = function (t, cb) {
+EnemyController.prototype.nextWave = function(t, cb) {
   this.waveStartTime = t * 20;
   this.numberOfWaves++;
   this.cb = cb;
@@ -27,7 +27,7 @@ EnemyController.prototype.nextWave = function (t, cb) {
 };
 
 
-EnemyController.prototype.update = function (t) {
+EnemyController.prototype.update = function(t) {
   if (this.currentWave !== undefined) {
     var waveTime = t * 20 - this.waveStartTime;
     this.timeLeftOfWave -= 20;
@@ -63,7 +63,7 @@ EnemyController.prototype.update = function (t) {
   }
 };
 
-EnemyController.prototype.render = function (ctx) {
+EnemyController.prototype.render = function(ctx) {
   for (var i = 0; i < this.enemies.length; i++) {
     var enemy = this.enemies[i];
     enemy.render(ctx);
@@ -71,12 +71,12 @@ EnemyController.prototype.render = function (ctx) {
 };
 
 
-EnemyController.prototype.generateEnemyType = function (enemyTypes) {
+EnemyController.prototype.generateEnemyType = function(enemyTypes) {
   var enemyId = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
   return this.enemyTypes[enemyId];
 }
 
-EnemyController.prototype.slowDownWithinRadius = function (radius, speedFactor, tickDuration) {
+EnemyController.prototype.slowDownWithinRadius = function(radius, speedFactor, tickDuration) {
   for (var i = 0; i < this.enemies.length; i++) {
     var enemy = this.enemies[i];
     if (enemy.getDistanceToCenter() < radius) {

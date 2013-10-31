@@ -19,20 +19,20 @@ function clamp(low, x, high) {
 function loadImage(path) {
   var img = new Image();
   loaded++;
-  img.onload = function () {
+  img.onload = function() {
     loaded--
   };
   img.src = path;
   return img;
 }
 
-window.requestAnimFrame = (function () {
+window.requestAnimFrame = (function() {
   return  window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.oRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
-    function (callback) {
+    function(callback) {
       window.setTimeout(callback, 0);
     };
 })();
@@ -90,11 +90,11 @@ function bootstrap() {
     KEYS[i] = false;
   }
 
-  document.addEventListener("keydown", function (e) {
+  document.addEventListener("keydown", function(e) {
     KEYS[e.keyCode] = true;
   });
 
-  document.addEventListener("keyup", function (e) {
+  document.addEventListener("keyup", function(e) {
     KEYS[e.keyCode] = false;
   });
 
@@ -192,7 +192,7 @@ function relMouseCoords(e) {
 
 document.addEventListener('click', handleEvent);
 document.addEventListener('touchstart', handleEvent);
-document.addEventListener('touchmove', function (e) {
+document.addEventListener('touchmove', function(e) {
   e.preventDefault();
   e.stopPropagation();
   return false;
@@ -241,7 +241,7 @@ function contains(obj) {
 }
 
 // Array Remove - By John Resig (MIT Licensed)
-Array.remove = function (array, from, to) {
+Array.remove = function(array, from, to) {
   var rest = array.slice((to || from) + 1 || array.length);
   array.length = from < 0 ? array.length + from : from;
   return array.push.apply(array, rest);

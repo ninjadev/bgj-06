@@ -11,11 +11,11 @@ function DotEffect(maxDpt, tickDuration, applicationsToMax) {
   this.duration = tickDuration;
 }
 
-DotEffect.prototype.onApply = function (enemy) {
+DotEffect.prototype.onApply = function(enemy) {
   this.appliedT = sm.activeState.t;
 }
 
-DotEffect.prototype.onReapply = function (enemy, newEffect) {
+DotEffect.prototype.onReapply = function(enemy, newEffect) {
   this.applications++;
   this.appliedT = sm.activeState.t;
 
@@ -35,11 +35,11 @@ DotEffect.prototype.onReapply = function (enemy, newEffect) {
 
 }
 
-DotEffect.prototype.onRemove = function (enemy) {
+DotEffect.prototype.onRemove = function(enemy) {
 }
 
 
-DotEffect.prototype.render = function (ctx, enemy, t) {
+DotEffect.prototype.render = function(ctx, enemy, t) {
   var color = "green";
   var radius = 0.7 * GU, innerRadius = 0.3 * GU, outerRadius = 0.9 * GU;
 
@@ -62,7 +62,7 @@ DotEffect.prototype.render = function (ctx, enemy, t) {
   ctx.fill();
 }
 
-DotEffect.prototype.update = function (enemy, t) {
+DotEffect.prototype.update = function(enemy, t) {
   enemy.hit(this.dpt);
   if (this.duration == undefined || this.duration <= 0) return;
   if (sm.activeState.t - this.appliedT >= this.duration) {

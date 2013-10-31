@@ -22,12 +22,12 @@ function SpecialWeapon(type, image, factor, duration) {
   this.reset();
 }
 
-SpecialWeapon.prototype.reset = function () {
+SpecialWeapon.prototype.reset = function() {
   this.radius = 0.5;
   this.impactInterval = 6;
 };
 
-SpecialWeapon.prototype.render = function () {
+SpecialWeapon.prototype.render = function() {
   this.sprite = this['sprite_' + this.type];
   ctx.save();
   var scaler = this.sprite.width * GU * 0.0000035 * this.radius;
@@ -38,7 +38,7 @@ SpecialWeapon.prototype.render = function () {
   ctx.restore();
 }
 
-SpecialWeapon.prototype.update = function () {
+SpecialWeapon.prototype.update = function() {
   this.radius += 0.2;
 
   if (this.impactInterval-- === 0) {
@@ -52,7 +52,7 @@ SpecialWeapon.prototype.update = function () {
   return this.radius < SpecialWeapon.maxRadius;
 }
 
-SpecialWeapon.prototype.getTransparency = function () {
+SpecialWeapon.prototype.getTransparency = function() {
   var t = this.radius / SpecialWeapon.maxRadius;
   return 1 - t * t;
 }

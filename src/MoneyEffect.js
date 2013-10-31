@@ -8,7 +8,7 @@ function MoneyEffect(options) {
 MoneyEffect.MAX_TIME_LEFT = 60;
 
 
-MoneyEffect.prototype.render = function (ctx) {
+MoneyEffect.prototype.render = function(ctx) {
   var ratio = this.time_left / MoneyEffect.MAX_TIME_LEFT;
   ctx.fillStyle = 'rgba(140,120,20,' + (ratio) + ')';
   ctx.font = 'normal ' + (50 - ratio * 40) + 'pt blackoutmidnight';
@@ -27,7 +27,7 @@ MoneyEffect.prototype.render = function (ctx) {
 }
 
 
-MoneyEffect.prototype.update = function () {
+MoneyEffect.prototype.update = function() {
   return this.time_left--;
 }
 

@@ -10,7 +10,7 @@ function Laser(color, speed, damage, sprite) {
   this.sprite = sprite;
 }
 
-Laser.prototype.update = function (t, humanControlled) {
+Laser.prototype.update = function(t, humanControlled) {
   if (humanControlled) {
     var dx = MOUSE.x - CENTER.x;
     var dy = MOUSE.y - CENTER.y;
@@ -23,7 +23,7 @@ Laser.prototype.update = function (t, humanControlled) {
   this.endpoints = this.getEndpoints();
 }
 
-Laser.prototype.render = function () {
+Laser.prototype.render = function() {
   ctx.save();
   var scaler = this.sprite.width * GU * 0.00002;
   ctx.translate(CENTER.x * GU, CENTER.y * GU);
@@ -40,14 +40,14 @@ Laser.prototype.render = function () {
   ctx.restore();
 };
 
-Laser.prototype.getEndpoints = function () {
+Laser.prototype.getEndpoints = function() {
   return {
     x: Math.cos(this.angle) * 8 + 8,
     y: Math.sin(this.angle) * 8 + 4.5
   };
 };
 
-Laser.prototype.hits = function () {
+Laser.prototype.hits = function() {
   var enemies = sm.states.game.enemies.enemies;
   for (var i = 0; i < enemies.length; i++) {
     if (distToSegment({x: enemies[i].x, y: enemies[i].y}, CENTER, this.endpoints) < enemies[i].radius) {
@@ -58,13 +58,13 @@ Laser.prototype.hits = function () {
   }
 }
 
-Laser.prototype.upgradesOnHit = function (enemy) {
+Laser.prototype.upgradesOnHit = function(enemy) {
   for (var i = 0; i < this.upgrades.length; i++) {
     this.upgrades[i].onEnemyHit(this, enemy);
   }
 }
 
-Laser.prototype.addUpgrade = function (upgrade) {
+Laser.prototype.addUpgrade = function(upgrade) {
   this.upgrades.push(upgrade);
   upgrade.onApply(this);
 }

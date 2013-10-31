@@ -8,18 +8,18 @@ function SpecialWeaponController() {
   this.$weapons_container = $('.weapons.template').clone()
     .removeClass('template');
   $('#wrapper').append(this.$weapons_container);
-  $("body").on("click touchstart", ".weapon-image", function () {
+  $("body").on("click touchstart", ".weapon-image", function() {
     var weapon = $(this).parent('.weapon');
     that.activate(weapon, weapon.data('id'));
   });
 }
 
-SpecialWeaponController.prototype.add = function (weapon) {
+SpecialWeaponController.prototype.add = function(weapon) {
   this.weapons.push(weapon);
   this.renderList();
 };
 
-SpecialWeaponController.prototype.update = function () {
+SpecialWeaponController.prototype.update = function() {
   for (var i = 0; i < this.weapons.length; i++) {
     var weapon = this.weapons[i];
     if (weapon.active) {
@@ -44,7 +44,7 @@ SpecialWeaponController.prototype.update = function () {
 
 };
 
-SpecialWeaponController.prototype.render = function () {
+SpecialWeaponController.prototype.render = function() {
   for (var i = 0; i < this.weapons.length; i++) {
     var weapon = this.weapons[i];
     if (weapon.active) {
@@ -54,11 +54,11 @@ SpecialWeaponController.prototype.render = function () {
 };
 
 
-SpecialWeaponController.prototype.renderList = function () {
+SpecialWeaponController.prototype.renderList = function() {
   this.$weapons_container.html(this.template({weapons: this.weapons})).show();
 };
 
-SpecialWeaponController.prototype.activate = function (weaponDOM, index) {
+SpecialWeaponController.prototype.activate = function(weaponDOM, index) {
   var weapon = this.weapons[index];
   if (weapon.loading) {
     return;
@@ -66,7 +66,7 @@ SpecialWeaponController.prototype.activate = function (weaponDOM, index) {
   weapon.loading = true;
   weaponDOM.addClass('loading');
   clearTimeout(this.cooldown[index]);
-  this.cooldown[index] = setTimeout(function () {
+  this.cooldown[index] = setTimeout(function() {
     weapon.loading = false;
     weaponDOM.removeClass('loading');
   }, 10000);

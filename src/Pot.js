@@ -12,14 +12,14 @@ function Pot(hp) {
   this.hp = hp;
 }
 
-Pot.prototype.setupView = function () {
+Pot.prototype.setupView = function() {
   this.$health = $('.health').clone().removeClass('template');
   this.$health.children().eq(1).html(this.hp);
 
   $('#wrapper').append(this.$health);
 }
 
-Pot.prototype.render = function () {
+Pot.prototype.render = function() {
   ctx.save();
   var scaler = this.sprite.width * GU * 0.000005 * this.clickScaler;
   ctx.translate(this.position.x * GU, this.position.y * GU);
@@ -28,15 +28,15 @@ Pot.prototype.render = function () {
   ctx.restore();
 }
 
-Pot.prototype.update = function () {
+Pot.prototype.update = function() {
   this.clickScaler += 0.1 * (1 - this.clickScaler);
 }
 
-Pot.prototype.click = function () {
+Pot.prototype.click = function() {
   this.clickScaler = 0.8;
 }
 
-Pot.prototype.lostLife = function () {
+Pot.prototype.lostLife = function() {
   this.hp--;
 
   this.$health.children().eq(1).html(this.hp);

@@ -42,7 +42,7 @@ function Enemy(x, y, enemyType, scaling) {
   this.radius = 0.5;
 }
 
-Enemy.prototype.render = function (ctx) {
+Enemy.prototype.render = function(ctx) {
 
   ctx.save();
   this.renderEffects(ctx);
@@ -93,7 +93,7 @@ Enemy.prototype.render = function (ctx) {
   this.small_ps.render(ctx);
 }
 
-Enemy.prototype.update = function (t) {
+Enemy.prototype.update = function(t) {
   this.speed = this.baseSpeed;
   this.effectsUpdate(t);
 
@@ -139,20 +139,20 @@ Enemy.prototype.update = function (t) {
   return true;
 }
 
-Enemy.prototype.renderEffects = function (ctx) {
+Enemy.prototype.renderEffects = function(ctx) {
   for (var i = 0; i < this.effects.length; i++) {
     this.effects[i].render(ctx, this);
   }
 }
 
-Enemy.prototype.hit = function (damage) {
+Enemy.prototype.hit = function(damage) {
   if (!this.dead) {
     this.hp -= damage;
     this.small_ps.explode(this.x, this.y, 5);
   }
 }
 
-Enemy.prototype.kill = function () {
+Enemy.prototype.kill = function() {
   this.dead = true;
   this.dead_time = 100;
   this.ps.explode(this.x, this.y, 35);
@@ -162,7 +162,7 @@ Enemy.prototype.kill = function () {
   createjs.Sound.play('res/kill-' + sound_number + '.mp3|res/kill-' + sound_number + '.ogg');
 }
 
-Enemy.prototype.effectsUpdate = function (t) {
+Enemy.prototype.effectsUpdate = function(t) {
   for (var i = 0; i < this.effects.length; i++) {
     this.effects[i].update(this, t);
   }
@@ -170,7 +170,7 @@ Enemy.prototype.effectsUpdate = function (t) {
 
 /** If the enemy has an effect of the same type, it replaces that effect.
  If not it adds the effect to the enemy. */
-Enemy.prototype.addEffect = function (effect) {
+Enemy.prototype.addEffect = function(effect) {
   for (var i = 0; i < this.effects.length; i++) {
     if (this.effects[i] instanceof effect.constructor) {
       this.effects[i].onReapply(this, effect);
@@ -182,14 +182,14 @@ Enemy.prototype.addEffect = function (effect) {
   effect.onApply(this);
 }
 
-Enemy.prototype.getDistanceToCenter = function () {
+Enemy.prototype.getDistanceToCenter = function() {
   var movex = CENTER.x - this.x;
   var movey = CENTER.y - this.y;
   return Math.sqrt(movex * movex + movey * movey);
 }
 
 //Removes a debuff of the same type as effect
-Enemy.prototype.removeEffect = function (effect) {
+Enemy.prototype.removeEffect = function(effect) {
   for (var i = 0; i < this.effects.length; i++) {
     if (this.effects[i] instanceof effect.constructor) {
       this.effects[i].onRemove();
@@ -203,7 +203,7 @@ Enemy.prototype.removeEffect = function (effect) {
 }
 
 /** That factory **/
-Enemy.spawnRandom = function (enemyType, scaling) {
+Enemy.spawnRandom = function(enemyType, scaling) {
   var side = Math.floor(Math.random() * 4);
   var x = 0;
   var y = 0;

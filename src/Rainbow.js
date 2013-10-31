@@ -10,7 +10,7 @@ function Rainbow() {
 
 Rainbow.prototype.psTimerInterval = 12;
 
-Rainbow.prototype.render = function () {
+Rainbow.prototype.render = function() {
   ctx.save();
   var scaler = this.sprite.width * GU * 0.000005;
   ctx.translate(this.position.x * GU, this.position.y * GU);
@@ -20,7 +20,7 @@ Rainbow.prototype.render = function () {
   this.ps.render(ctx);
 }
 
-Rainbow.prototype.update = function () {
+Rainbow.prototype.update = function() {
   this.ps.update();
   this.ps_timer--;
   if (!this.ps_timer) {

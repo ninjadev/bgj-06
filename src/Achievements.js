@@ -3,7 +3,7 @@ function Achievements() {
   /* warmup, should not make sound */
   createjs.Sound.play('res/achievement-T.mp3|res/achievement-T.ogg');
   createjs.Sound.play('res/achievement-S.mp3|res/achievement-S.ogg');
-  $(function () {
+  $(function() {
     that.template = $('.achievement.template');
   });
   this.achievements = {
@@ -86,7 +86,7 @@ function Achievements() {
   };
 }
 
-Achievements.prototype.give = function (achievement_key) {
+Achievements.prototype.give = function(achievement_key) {
   var achievement = this.achievements[achievement_key];
   if (achievement.achieved) {
     return;

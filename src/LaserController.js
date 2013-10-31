@@ -9,7 +9,7 @@ function LaserController() {
   var that = this;
 }
 
-LaserController.prototype.addLaser = function (color, dmg) {
+LaserController.prototype.addLaser = function(color, dmg) {
   var laser = new Laser(
     color,
     0.006,
@@ -34,7 +34,7 @@ LaserController.prototype.addLaser = function (color, dmg) {
   return laser;
 }
 
-LaserController.prototype.update = function (t) {
+LaserController.prototype.update = function(t) {
   if (this.redLaser) {
     this.redLaser.update(t, true);
   }
@@ -46,7 +46,7 @@ LaserController.prototype.update = function (t) {
   }
 };
 
-LaserController.prototype.render = function () {
+LaserController.prototype.render = function() {
   for (var i = 0; i < this.lasers.length; i++) {
     var laser = this.lasers[i];
     laser.render();

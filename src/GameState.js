@@ -1,7 +1,7 @@
 function GameState() {
 }
 
-GameState.prototype.init = function () {
+GameState.prototype.init = function() {
 
 
   this.green_laser_beam = loadImage('res/green_laser_beam.png');
@@ -13,7 +13,7 @@ GameState.prototype.init = function () {
 
 }
 
-GameState.prototype.getPotAmount = function () {
+GameState.prototype.getPotAmount = function() {
   var enemyCont = sm.activeState.enemies;
   if (enemyCont && enemyCont.numberOfWaves > 1) {
     return 1 + Math.floor(1.15 ^ enemyCont.numberOfWaves);
@@ -21,15 +21,15 @@ GameState.prototype.getPotAmount = function () {
     return 1;
   }
 }
-GameState.prototype.spawnMoneyEffect = function (options) {
+GameState.prototype.spawnMoneyEffect = function(options) {
   this.moneyEffects.push(new MoneyEffect(options));
 }
 
 
-GameState.prototype.pause = function () {
+GameState.prototype.pause = function() {
 }
 
-GameState.prototype.resume = function () {
+GameState.prototype.resume = function() {
   /* warmup, should not make sound */
   createjs.Sound.play('res/coin.mp3|res/coin.ogg');
   createjs.Sound.play('res/kill-1.mp3|res/kill-1.ogg');
@@ -41,7 +41,7 @@ GameState.prototype.resume = function () {
 
   var that = this;
   this.elements = [
-    [function () {
+    [function() {
       that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
       that.achievements.give('first');
       createjs.Sound.play('res/coin.mp3|res/coin.ogg');
@@ -49,7 +49,7 @@ GameState.prototype.resume = function () {
       that.cash.add(Math.floor(that.goldPerClick));
       that.pot.click();
     }, {x: 7.5, y: 4, w: 1, h: 1}],
-    [function () {
+    [function() {
       that.audioButton.toggleActivated();
     }, {x: 15, y: 0, w: 1, h: 1}]
   ];
@@ -97,7 +97,7 @@ GameState.prototype.resume = function () {
   this.pot.setupView();
 }
 
-GameState.prototype.render = function (ctx) {
+GameState.prototype.render = function(ctx) {
   ctx.save();
   var scaler = 16 * GU / this.bg.width + 1 + 0.01 * Math.sin(t / 125);
   ctx.translate(16 * GU / 2, 9 * GU / 2);
@@ -127,7 +127,7 @@ GameState.prototype.render = function (ctx) {
   this.specialWeaponController.render();
 }
 
-GameState.prototype.update = function () {
+GameState.prototype.update = function() {
   var that = this;
   this.t++;
 
@@ -139,7 +139,7 @@ GameState.prototype.update = function () {
       }
     } else if (this.enemies.timeLeftOfWave == 0) {
       this.progressCircle.hide();
-      this.enemies.nextWave(this.t, function () {
+      this.enemies.nextWave(this.t, function() {
         that.progressCircle.show();
         that.timeToWave = 5000;
       });
@@ -164,7 +164,7 @@ GameState.prototype.update = function () {
   }
 }
 
-GameState.prototype.gameOver = function () {
+GameState.prototype.gameOver = function() {
   this.isGameOver = true;
   createjs.Sound.play('res/Fail_game.mp3');
   this.audioButton.pause();
@@ -179,7 +179,7 @@ GameState.prototype.gameOver = function () {
 
   $('#wrapper').append($overlay, $gameOver);
 
-  $('#play-again').on("click", function () {
+  $('#play-again').on("click", function() {
     $('#wrapper').empty();
     sm.addState("menu", new MenuState());
     sm.changeState("menu");

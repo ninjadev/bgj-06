@@ -13,7 +13,7 @@ function AudioButton() {
   }
 }
 
-AudioButton.prototype.render = function () {
+AudioButton.prototype.render = function() {
   var sprite = this.on ? this.sprite_on : this.sprite_off;
   ctx.save();
   var scaler = sprite.width * GU * 0.00025;
@@ -23,11 +23,11 @@ AudioButton.prototype.render = function () {
   ctx.restore();
 }
 
-AudioButton.prototype.getMusicElement = function () {
+AudioButton.prototype.getMusicElement = function() {
   return $("#music")[0];
 }
 
-AudioButton.prototype.pause = function () {
+AudioButton.prototype.pause = function() {
   this.getMusicElement().pause();
 
   var cookie = JSON.parse(getCookie("cuteanimals_stats"));
@@ -35,7 +35,7 @@ AudioButton.prototype.pause = function () {
   setCookie("cuteanimals_stats", JSON.stringify(cookie));
 }
 
-AudioButton.prototype.toggleActivated = function () {
+AudioButton.prototype.toggleActivated = function() {
   this.on = !this.on;
   createjs.Sound.setMute(!this.on);
   if (this.on) {

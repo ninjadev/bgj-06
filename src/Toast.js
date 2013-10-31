@@ -1,9 +1,9 @@
-Toast = (function () {
+Toast = (function() {
   var toast_template;
   var active_toast;
   var active_toast_container;
   var toast_queue = [];
-  $(function () {
+  $(function() {
     toast_template = $('.toast.template');
   });
 
@@ -29,7 +29,7 @@ Toast = (function () {
       duration: 300,
       queue: false
     }, 'easeinout');
-    setTimeout(function () {
+    setTimeout(function() {
       toast.animate({
         'margin-top': '-=20px'
       }, {
@@ -41,7 +41,7 @@ Toast = (function () {
       if (toast_queue.length > 0) {
         printMessage(toast_queue.shift());
       }
-      toast.fadeOut(500, function () {
+      toast.fadeOut(500, function() {
         toast.remove();
       });
     }, 3000 + 32 * (message.length - 200));

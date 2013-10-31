@@ -13,12 +13,12 @@ function SpeedEffect(maxSpeedFactor, tickDuration, applicationsToMax) {
 
 }
 
-SpeedEffect.prototype.onApply = function (enemy) {
+SpeedEffect.prototype.onApply = function(enemy) {
   this.appliedT = sm.activeState.t;
 }
 
 
-SpeedEffect.prototype.onReapply = function (enemy, newEffect) {
+SpeedEffect.prototype.onReapply = function(enemy, newEffect) {
   this.applications += 1;
   this.appliedT = sm.activeState.t;
 
@@ -31,10 +31,10 @@ SpeedEffect.prototype.onReapply = function (enemy, newEffect) {
 
 }
 
-SpeedEffect.prototype.onRemove = function (enemy) {
+SpeedEffect.prototype.onRemove = function(enemy) {
 }
 
-SpeedEffect.prototype.recalculateSpeed = function () {
+SpeedEffect.prototype.recalculateSpeed = function() {
   if (this.applicationsToMax && this.applicationsToMax > 0) {
     this.speedFactor = 1 - (1 - this.maxSpeedFactor)
       * Math.min(1, this.applications / this.applicationsToMax);
@@ -43,7 +43,7 @@ SpeedEffect.prototype.recalculateSpeed = function () {
   }
 }
 
-SpeedEffect.prototype.render = function (ctx, enemy) {
+SpeedEffect.prototype.render = function(ctx, enemy) {
   var color;
   if (this.speedFactor < 0) {
     color = "orange";
@@ -75,7 +75,7 @@ SpeedEffect.prototype.render = function (ctx, enemy) {
   ctx.fill();
 }
 
-SpeedEffect.prototype.update = function (enemy, t) {
+SpeedEffect.prototype.update = function(enemy, t) {
   enemy.speed *= this.speedFactor;
   if (this.duration == undefined || this.duration <= 0) return;
   if (sm.activeState.t - this.appliedT >= this.duration) {

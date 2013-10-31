@@ -16,7 +16,7 @@ function ParticleSystem(options) {
 }
 
 
-ParticleSystem.prototype.update = function () {
+ParticleSystem.prototype.update = function() {
   for (var i = 0; i < this.num_particles; i++) {
     var p = this.particles[i];
     if (p.t <= 0) {
@@ -37,7 +37,7 @@ ParticleSystem.prototype.update = function () {
   }
 }
 
-ParticleSystem.prototype.render = function (ctx) {
+ParticleSystem.prototype.render = function(ctx) {
   ctx.save();
   ctx.globalCompositeOperation = this.blend_mode;
   for (var i = 0; i < this.num_particles; i++) {
@@ -49,7 +49,7 @@ ParticleSystem.prototype.render = function (ctx) {
 }
 
 
-ParticleSystem.prototype.explode = function (x, y, num) {
+ParticleSystem.prototype.explode = function(x, y, num) {
   for (var i = 0; i < num; i++) {
     if (this.num_particles >= this.max_particles - 1) return;
     this.num_particles++;

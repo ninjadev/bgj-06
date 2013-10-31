@@ -11,11 +11,11 @@
  }
  the numbers are the base stats, and will be scaled automagically
  */
-var ENEMYTYPES = function () {
+var ENEMYTYPES = function() {
   return {
     dog: {
       sprites: {
-        walking: (function () {
+        walking: (function() {
           var frames = [];
           for (var i = 1; i <= 8; i++) {
             frames.push(loadImage('res/dog/dog-walking-' + i + '.png'));
@@ -26,7 +26,7 @@ var ENEMYTYPES = function () {
     },
     bear: {
       sprites: {
-        walking: (function () {
+        walking: (function() {
           var frames = [];
           for (var i = 1; i <= 4; i++) {
             frames.push(loadImage('res/pinkbear/pinkbear-walking-' + i + '.png'));
@@ -37,7 +37,7 @@ var ENEMYTYPES = function () {
     },
     elephant: {
       sprites: {
-        walking: (function () {
+        walking: (function() {
           var frames = [];
           for (var i = 1; i <= 6; i++) {
             frames.push(loadImage('res/elephant/elephant-walking-' + i + '.png'));
