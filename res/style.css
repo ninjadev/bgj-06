@@ -209,33 +209,48 @@ strong {
     margin-top: 0;
 }
 
+#wrapper.achievements {
+    background: white;
+}
+
 .achievements {
     position: absolute;
-    left: 10%;
-    right: 10%;
-    top: 5%;
-    bottom: 5%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     font-size: 200%;
     overflow: hidden;
 }
 
 .achievement-element {
-    padding: 1%;
+    padding: 1% 5%;
     clear: both;
     overflow: hidden;
 }
 
 .achievements h1 {
-    padding: .6em 1em;
+    padding-left: 5%;
     background: #01bbd2;
     color: white;
+    height: 15%;
+    line-height: 2.4em;
+}
+
+.achievements .back-button {
+    float: right;
+    text-decoration: none;
+    color: white;
+    line-height: 5em;
+    margin-right: 5%;
 }
 
 .achievement-list {
     overflow: auto;
     width: 100%;
-    height: 100%;
+    top: 15%;
+    bottom: 0;
     position: absolute;
 }
 
