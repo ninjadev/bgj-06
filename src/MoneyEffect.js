@@ -3,7 +3,7 @@ function MoneyEffect(options) {
   this.y = options.y + Math.random() * 0.2;
   this.amount = options.amount;
   this.time_left = MoneyEffect.MAX_TIME_LEFT;
-}
+};
 
 MoneyEffect.MAX_TIME_LEFT = 60;
 
@@ -24,10 +24,10 @@ MoneyEffect.prototype.render = function(ctx) {
     this.x * GU,
     (ratio * 0.2 + this.y) * GU
   );
-}
+};
 
 
 MoneyEffect.prototype.update = function() {
   return this.time_left--;
-}
+};
 

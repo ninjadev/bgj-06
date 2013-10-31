@@ -13,7 +13,7 @@ function ParticleSystem(options) {
   for (var i = 0; i < this.max_particles; i++) {
     this.particles[i] = {x: 0, y: 0, dx: 0, dy: 0, t: 0};
   }
-}
+};
 
 
 ParticleSystem.prototype.update = function() {
@@ -35,7 +35,7 @@ ParticleSystem.prototype.update = function() {
       p.t--;
     }
   }
-}
+};
 
 ParticleSystem.prototype.render = function(ctx) {
   ctx.save();
@@ -46,7 +46,7 @@ ParticleSystem.prototype.render = function(ctx) {
     ctx.fillRect(p.x * GU, p.y * GU, GU * this.size, GU * this.size);
   }
   ctx.restore();
-}
+};
 
 
 ParticleSystem.prototype.explode = function(x, y, num) {
@@ -60,4 +60,4 @@ ParticleSystem.prototype.explode = function(x, y, num) {
     p.dy = this.explode_random.y * (0.5 - Math.random());
     p.t = this.T;
   }
-}
+};

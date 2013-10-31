@@ -84,7 +84,7 @@ function Achievements() {
       custom_image: 'first'
     }
   };
-}
+};
 
 Achievements.prototype.give = function(achievement_key) {
   var achievement = this.achievements[achievement_key];
@@ -105,4 +105,4 @@ Achievements.prototype.give = function(achievement_key) {
   var ach = JSON.parse(getCookie('cuteanimals_stats'));
   ach.achievements.push('' + achievement_key);
   setCookie("cuteanimals_stats", JSON.stringify(ach));
-}
+};

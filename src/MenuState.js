@@ -1,5 +1,5 @@
 function MenuState() {
-}
+};
 
 MenuState.prototype.init = function() {
   this.bg_img = loadImage('res/bg.png');
@@ -34,13 +34,13 @@ MenuState.prototype.init = function() {
   this.start_y = this.y_values[0];
   this.end_y = this.y_values[0];
   this.selected = 0;
-}
+};
 
 MenuState.prototype.setY = function(y) {
   this.start_y = this.y;
   this.end_y = y;
   this.y_time = 0;
-}
+};
 
 MenuState.prototype.select = function(selected) {
   if (this.selected == selected) {
@@ -48,11 +48,11 @@ MenuState.prototype.select = function(selected) {
   }
   this.selected = selected;
   this.setY(this.y_values[this.selected]);
-}
+};
 
 MenuState.prototype.pause = function() {
   document.removeEventListener('keypress', this.fullscreenHandler);
-}
+};
 
 MenuState.prototype.resume = function() {
   var that = this;
@@ -63,7 +63,7 @@ MenuState.prototype.resume = function() {
       document.body.mozRequestFullscreen && document.body.mozRequestFullScreen();
     }
   });
-}
+};
 
 MenuState.prototype.render = function(ctx) {
 
@@ -94,7 +94,7 @@ MenuState.prototype.render = function(ctx) {
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.menu_img, 0, 0);
   ctx.restore();
-}
+};
 
 MenuState.prototype.update = function() {
   this.key_cooldown && this.key_cooldown--;
@@ -121,4 +121,4 @@ MenuState.prototype.update = function() {
       sm.changeState(['game', 'achievements', 'credits'][this.selected]);
     }
   }
-}
+};

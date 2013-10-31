@@ -2,7 +2,7 @@ function ProgressCircle(x, y, radius) {
   this.final_x = this.x = x;
   this.final_y = this.y = y;
   this.final_radius = this.radius = radius;
-}
+};
 
 ProgressCircle.prototype.update = function(progress) {
   this.progress = Math.min(1, Math.max(0, progress));

@@ -1,5 +1,5 @@
 function GameState() {
-}
+};
 
 GameState.prototype.init = function() {
 
@@ -11,7 +11,7 @@ GameState.prototype.init = function() {
   this.bg = loadImage('res/bg.png');
   this.vignette = loadImage('res/vignette.png');
 
-}
+};
 
 GameState.prototype.getPotAmount = function() {
   var enemyCont = sm.activeState.enemies;
@@ -20,14 +20,14 @@ GameState.prototype.getPotAmount = function() {
   } else {
     return 1;
   }
-}
+};
 GameState.prototype.spawnMoneyEffect = function(options) {
   this.moneyEffects.push(new MoneyEffect(options));
-}
+};
 
 
 GameState.prototype.pause = function() {
-}
+};
 
 GameState.prototype.resume = function() {
   /* warmup, should not make sound */
@@ -95,7 +95,7 @@ GameState.prototype.resume = function() {
   this.achievements.give('welcome');
   this.cash.setupView();
   this.pot.setupView();
-}
+};
 
 GameState.prototype.render = function(ctx) {
   ctx.save();
@@ -125,7 +125,7 @@ GameState.prototype.render = function(ctx) {
 
   this.audioButton.render();
   this.specialWeaponController.render();
-}
+};
 
 GameState.prototype.update = function() {
   var that = this;
@@ -162,7 +162,7 @@ GameState.prototype.update = function() {
     this.pot.update();
     this.specialWeaponController.update();
   }
-}
+};
 
 GameState.prototype.gameOver = function() {
   this.isGameOver = true;
@@ -184,4 +184,4 @@ GameState.prototype.gameOver = function() {
     sm.addState("menu", new MenuState());
     sm.changeState("menu");
   });
-}
+};

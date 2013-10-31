@@ -7,7 +7,7 @@ function LaserController() {
   this.startingRotation = null;
   this.startingAngle = null;
   var that = this;
-}
+};
 
 LaserController.prototype.addLaser = function(color, dmg) {
   var laser = new Laser(
@@ -32,7 +32,7 @@ LaserController.prototype.addLaser = function(color, dmg) {
       break;
   }
   return laser;
-}
+};
 
 LaserController.prototype.update = function(t) {
   if (this.redLaser) {

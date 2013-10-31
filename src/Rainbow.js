@@ -6,7 +6,7 @@ function Rainbow() {
 
   this.ps = new ParticleSystem();
   this.ps_timer = this.psTimerInterval;
-}
+};
 
 Rainbow.prototype.psTimerInterval = 12;
 
@@ -18,7 +18,7 @@ Rainbow.prototype.render = function() {
   ctx.drawImage(this.sprite, -this.sprite.width / 2, -this.sprite.height);
   ctx.restore();
   this.ps.render(ctx);
-}
+};
 
 Rainbow.prototype.update = function() {
   this.ps.update();
@@ -27,4 +27,4 @@ Rainbow.prototype.update = function() {
     this.ps_timer = this.psTimerInterval;
     this.ps.explode(CENTER.x, CENTER.y, 2);
   }
-}
+};

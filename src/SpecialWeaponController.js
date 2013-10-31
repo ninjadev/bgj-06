@@ -12,7 +12,7 @@ function SpecialWeaponController() {
     var weapon = $(this).parent('.weapon');
     that.activate(weapon, weapon.data('id'));
   });
-}
+};
 
 SpecialWeaponController.prototype.add = function(weapon) {
   this.weapons.push(weapon);

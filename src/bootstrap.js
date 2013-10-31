@@ -14,7 +14,7 @@ function smoothstep(a, b, t) {
 };
 function clamp(low, x, high) {
   return Math.max(low, Math.min(x, high));
-}
+};
 
 function loadImage(path) {
   var img = new Image();
@@ -24,7 +24,7 @@ function loadImage(path) {
   };
   img.src = path;
   return img;
-}
+};
 
 window.requestAnimFrame = (function() {
   return  window.requestAnimationFrame ||
@@ -60,7 +60,7 @@ function loop() {
 
 
   requestAnimFrame(loop);
-}
+};
 
 function bootstrap() {
 
@@ -117,7 +117,7 @@ function bootstrap() {
 
   loaded--;
   requestAnimFrame(loop);
-}
+};
 
 function resize(e) {
   if (window.innerWidth / window.innerHeight > 16 / 9) {
@@ -134,12 +134,12 @@ function resize(e) {
   wrapper.style.height = 9 * GU + 'px';
   wrapper.style.fontSize = 0.15 * GU + 'px';
   wrapper.style.zIndex = 999999999;
-}
+};
 
 function saveData(data) {
   json_data = JSON.stringify(data);
   setCookie("game_data", json_data, 10 ^ 5);
-}
+};
 function readData() {
   json_data = getCookie("game_data");
   if (json_data !== undefined) {
@@ -148,14 +148,14 @@ function readData() {
     /* default game_data object */
     return {progress: [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]};
   }
-}
+};
 
 function setCookie(c_name, value, exdays) {
   var exdate = new Date();
   exdate.setDate(exdate.getDate() + exdays);
   var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
   document.cookie = c_name + "=" + c_value;
-}
+};
 function getCookie(c_name) {
   var i, x, y, ARRcookies = document.cookie.split(";");
   for (i = 0; i < ARRcookies.length; i++) {
@@ -166,7 +166,7 @@ function getCookie(c_name) {
       return unescape(y);
     }
   }
-}
+};
 function relMouseCoords(e) {
   if (e.type !== "touchstart") {
     e.preventDefault();
@@ -188,7 +188,7 @@ function relMouseCoords(e) {
   canvasY = (event.pageY || (event.touches[0] && event.touches[0].pageY) || (this.cached_coords.y + totalOffsetY)) - totalOffsetY;
 
   return {x: canvasX / GU, y: canvasY / GU}
-}
+};
 
 document.addEventListener('click', handleEvent);
 document.addEventListener('touchstart', handleEvent);
@@ -228,7 +228,7 @@ function handleEvent(e) {
   }
   clickables[i] && clickables[i][1].hover && clickables[i][1].hover();
   $("body").css('cursor', hoverOverClickable ? "pointer" : "auto");
-}
+};
 
 window.onresize = resize;
 
@@ -238,7 +238,7 @@ function contains(obj) {
     obj.position.x + obj.size.w > this.position.x &&
     obj.position.y < this.position.y + this.size.h &&
     obj.position.y + obj.size.h > this.position.y;
-}
+};
 
 // Array Remove - By John Resig (MIT Licensed)
 Array.remove = function(array, from, to) {

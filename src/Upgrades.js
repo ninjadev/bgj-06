@@ -250,7 +250,7 @@ function Upgrades(game) {
     var index = $(this).parent('div').data('id');
     that.purchase(index);
   });
-}
+};
 
 Upgrades.prototype.purchase = function(index) {
   var upgrade = this.upgrades[index];
@@ -341,7 +341,7 @@ Upgrades.prototype.unlocked = function(upgrade) {
 
   return true;
 
-}
+};
 
 Upgrades.prototype.canPurchase = function(upgrade) {
   if (!this.unlocked(upgrade)) {

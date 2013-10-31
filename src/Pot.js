@@ -10,14 +10,14 @@ function Pot(hp) {
   this.clickScaler = 1;
 
   this.hp = hp;
-}
+};
 
 Pot.prototype.setupView = function() {
   this.$health = $('.health').clone().removeClass('template');
   this.$health.children().eq(1).html(this.hp);
 
   $('#wrapper').append(this.$health);
-}
+};
 
 Pot.prototype.render = function() {
   ctx.save();
@@ -26,15 +26,15 @@ Pot.prototype.render = function() {
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.sprite, -this.sprite.width / 2, -this.sprite.height / 2);
   ctx.restore();
-}
+};
 
 Pot.prototype.update = function() {
   this.clickScaler += 0.1 * (1 - this.clickScaler);
-}
+};
 
 Pot.prototype.click = function() {
   this.clickScaler = 0.8;
-}
+};
 
 Pot.prototype.lostLife = function() {
   this.hp--;
@@ -49,4 +49,4 @@ Pot.prototype.lostLife = function() {
   }
 
   return true;
-}
+};

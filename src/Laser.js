@@ -8,7 +8,7 @@ function Laser(color, speed, damage, sprite) {
   this.upgrades = [];
   this.endpoints = this.getEndpoints();
   this.sprite = sprite;
-}
+};
 
 Laser.prototype.update = function(t, humanControlled) {
   if (humanControlled) {
@@ -21,7 +21,7 @@ Laser.prototype.update = function(t, humanControlled) {
   this.angle += this.offset;
   this.hittedEnemies = this.hits();
   this.endpoints = this.getEndpoints();
-}
+};
 
 Laser.prototype.render = function() {
   ctx.save();
@@ -56,15 +56,15 @@ Laser.prototype.hits = function() {
       enemies[i].hit(this.nextDamage);
     }
   }
-}
+};
 
 Laser.prototype.upgradesOnHit = function(enemy) {
   for (var i = 0; i < this.upgrades.length; i++) {
     this.upgrades[i].onEnemyHit(this, enemy);
   }
-}
+};
 
 Laser.prototype.addUpgrade = function(upgrade) {
   this.upgrades.push(upgrade);
   upgrade.onApply(this);
-}
+};

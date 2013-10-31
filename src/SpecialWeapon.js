@@ -20,7 +20,7 @@ function SpecialWeapon(type, image, factor, duration) {
   this.active = false;
   this.loading = false;
   this.reset();
-}
+};
 
 SpecialWeapon.prototype.reset = function() {
   this.radius = 0.5;
@@ -36,7 +36,7 @@ SpecialWeapon.prototype.render = function() {
   ctx.globalAlpha = this.getTransparency();
   ctx.drawImage(this.sprite, -this.sprite.width / 2, -this.sprite.height / 2);
   ctx.restore();
-}
+};
 
 SpecialWeapon.prototype.update = function() {
   this.radius += 0.2;
@@ -50,9 +50,9 @@ SpecialWeapon.prototype.update = function() {
     }
   }
   return this.radius < SpecialWeapon.maxRadius;
-}
+};
 
 SpecialWeapon.prototype.getTransparency = function() {
   var t = this.radius / SpecialWeapon.maxRadius;
   return 1 - t * t;
-}
+};

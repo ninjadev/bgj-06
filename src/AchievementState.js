@@ -1,6 +1,6 @@
 // Copy this file, rename to name of state and add to StateManager
 function AchievementState() {
-}
+};
 
 AchievementState.prototype.init = function() {
   this.elements = [];
@@ -8,12 +8,12 @@ AchievementState.prototype.init = function() {
   this.template = Handlebars.compile(source);
 
   this.achievement_data = new Achievements();
-}
+};
 
 AchievementState.prototype.pause = function() {
   $('#wrapper').empty().removeClass('achievements');
   $('.back-button').off('click');
-}
+};
 
 AchievementState.prototype.resume = function() {
   var achievements = this.getAchievements();
@@ -28,11 +28,10 @@ AchievementState.prototype.resume = function() {
   $('.back-button').on('click', function() {
     sm.changeState('menu');
   });
-
-}
+};
 
 AchievementState.prototype.render = function(ctx) {
-}
+};
 
 AchievementState.prototype.update = function() {
   if (KEYS[27]) {

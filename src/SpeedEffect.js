@@ -11,11 +11,11 @@ function SpeedEffect(maxSpeedFactor, tickDuration, applicationsToMax) {
     this.speedFactor = maxSpeedFactor;
   }
 
-}
+};
 
 SpeedEffect.prototype.onApply = function(enemy) {
   this.appliedT = sm.activeState.t;
-}
+};
 
 
 SpeedEffect.prototype.onReapply = function(enemy, newEffect) {
@@ -29,10 +29,10 @@ SpeedEffect.prototype.onReapply = function(enemy, newEffect) {
   }
   this.recalculateSpeed();
 
-}
+};
 
 SpeedEffect.prototype.onRemove = function(enemy) {
-}
+};
 
 SpeedEffect.prototype.recalculateSpeed = function() {
   if (this.applicationsToMax && this.applicationsToMax > 0) {
@@ -41,7 +41,7 @@ SpeedEffect.prototype.recalculateSpeed = function() {
   } else {
     this.speedFactor = this.maxSpeedFactor;
   }
-}
+};
 
 SpeedEffect.prototype.render = function(ctx, enemy) {
   var color;
@@ -73,7 +73,7 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
 
   ctx.fillStyle = gradient;
   ctx.fill();
-}
+};
 
 SpeedEffect.prototype.update = function(enemy, t) {
   enemy.speed *= this.speedFactor;
@@ -85,4 +85,4 @@ SpeedEffect.prototype.update = function(enemy, t) {
       enemy.removeEffect(this);
     }
   }
-}
+};

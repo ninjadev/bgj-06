@@ -1,16 +1,16 @@
 function CreditsState() {
-}
+};
 
 CreditsState.prototype.init = function() {
   this.bg_img = loadImage('res/about.png');
-}
+};
 
 CreditsState.prototype.pause = function() {
-}
+};
 
 CreditsState.prototype.resume = function() {
   this.cooldown = true;
-}
+};
 
 CreditsState.prototype.render = function(ctx) {
   ctx.save();
@@ -21,7 +21,7 @@ CreditsState.prototype.render = function(ctx) {
   ctx.drawImage(this.bg_img, 0, 0);
   ctx.restore();
   ctx.save();
-}
+};
 
 CreditsState.prototype.update = function() {
 
@@ -29,4 +29,4 @@ CreditsState.prototype.update = function() {
     sm.changeState('menu');
     this.cooldown = false;
   }
-}
+};

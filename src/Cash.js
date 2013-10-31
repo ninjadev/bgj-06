@@ -8,7 +8,7 @@ function Cash(achievements, game) {
   this.game = game;
   this.accumulatedAmount = 0;
   this.amount = 0;
-}
+};
 
 Cash.prototype.setupView = function() {
   this.cash_display = $('.cash.template').clone()
@@ -32,7 +32,7 @@ Cash.prototype.add = function(amount) {
   }
   this.render();
   this.game.upgrades.render();
-}
+};
 
 Cash.prototype.spend = function(amount) {
   if (!this.canSpend(amount)) {
@@ -42,7 +42,7 @@ Cash.prototype.spend = function(amount) {
   this.render();
   this.game.upgrades.render();
   return true;
-}
+};
 
 Cash.prototype.canSpend = function(amount) {
   return !(this.amount < amount);
@@ -50,4 +50,4 @@ Cash.prototype.canSpend = function(amount) {
 
 Cash.prototype.render = function() {
   this.cash_display.find('.value').text('$' + Math.floor(this.amount));
-}
+};

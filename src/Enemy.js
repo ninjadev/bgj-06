@@ -40,7 +40,7 @@ function Enemy(x, y, enemyType, scaling) {
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
-}
+};
 
 Enemy.prototype.render = function(ctx) {
 
@@ -91,7 +91,7 @@ Enemy.prototype.render = function(ctx) {
   ctx.restore();
   this.ps.render(ctx);
   this.small_ps.render(ctx);
-}
+};
 
 Enemy.prototype.update = function(t) {
   this.speed = this.baseSpeed;
@@ -137,20 +137,20 @@ Enemy.prototype.update = function(t) {
   }
 
   return true;
-}
+};
 
 Enemy.prototype.renderEffects = function(ctx) {
   for (var i = 0; i < this.effects.length; i++) {
     this.effects[i].render(ctx, this);
   }
-}
+};
 
 Enemy.prototype.hit = function(damage) {
   if (!this.dead) {
     this.hp -= damage;
     this.small_ps.explode(this.x, this.y, 5);
   }
-}
+};
 
 Enemy.prototype.kill = function() {
   this.dead = true;
@@ -160,13 +160,13 @@ Enemy.prototype.kill = function() {
   sm.states.game.stats.addKill();
   var sound_number = (Math.random() * 4 | 0) + 1;
   createjs.Sound.play('res/kill-' + sound_number + '.mp3|res/kill-' + sound_number + '.ogg');
-}
+};
 
 Enemy.prototype.effectsUpdate = function(t) {
   for (var i = 0; i < this.effects.length; i++) {
     this.effects[i].update(this, t);
   }
-}
+};
 
 /** If the enemy has an effect of the same type, it replaces that effect.
  If not it adds the effect to the enemy. */
@@ -180,13 +180,13 @@ Enemy.prototype.addEffect = function(effect) {
 
   this.effects.push(effect);
   effect.onApply(this);
-}
+};
 
 Enemy.prototype.getDistanceToCenter = function() {
   var movex = CENTER.x - this.x;
   var movey = CENTER.y - this.y;
   return Math.sqrt(movex * movex + movey * movey);
-}
+};
 
 //Removes a debuff of the same type as effect
 Enemy.prototype.removeEffect = function(effect) {
@@ -200,7 +200,7 @@ Enemy.prototype.removeEffect = function(effect) {
       return;
     }
   }
-}
+};
 
 /** That factory **/
 Enemy.spawnRandom = function(enemyType, scaling) {
@@ -226,4 +226,4 @@ Enemy.spawnRandom = function(enemyType, scaling) {
       break;
   }
   return new Enemy(x, y, enemyType, scaling);
-}
+};

@@ -9,11 +9,11 @@ function DotEffect(maxDpt, tickDuration, applicationsToMax) {
   }
   this.applications = 1;
   this.duration = tickDuration;
-}
+};
 
 DotEffect.prototype.onApply = function(enemy) {
   this.appliedT = sm.activeState.t;
-}
+};
 
 DotEffect.prototype.onReapply = function(enemy, newEffect) {
   this.applications++;
@@ -33,10 +33,10 @@ DotEffect.prototype.onReapply = function(enemy, newEffect) {
     this.dpt = this.maxDpt;
   }
 
-}
+};
 
 DotEffect.prototype.onRemove = function(enemy) {
-}
+};
 
 
 DotEffect.prototype.render = function(ctx, enemy, t) {
@@ -60,7 +60,7 @@ DotEffect.prototype.render = function(ctx, enemy, t) {
 
   ctx.fillStyle = gradient;
   ctx.fill();
-}
+};
 
 DotEffect.prototype.update = function(enemy, t) {
   enemy.hit(this.dpt);
@@ -68,4 +68,4 @@ DotEffect.prototype.update = function(enemy, t) {
   if (sm.activeState.t - this.appliedT >= this.duration) {
     enemy.removeEffect(this);
   }
-}
+};
