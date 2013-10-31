@@ -118,7 +118,7 @@ MenuState.prototype.update = function(){
     }
     if(KEYS[13]){ /* key enter */
       this.key_cooldown = 10;
-      sm.changeState(['game', 'game', 'credits'][this.selected]);
+      sm.changeState(['game', 'achievements', 'credits'][this.selected]);
     }
   }
 }

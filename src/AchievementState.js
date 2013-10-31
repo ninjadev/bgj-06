@@ -3,41 +3,32 @@ function AchievementState(){
 }
 
 AchievementState.prototype.init = function(){
-    this.elements = [];
-    var source = $("#achievements-list-template").html();
-    this.template = Handlebars.compile(source);
+  this.elements = [];
+  var source = $("#achievements-list-template").html();
+  this.template = Handlebars.compile(source);
+
+  this.achievement_data = new Achievements();
 }
 
 AchievementState.prototype.pause = function(){
-  $('#wrapper').empty();
+  $('#wrapper').empty().removeClass('achievements');
+  $('.back-button').off('click');
 }
 
 AchievementState.prototype.resume = function(){
-  var json_data = getCookie("cuteanimals_stats");
-  if (json_data === undefined) {
-    return false;
-  }
-  var data = JSON.parse(json_data);
-  var uniqueNames = [];
-  $.each(data.achievements, function(i, el){
-        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-  });
-  var achievement_data = new Achievements();
-  var achievements = [];
-  for (var i=0;i<uniqueNames.length;i++) {
-    achievements[i] = achievement_data.achievements[uniqueNames[i]];
-    if (achievements[i].custom_image === undefined) {
-      achievements[i].custom_image = uniqueNames[i];
-    }
-  }
-  var html = this.template({achievements: achievements});
-  console.log(achievements);
-  console.log(html);
+  var achievements = this.getAchievements();
 
-  this.achievement_template = $('.achievements.template').clone()
+  var html = this.template({achievements: achievements});
+
+  this.$achievement_template = $('.achievements.template').clone()
     .removeClass('template');
-  this.achievement_template.html(html);
-  $('#wrapper').append(this.achievement_template);
+  this.$achievement_template.html(html);
+  $('#wrapper').addClass('achievements').append(this.$achievement_template);
+
+  $('.back-button').on('click', function(){
+    sm.changeState('menu');
+  });
+
 }
 
 AchievementState.prototype.render = function(ctx){
@@ -47,4 +38,30 @@ AchievementState.prototype.update = function(){
   if (KEYS[27]) {
     sm.changeState("menu");
   }
-}
+};
+
+AchievementState.prototype.getAchievements = function(){
+  var json_data = getCookie("cuteanimals_stats");
+  if (json_data === undefined) {
+    return [
+        {
+          name: "No achievements",
+          description: "You should try the game, and come back later!",
+          custom_image: "default" 
+        }
+      ];
+  }
+  var data = JSON.parse(json_data);
+  var uniqueNames = [];
+  $.each(data.achievements, function(i, el){
+        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+  });
+  var achievements = [];
+  for (var i=0;i<uniqueNames.length;i++) {
+    achievements[i] = this.achievement_data.achievements[uniqueNames[i]];
+    if (achievements[i].custom_image === undefined) {
+      achievements[i].custom_image = uniqueNames[i];
+    }
+  }
+  return achievements;
+};
