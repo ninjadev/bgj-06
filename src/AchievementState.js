@@ -1,8 +1,8 @@
 // Copy this file, rename to name of state and add to StateManager
-function AchievementState(){
+function AchievementState() {
 }
 
-AchievementState.prototype.init = function(){
+AchievementState.prototype.init = function () {
   this.elements = [];
   var source = $("#achievements-list-template").html();
   this.template = Handlebars.compile(source);
@@ -10,12 +10,12 @@ AchievementState.prototype.init = function(){
   this.achievement_data = new Achievements();
 }
 
-AchievementState.prototype.pause = function(){
+AchievementState.prototype.pause = function () {
   $('#wrapper').empty().removeClass('achievements');
   $('.back-button').off('click');
 }
 
-AchievementState.prototype.resume = function(){
+AchievementState.prototype.resume = function () {
   var achievements = this.getAchievements();
 
   var html = this.template({achievements: achievements});
@@ -25,39 +25,39 @@ AchievementState.prototype.resume = function(){
   this.$achievement_template.html(html);
   $('#wrapper').addClass('achievements').append(this.$achievement_template);
 
-  $('.back-button').on('click', function(){
+  $('.back-button').on('click', function () {
     sm.changeState('menu');
   });
 
 }
 
-AchievementState.prototype.render = function(ctx){
+AchievementState.prototype.render = function (ctx) {
 }
 
-AchievementState.prototype.update = function(){
+AchievementState.prototype.update = function () {
   if (KEYS[27]) {
     sm.changeState("menu");
   }
 };
 
-AchievementState.prototype.getAchievements = function(){
+AchievementState.prototype.getAchievements = function () {
   var json_data = getCookie("cuteanimals_stats");
   if (json_data === undefined) {
     return [
-        {
-          name: "No achievements",
-          description: "You should try the game, and come back later!",
-          custom_image: "default" 
-        }
-      ];
+      {
+        name: "No achievements",
+        description: "You should try the game, and come back later!",
+        custom_image: "default"
+      }
+    ];
   }
   var data = JSON.parse(json_data);
   var uniqueNames = [];
-  $.each(data.achievements, function(i, el){
-        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+  $.each(data.achievements, function (i, el) {
+    if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
   });
   var achievements = [];
-  for (var i=0;i<uniqueNames.length;i++) {
+  for (var i = 0; i < uniqueNames.length; i++) {
     achievements[i] = this.achievement_data.achievements[uniqueNames[i]];
     if (achievements[i].custom_image === undefined) {
       achievements[i].custom_image = uniqueNames[i];

@@ -4,13 +4,13 @@ function ProgressCircle(x, y, radius) {
   this.final_radius = this.radius = radius;
 }
 
-ProgressCircle.prototype.update = function(progress) {
-  this.progress = Math.min(1,Math.max(0,progress));
-  this.progressAngle = (2*Math.PI)*this.progress - Math.PI/2;
-  
+ProgressCircle.prototype.update = function (progress) {
+  this.progress = Math.min(1, Math.max(0, progress));
+  this.progressAngle = (2 * Math.PI) * this.progress - Math.PI / 2;
+
 };
 
-ProgressCircle.prototype.render = function(ctx) {
+ProgressCircle.prototype.render = function (ctx) {
   if (!this.visible) {
     return;
   }
@@ -18,24 +18,24 @@ ProgressCircle.prototype.render = function(ctx) {
   ctx.save();
   ctx.beginPath();
   ctx.arc(
-    this.x*GU,
-    this.y*GU,
-    this.radius*GU,
-    -Math.PI/2,
+    this.x * GU,
+    this.y * GU,
+    this.radius * GU,
+    -Math.PI / 2,
     this.progressAngle,
     false
   );
   ctx.strokeStyle = "white";
-  ctx.lineWidth = .06*GU;
+  ctx.lineWidth = .06 * GU;
   ctx.stroke();
   ctx.closePath();
   ctx.restore();
 };
 
-ProgressCircle.prototype.hide = function() {
+ProgressCircle.prototype.hide = function () {
   this.visible = false;
 };
 
-ProgressCircle.prototype.show = function() {
+ProgressCircle.prototype.show = function () {
   this.visible = true;
 };

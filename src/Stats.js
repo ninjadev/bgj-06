@@ -1,9 +1,9 @@
-function Stats(achievements){
+function Stats(achievements) {
   this.achievements = achievements;
   this.kills = 0;
 }
 
-Stats.prototype.addKill = function(){
+Stats.prototype.addKill = function () {
   this.kills++;
   if (this.kills >= 1) {
     this.achievements.give("first_kill");
