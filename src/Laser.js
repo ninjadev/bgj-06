@@ -25,7 +25,7 @@ Laser.prototype.update = function(t, humanControlled){
 
 Laser.prototype.render = function(){
   ctx.save();
-  var scaler = this.sprite.width * GU * 0.00002;
+  var scaler = GU * 0.01024;
   ctx.translate(CENTER.x * GU, CENTER.y * GU);
   ctx.scale(scaler, scaler);
 
@@ -35,7 +35,7 @@ Laser.prototype.render = function(){
   var y = -this.sprite.height * scaler - 1.6*GU;
   */
   var x = -this.sprite.width / 2;
-  var y = -this.sprite.height - 90;
+  var y = -this.sprite.height - 45;
   ctx.drawImage(this.sprite, x, y);
   ctx.restore();
 };
