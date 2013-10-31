@@ -53,7 +53,7 @@ Enemy.prototype.render = function(ctx) {
       ctx.globalAlpha = this.dead_time / 20;
     }
   }
-  var scaler = sprite.width * GU * 0.000015 * 0.3;
+  var scaler = sprite.width * GU * 0.000018;
   ctx.translate(this.x * GU, this.y * GU);
   if (this.x > CENTER.x) {
     ctx.scale(-scaler, scaler);

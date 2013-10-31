@@ -74,14 +74,14 @@ MenuState.prototype.render = function(ctx) {
   ctx.translate(-this.bg_img.width / 2, -this.bg_img.height / 2);
   ctx.drawImage(this.bg_img, 0, 0);
   ctx.restore();
+  
   ctx.save();
-
   scaler = 16 * GU / this.vignette_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.vignette_img, 0, 0);
   ctx.restore();
   ctx.save();
-  var scaler = 16 * GU / this.bg_title_img.width;
+  scaler = 16 * GU / this.bg_title_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.bg_title_img, 0, 0);
   ctx.restore();
@@ -90,7 +90,7 @@ MenuState.prototype.render = function(ctx) {
   ctx.fillRect(0, this.y * GU, 16 * GU, GU);
 
   ctx.save();
-  var scaler = 16 * GU / this.bg_img.width;
+  scaler = 16 * GU / this.bg_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.menu_img, 0, 0);
   ctx.restore();
