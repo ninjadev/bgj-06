@@ -25,7 +25,7 @@ AchievementState.prototype.resume = function() {
   this.$achievement_template.html(html);
   $('#wrapper').addClass('achievements').append(this.$achievement_template);
 
-  $('.back-button').on('click', function() {
+  $('.back-button').on('click touchstart', function() {
     sm.changeState('menu');
   });
 };
