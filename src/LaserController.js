@@ -7,7 +7,7 @@ function LaserController() {
   this.startingRotation = null;
   this.startingAngle = null;
   var that = this;
-}
+};
 
 LaserController.prototype.addLaser = function(color, dmg) {
   var laser = new Laser(
@@ -19,35 +19,35 @@ LaserController.prototype.addLaser = function(color, dmg) {
       "#ff0000": sm.states.game.red_laser_beam }[color]
   );
   this.lasers.push(laser);
-  switch(color){
-  case Colors.GREEN:
-    this.greenLaser = laser;
-    this.greenLaser.offset = 0.05;
-    break;
-  case Colors.BLUE:
-    this.blueLaser = laser;
-    break;
-  case Colors.RED:
-    this.redLaser = laser;
-    break;
+  switch (color) {
+    case Colors.GREEN:
+      this.greenLaser = laser;
+      this.greenLaser.offset = 0.05;
+      break;
+    case Colors.BLUE:
+      this.blueLaser = laser;
+      break;
+    case Colors.RED:
+      this.redLaser = laser;
+      break;
   }
   return laser;
-}
+};
 
-LaserController.prototype.update = function(t){
-  if(this.redLaser){
-      this.redLaser.update(t, true);
+LaserController.prototype.update = function(t) {
+  if (this.redLaser) {
+    this.redLaser.update(t, true);
   }
-  if(this.greenLaser){
-      this.greenLaser.update(t, true);
+  if (this.greenLaser) {
+    this.greenLaser.update(t, true);
   }
-  if(this.blueLaser){
-      this.blueLaser.update(-t, false);
+  if (this.blueLaser) {
+    this.blueLaser.update(-t, false);
   }
 };
 
-LaserController.prototype.render = function(){
-  for (var i=0;i<this.lasers.length;i++){
+LaserController.prototype.render = function() {
+  for (var i = 0; i < this.lasers.length; i++) {
     var laser = this.lasers[i];
     laser.render();
   }
