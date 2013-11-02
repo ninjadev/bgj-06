@@ -9,7 +9,7 @@ function Enemy(x, y, enemyType, scaling) {
     blend_mode: 'source-over',
     gravity: {x: 0, y: 0},
     explode_random: {x: 0.1, y: 0.1},
-    size: 0.02,
+    size: 0.025,
     friction: 0.6,
     life: 100
   });
@@ -29,13 +29,7 @@ function Enemy(x, y, enemyType, scaling) {
   this.baseSpeed = enemyType.speed;
   this.killRadius = 0.0086 * GU;
   this.bounty = Math.round(enemyType.bounty + 200 * scaling * enemyType.bounty);
-
   this.effects = [];
-  //Example of how to add enemy
-  //TODO: Remove me
-  //this.addEffect(new DotEffect(0.3));
-
-
   this.width = 40;
   this.height = 40;
   this.animation_ticker = 0;
@@ -147,8 +141,10 @@ Enemy.prototype.renderEffects = function(ctx) {
 
 Enemy.prototype.hit = function(damage) {
   if (!this.dead) {
-    this.hp -= damage;
-    this.small_ps.explode(this.x, this.y, 5);
+    if (damage > 0) {
+      this.hp -= damage;
+      this.small_ps.explode(this.x, this.y, 3);
+    }
   }
 };
 

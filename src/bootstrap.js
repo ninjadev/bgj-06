@@ -211,7 +211,6 @@ if (window.navigator.msPointerEnabled) {
   });
 }
 
-
 function handleEvent(e) {
   e.preventDefault();
   mouseXY = relMouseCoords(e);
