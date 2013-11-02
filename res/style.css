@@ -78,14 +78,7 @@ button {
     text-align: center;
     color: #d6116e;
     display: none;
-}
-
-.health img {
-    width: 4%;
-}
-
-.health .value {
-    font-size: 100%;
+    font-size: 180%;
 }
 
 @font-face {

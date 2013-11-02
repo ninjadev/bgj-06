@@ -98,8 +98,6 @@ function bootstrap() {
     KEYS[e.keyCode] = false;
   });
 
-  document.addEventListener("mousemove", handleEvent);
-
   resize();
 
   /* add game states here */
@@ -190,14 +188,6 @@ function relMouseCoords(e) {
   return {x: canvasX / GU, y: canvasY / GU}
 };
 
-document.addEventListener('click', handleEvent);
-document.addEventListener('touchstart', handleEvent);
-document.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  handleEvent(e);
-  return false;
-});
 if (window.navigator.msPointerEnabled) {
   document.addEventListener("MSPointerDown", handleEvent, false);
   document.addEventListener("MSPointerMove", function(e) {
@@ -206,7 +196,16 @@ if (window.navigator.msPointerEnabled) {
     handleEvent(e);
     return false;
   }, false);
-  document.removeEventListener('click', handleEvent);
+} else {
+  document.addEventListener('touchstart', handleEvent);
+  document.addEventListener('click', handleEvent);
+  document.addEventListener("mousemove", handleEvent);
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    handleEvent(e);
+    return false;
+  });
 }
 
 
@@ -214,7 +213,7 @@ function handleEvent(e) {
   e.preventDefault();
   mouseXY = relMouseCoords(e);
   MOUSE = mouseXY;
-  var eventType = (e.type === "mousemove" || e.type === "touchmove" ? "hover" : "click");
+  var eventType = (e.type === "mousemove" || e.type === "touchmove" || e.type === "pointermove" ? "hover" : "click");
   var clickables;
   if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
     clickables = sm.activeState.gameMenuWindow.buttons;
