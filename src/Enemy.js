@@ -205,20 +205,20 @@ Enemy.spawnRandom = function(enemyType, scaling) {
   var y = 0;
   switch (side) {
     case 0:
-      x = 0;
+      x = -0.5;
       y = Math.random() * 9;
       break;
     case 1:
       x = Math.random() * 15;
-      y = 0;
+      y = -0.5;
       break;
     case 2:
-      x = 16;
+      x = 16.5;
       y = Math.random() * 9;
       break;
     case 3:
       x = Math.random() * 15;
-      y = 9;
+      y = 9.5;
       break;
   }
   return new Enemy(x, y, enemyType, scaling);

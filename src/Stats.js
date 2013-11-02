@@ -2,7 +2,7 @@ function Stats(achievements) {
   this.achievements = achievements;
   this.kills = 0;
   this.accumulatedClicks = 0;
-  this.clicks = new Array();
+  this.clicks = [];
 };
 
 Stats.prototype.addKill = function() {
