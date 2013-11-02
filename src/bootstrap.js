@@ -198,6 +198,16 @@ document.addEventListener('touchmove', function(e) {
   handleEvent(e);
   return false;
 });
+if (window.navigator.msPointerEnabled) {
+  document.addEventListener("MSPointerDown", handleEvent, false);
+  document.addEventListener("MSPointerMove", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    handleEvent(e);
+    return false;
+  }, false);
+  document.removeEventListener('click', handleEvent);
+}
 
 
 function handleEvent(e) {
