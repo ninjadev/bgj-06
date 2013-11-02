@@ -13,6 +13,7 @@ html, body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
+    -ms-touch-action: none;
     font-family: 'blackoutmidnight';
     cursor: default;
 }
@@ -77,14 +78,7 @@ button {
     text-align: center;
     color: #d6116e;
     display: none;
-}
-
-.health img {
-    width: 4%;
-}
-
-.health .value {
-    font-size: 100%;
+    font-size: 180%;
 }
 
 @font-face {
