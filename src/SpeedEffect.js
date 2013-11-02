@@ -52,26 +52,19 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
   } else {
     color = "yellow";
   }
+  var sprite = this["sprite_" + color];
 
-  var radius = 0.7 * GU, innerRadius = 0.3 * GU, outerRadius = 0.9 * GU;
-
+  var radius = 1.6;
   //Scale with power.
   if (this.applicationsToMax && this.applicationsToMax > 0) {
     radius *= Math.min(1, this.applications / this.applicationsToMax);
-    outerRadius *= Math.min(1, this.applications / this.applicationsToMax);
-    innerRadius *= Math.min(1, this.applications / this.applicationsToMax);
   }
 
   ctx.save();
-  var gradient = ctx.createRadialGradient(enemy.x * GU, enemy.y * GU, innerRadius,
-    enemy.x * GU, enemy.y * GU, outerRadius);
-  gradient.addColorStop(0, color);
-  gradient.addColorStop(1, 'rgba(0,0,0,0)');
-
-  ctx.arc(enemy.x * GU, enemy.y * GU, radius, 0, 2 * Math.PI, true);
-
-  ctx.fillStyle = gradient;
-  ctx.fillRect(enemy.x * GU - outerRadius, enemy.y * GU - outerRadius, 2 * outerRadius, 2 * outerRadius);
+  var scaler = radius * GU / sprite.width;
+  ctx.translate(enemy.x * GU, enemy.y * GU);
+  ctx.scale(scaler, scaler);
+  ctx.drawImage(sprite, -sprite.width * 0.5, -sprite.height * 0.5);
   ctx.restore();
 };
 
