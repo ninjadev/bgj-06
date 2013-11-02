@@ -195,6 +195,7 @@ document.addEventListener('touchstart', handleEvent);
 document.addEventListener('touchmove', function(e) {
   e.preventDefault();
   e.stopPropagation();
+  handleEvent(e);
   return false;
 });
 
