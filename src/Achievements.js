@@ -85,7 +85,7 @@ function Achievements() {
     },
     insane_clicking: {
       name: 'Insane clicking',
-      description: "Over 100 clicks / 10 seconds! Make sure your fingers don't overheat",
+      description: "Over 100 clicks in 10 seconds! Make sure your fingers don't overheat",
       custom_image: 'cursor'
     },
     forty_two_clicks: {
