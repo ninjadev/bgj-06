@@ -49,6 +49,7 @@ GameState.prototype.resume = function() {
       that.spawnMoneyEffect({amount: Math.floor(that.goldPerClick), x: CENTER.x - 0.1, y: CENTER.y - 1});
       that.cash.add(Math.floor(that.goldPerClick));
       that.pot.click();
+      that.stats.addClick();
     }, {x: 7.5, y: 4, w: 1, h: 1}],
     [function() {
       that.audioButton.toggleActivated();

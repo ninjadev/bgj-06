@@ -30,6 +30,9 @@ Cash.prototype.add = function(amount) {
   if (this.accumulatedAmount >= 1000) {
     this.achievements.give('grand');
   }
+  if (this.accumulatedAmount > 9000) {
+    this.achievements.give('over_nine_thousand');
+  }
   this.render();
   this.game.upgrades.render();
 };

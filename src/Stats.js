@@ -1,6 +1,8 @@
 function Stats(achievements) {
   this.achievements = achievements;
   this.kills = 0;
+  this.accumulatedClicks = 0;
+  this.clicks = new Array();
 };
 
 Stats.prototype.addKill = function() {
@@ -28,4 +30,23 @@ Stats.prototype.addKill = function() {
   ach.kills += 1;
   ach.all_time_kills += 1;
   setCookie("cuteanimals_stats", JSON.stringify(ach));
+};
+
+Stats.prototype.addClick = function() {
+  this.accumulatedClicks++;
+  if (this.accumulatedClicks === 42) {
+    this.achievements.give("forty_two_clicks");
+  }
+  if (this.accumulatedClicks === 1337) {
+    this.achievements.give("leet");
+  }
+  this.clicks.push(t);
+  if (this.clicks.length > 100) {
+    var timeDifference = t - this.clicks[this.clicks.length - 101];
+    if (timeDifference <= 7500) {
+      this.achievements.give("cheater");
+    } else if (timeDifference <= 10000) {
+      this.achievements.give("insane_clicking");
+    }
+  }
 };

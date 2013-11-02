@@ -76,12 +76,34 @@ function Achievements() {
     afford_red_laser: {
       name: 'Is someone coming?',
       description: 'Quick, you should buy a red laser to keep these guys at bay.',
-      custom_image: 'red_laser' /*TODO: perhaps make an icon with coins on it instead? */
+      custom_image: 'red_laser'
     },
     first_wave_completed: {
       name: 'First wave completed',
       description: "Alright, no enemies in sight. Click the pot to get more gold while you can!",
       custom_image: 'first'
+    },
+    insane_clicking: {
+      name: 'Insane clicking',
+      description: "Over 100 clicks in 10 seconds! Make sure your fingers don't overheat",
+      custom_image: 'cursor'
+    },
+    forty_two_clicks: {
+      name: '42 clicks',
+      description: "The answer to everything",
+      custom_image: 'cursor'
+    },
+    over_nine_thousand: {
+      name: "It's Over 9000!!!",
+      description: "You have earned more than 9000 coins in total"
+    },
+    leet: {
+      name: "1337 clicks",
+      description: "ZOMG j00 leik, totally pwn"
+    },
+    cheater: {
+      name: "Cheater?",
+      description: "Not sure if you are clicking really fast or cheating"
     }
   };
 };
