@@ -80,6 +80,9 @@ function bootstrap() {
   AudioButton.prototype.sprite_off = loadImage("res/audio_off.png");
   SpecialWeapon.prototype.sprite_slomoalizer = loadImage("res/slomoalizer.png");
   SpecialWeapon.prototype.sprite_blast = loadImage("res/blast.png");
+  SpeedEffect.prototype.sprite_blue = loadImage("res/effects/blue_effect.png");
+  SpeedEffect.prototype.sprite_orange = loadImage("res/effects/orange_effect.png");
+  DotEffect.prototype.sprite_green = loadImage("res/effects/green_effect.png");
 
   dt = 0;
   t = 0;
