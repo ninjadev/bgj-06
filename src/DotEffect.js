@@ -43,7 +43,6 @@ DotEffect.prototype.render = function(ctx, enemy, t) {
   var color = "green";
   var radius = 0.7 * GU, innerRadius = 0.3 * GU, outerRadius = 0.9 * GU;
 
-
   //Scale with power.
   if (this.applicationsToMax !== undefined) {
     radius *= Math.min(1, this.applications / this.applicationsToMax);
@@ -51,15 +50,17 @@ DotEffect.prototype.render = function(ctx, enemy, t) {
     innerRadius *= Math.min(1, this.applications / this.applicationsToMax);
   }
 
+  ctx.save();
   var gradient = ctx.createRadialGradient(enemy.x * GU, enemy.y * GU, innerRadius,
     enemy.x * GU, enemy.y * GU, outerRadius);
   gradient.addColorStop(0, color);
   gradient.addColorStop(1, 'rgba(0,0,0,0)');
 
-  ctx.arc(enemy.x * GU, enemy.y * GU, radius, 0, 2 * Math.PI);
+  ctx.arc(enemy.x * GU, enemy.y * GU, radius, 0, 2 * Math.PI, true);
 
   ctx.fillStyle = gradient;
-  ctx.fill();
+  ctx.fillRect(enemy.x * GU - outerRadius, enemy.y * GU - outerRadius, 2 * outerRadius, 2 * outerRadius);
+  ctx.restore();
 };
 
 DotEffect.prototype.update = function(enemy, t) {
