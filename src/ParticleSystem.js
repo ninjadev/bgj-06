@@ -2,7 +2,7 @@ function ParticleSystem(options) {
   options = options || {};
   this.num_particles = 0;
   this.particles = [];
-  this.max_particles = 256;
+  this.max_particles = options.max_particles || 256;
   this.color = options.color || {r: 32, g: 32, b: 32};
   this.blend_mode = options.blend_mode || 'lighter';
   this.gravity = options.gravity || {x: 0, y: 0.05};
@@ -19,7 +19,7 @@ function ParticleSystem(options) {
 ParticleSystem.prototype.update = function() {
   for (var i = 0; i < this.num_particles; i++) {
     var p = this.particles[i];
-    if (p.t <= 0) {
+    if (p.t <= 0 || p.y < -this.size) {
       this.num_particles--;
       var q = this.particles[this.num_particles];
       p.x = q.x;
