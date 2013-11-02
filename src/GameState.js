@@ -42,10 +42,11 @@ GameState.prototype.resume = function() {
   var that = this;
   this.elements = [
     [function() {
-      that.rainbow.ps.explode(CENTER.x, CENTER.y, 8);
+      var numExplosion = Math.floor((that.rainbow.ps.max_particles - that.rainbow.ps.num_particles) * 0.125);
+      that.rainbow.ps.explode(CENTER.x, CENTER.y, numExplosion);
       that.achievements.give('first');
       createjs.Sound.play('res/coin.mp3|res/coin.ogg');
-      that.spawnMoneyEffect({amount: Math.floor(that.goldPerClick), x: CENTER.x, y: CENTER.y - 1});
+      that.spawnMoneyEffect({amount: Math.floor(that.goldPerClick), x: CENTER.x - 0.1, y: CENTER.y - 1});
       that.cash.add(Math.floor(that.goldPerClick));
       that.pot.click();
     }, {x: 7.5, y: 4, w: 1, h: 1}],
