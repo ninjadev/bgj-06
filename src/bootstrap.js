@@ -12,6 +12,7 @@ function smoothstep(a, b, t) {
   var v = t * t * (3 - 2 * t);
   return b * v + a * (1 - v);
 };
+
 function clamp(low, x, high) {
   return Math.max(low, Math.min(x, high));
 };
@@ -27,7 +28,7 @@ function loadImage(path) {
 };
 
 window.requestAnimFrame = (function() {
-  return  window.requestAnimationFrame ||
+  return window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.oRequestAnimationFrame ||
@@ -101,16 +102,16 @@ function bootstrap() {
     KEYS[e.keyCode] = false;
   });
 
-  resize();
-
   /* add game states here */
 
   sm.addState("game", new GameState());
+
   sm.addState("achievements", new AchievementState());
   sm.addState("menu", new MenuState());
   sm.addState("credits", new CreditsState());
-
   document.body.appendChild(canvas);
+
+  resize({});
 
   /* start the game */
 
@@ -126,24 +127,27 @@ function resize(e) {
   } else {
     GU = (window.innerWidth / 16);
   }
-  canvas.width = 16 * GU;
-  canvas.height = 9 * GU;
-  canvas.style.margin = ((window.innerHeight - 9 * GU) / 2) + "px 0 0 " + ((window.innerWidth - 16 * GU) / 2) + "px";
-  var wrapper = document.getElementById('wrapper');
-  wrapper.style.margin = canvas.style.margin;
-  wrapper.style.width = 16 * GU + 'px';
-  wrapper.style.height = 9 * GU + 'px';
-  wrapper.style.fontSize = 0.15 * GU + 'px';
-  wrapper.style.zIndex = 999999999;
+  if (typeof canvas !== "undefined") {
+    canvas.width = 16 * GU;
+    canvas.height = 9 * GU;
+    canvas.style.margin = ((window.innerHeight - 9 * GU) / 2) + "px 0 0 " + ((window.innerWidth - 16 * GU) / 2) + "px";
+    var wrapper = document.getElementById('wrapper');
+    wrapper.style.margin = canvas.style.margin;
+    wrapper.style.width = 16 * GU + 'px';
+    wrapper.style.height = 9 * GU + 'px';
+    wrapper.style.fontSize = 0.15 * GU + 'px';
+    wrapper.style.zIndex = 999999999;
+  }
 };
 
 function saveData(data) {
   json_data = JSON.stringify(data);
   setCookie("game_data", json_data, 10 ^ 5);
 };
+
 function readData() {
   json_data = getCookie("game_data");
-  if (json_data !== undefined) {
+  if (typeof json_data !== "undefined") {
     return JSON.parse(json_data);
   } else {
     /* default game_data object */
@@ -154,9 +158,10 @@ function readData() {
 function setCookie(c_name, value, exdays) {
   var exdate = new Date();
   exdate.setDate(exdate.getDate() + exdays);
-  var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+  var c_value = encodeURIComponent(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
   document.cookie = c_name + "=" + c_value;
 };
+
 function getCookie(c_name) {
   var i, x, y, ARRcookies = document.cookie.split(";");
   for (i = 0; i < ARRcookies.length; i++) {
@@ -164,19 +169,23 @@ function getCookie(c_name) {
     y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
     x = x.replace(/^\s+|\s+$/g, "");
     if (x == c_name) {
-      return unescape(y);
+      return decodeURIComponent(y);
     }
   }
 };
+
 function relMouseCoords(e) {
   if (e.type !== "touchstart") {
     e.preventDefault();
   }
+  if (typeof this.canvas === "undefined") {
+    return {x: 0, y: 0};
+  }
+  var currentElement = this.canvas;
   var totalOffsetX = 0;
   var totalOffsetY = 0;
   var canvasX = 0;
   var canvasY = 0;
-  var currentElement = this.canvas;
 
   do {
     totalOffsetX += currentElement.offsetLeft;
@@ -184,21 +193,20 @@ function relMouseCoords(e) {
   }
   while (currentElement = currentElement.offsetParent);
 
-  var event = e;
-  canvasX = (event.pageX || (event.touches[0] && event.touches[0].pageX) || (this.cached_coords.x + totalOffsetX)) - totalOffsetX;
-  canvasY = (event.pageY || (event.touches[0] && event.touches[0].pageY) || (this.cached_coords.y + totalOffsetY)) - totalOffsetY;
+  canvasX = (e.pageX || (e.touches && e.touches[0] && e.touches[0].pageX) || (this.cached_coords.x + totalOffsetX)) - totalOffsetX;
+  canvasY = (e.pageY || (e.touches && e.touches[0] && e.touches[0].pageY) || (this.cached_coords.y + totalOffsetY)) - totalOffsetY;
 
   return {x: canvasX / GU, y: canvasY / GU}
 };
 
 if (window.navigator.msPointerEnabled) {
-  document.addEventListener("MSPointerDown", handleEvent, false);
+  document.addEventListener("MSPointerDown", handleEvent);
   document.addEventListener("MSPointerMove", function(e) {
     e.preventDefault();
     e.stopPropagation();
     handleEvent(e);
     return false;
-  }, false);
+  });
 } else {
   document.addEventListener('touchstart', handleEvent);
   document.addEventListener('click', handleEvent);
@@ -213,11 +221,12 @@ if (window.navigator.msPointerEnabled) {
 
 function handleEvent(e) {
   e.preventDefault();
-  mouseXY = relMouseCoords(e);
-  MOUSE = mouseXY;
+  MOUSE = relMouseCoords(e);
   var eventType = (e.type === "mousemove" || e.type === "touchmove" || e.type === "pointermove" ? "hover" : "click");
   var clickables;
-  if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
+  if (typeof sm === "undefined") {
+    return;
+  } else if (typeof sm.activeState.gameMenuWindow !== "undefined" && sm.activeState.gameMenuWindow.visible) {
     clickables = sm.activeState.gameMenuWindow.buttons;
   } else {
     clickables = sm.activeState.elements;
@@ -229,7 +238,7 @@ function handleEvent(e) {
     coordY = clickables[i][1].y;
     sizeX = clickables[i][1].w;
     sizeY = clickables[i][1].h;
-    if (mouseXY.x >= coordX && mouseXY.x <= coordX + sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY) {
+    if (MOUSE.x >= coordX && MOUSE.x <= coordX + sizeX && MOUSE.y >= coordY && MOUSE.y <= coordY + sizeY) {
       if (eventType === "click") {
         clickables[i][0](clickables[i].slice(2));
       } else if (eventType === "hover") {
@@ -242,7 +251,7 @@ function handleEvent(e) {
   $("body").css('cursor', hoverOverClickable ? "pointer" : "auto");
 };
 
-window.onresize = resize;
+window.addEventListener('resize', resize);
 
 /* global mixin for position/size-objects that do AABB collision with another posititon/size-object */
 function contains(obj) {
