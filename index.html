@@ -82,11 +82,13 @@
     </div>
 
     <div class="health template">
-        <img src=res/heart.png />
+        <span class=heart>&hearts;</span>
         <span class=value></span>
     </div>
 
     <div class="weapons template"></div>
+
+    <div class="achievements template"></div>
 
     <script id="upgrade-img-template" type="text/x-handlebars-template">
         <div class="tooltip upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
@@ -115,6 +117,7 @@
 
 
     <script id="achievements-list-template" type="text/x-handlebars-template">
+        <a href=javascript:; class=back-button>[Back]</a>
         <h1>Achievements</h1>
         <div class="achievement-list">
             {{#each achievements}}
