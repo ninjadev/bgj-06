@@ -198,7 +198,6 @@ document.addEventListener('touchmove', function(e) {
   return false;
 });
 
-
 function handleEvent(e) {
   e.preventDefault();
   mouseXY = relMouseCoords(e);
