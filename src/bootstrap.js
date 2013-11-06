@@ -169,9 +169,6 @@ function getCookie(c_name) {
   }
 };
 function relMouseCoords(e) {
-  if (e.type !== "touchstart") {
-    e.preventDefault();
-  }
   var totalOffsetX = 0;
   var totalOffsetY = 0;
   var canvasX = 0;
@@ -194,35 +191,42 @@ function relMouseCoords(e) {
 if (window.navigator.msPointerEnabled) {
   document.addEventListener("MSPointerDown", handleEvent, false);
   document.addEventListener("MSPointerMove", function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    handleEvent(e);
-    return false;
+    return handleEvent(e);
   }, false);
 } else {
   document.addEventListener('touchstart', handleEvent);
   document.addEventListener('click', handleEvent);
   document.addEventListener("mousemove", handleEvent);
   document.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    handleEvent(e);
-    return false;
+    return handleEvent(e);
   });
 }
 
 function handleEvent(e) {
-  e.preventDefault();
   mouseXY = relMouseCoords(e);
   MOUSE = mouseXY;
   var eventType = (e.type === "mousemove" || e.type === "touchmove" || e.type === "pointermove" ? "hover" : "click");
+  var insideScrollable = false;
+  var scrollables = sm && sm.activeState && sm.activeState.scrollables || null;
+  var coordX, coordY, sizeX, sizeY;
+  if (scrollables) {
+    for (var i = 0; i < scrollables.length; i++) {
+      coordX = scrollables[i].x;
+      coordY = scrollables[i].y;
+      sizeX = scrollables[i].w;
+      sizeY = scrollables[i].h;
+      if (mouseXY.x >= coordX && mouseXY.x <= coordX + sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY) {
+        insideScrollable = true;
+        break;
+      }
+    }
+  }
   var clickables;
   if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
     clickables = sm.activeState.gameMenuWindow.buttons;
   } else {
     clickables = sm.activeState.elements;
   }
-  var coordX, coordY, sizeX, sizeY;
   var hoverOverClickable = false;
   for (var i = 0; i < clickables.length; i++) {
     coordX = clickables[i][1].x;
@@ -240,6 +244,11 @@ function handleEvent(e) {
   }
   clickables[i] && clickables[i][1].hover && clickables[i][1].hover();
   $("body").css('cursor', hoverOverClickable ? "pointer" : "auto");
+  if (!insideScrollable) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  return insideScrollable;
 };
 
 window.onresize = resize;

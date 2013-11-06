@@ -1,9 +1,11 @@
-// Copy this file, rename to name of state and add to StateManager
 function AchievementState() {
 };
 
 AchievementState.prototype.init = function() {
   this.elements = [];
+  this.scrollables = [
+    {x: 0, y: 0.15*9, w: 16, h: 0.85*9}
+  ];
   var source = $("#achievements-list-template").html();
   this.template = Handlebars.compile(source);
 
