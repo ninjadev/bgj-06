@@ -2,15 +2,12 @@ function GameState() {
 };
 
 GameState.prototype.init = function() {
-
-
   this.green_laser_beam = loadImage('res/green_laser_beam.png');
   this.blue_laser_beam = loadImage('res/blue_laser_beam.png');
   this.red_laser_beam = loadImage('res/red_laser_beam.png');
 
   this.bg = loadImage('res/bg.png');
   this.vignette = loadImage('res/vignette.png');
-
 };
 
 GameState.prototype.getPotAmount = function() {
@@ -21,10 +18,10 @@ GameState.prototype.getPotAmount = function() {
     return 1;
   }
 };
+
 GameState.prototype.spawnMoneyEffect = function(options) {
   this.moneyEffects.push(new MoneyEffect(options));
 };
-
 
 GameState.prototype.pause = function() {
 };
@@ -89,8 +86,6 @@ GameState.prototype.resume = function() {
   this.stats = new Stats(this.achievements);
 
   this.progressCircle = new ProgressCircle(14.5, 0.5, 0.25);
-
-  audioIsMuted = false;
 
   this.t = 0;
   this.upgrades = new Upgrades(this);
@@ -182,7 +177,7 @@ GameState.prototype.gameOver = function() {
 
   $('#wrapper').append($overlay, $gameOver);
 
-  $('#play-again').on("click", function() {
+  $('#play-again').on("click touchstart", function() {
     $('#wrapper').empty();
     sm.addState("menu", new MenuState());
     sm.changeState("menu");
