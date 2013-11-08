@@ -136,7 +136,7 @@ function resize(e) {
     wrapper.style.width = 16 * GU + 'px';
     wrapper.style.height = 9 * GU + 'px';
     wrapper.style.fontSize = 0.15 * GU + 'px';
-    wrapper.style.zIndex = 999999999;
+    wrapper.style.zIndex = 99999999;
   }
 }
 
