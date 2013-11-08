@@ -8,8 +8,9 @@ function AudioButton() {
 
   this.on = cookie.music;
   createjs.Sound.setMute(!this.on);
+  this.musicElement = $("#music")[0];
   if (this.on) {
-    this.getMusicElement().play();
+    this.musicElement.play && this.musicElement.play();
   }
 };
 
@@ -23,12 +24,8 @@ AudioButton.prototype.render = function() {
   ctx.restore();
 };
 
-AudioButton.prototype.getMusicElement = function() {
-  return $("#music")[0];
-};
-
 AudioButton.prototype.pause = function() {
-  this.getMusicElement().pause();
+  this.musicElement.pause();
 
   var cookie = JSON.parse(getCookie("cuteanimals_stats"));
   cookie.music = false;
@@ -39,9 +36,9 @@ AudioButton.prototype.toggleActivated = function() {
   this.on = !this.on;
   createjs.Sound.setMute(!this.on);
   if (this.on) {
-    this.getMusicElement().play();
+    this.musicElement.play && this.musicElement.play();
   } else {
-    this.getMusicElement().pause();
+    this.musicElement.pause && this.musicElement.pause();
   }
 
   var cookie = JSON.parse(getCookie("cuteanimals_stats"));
