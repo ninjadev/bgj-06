@@ -310,6 +310,22 @@ strong {
     color: black;
 }
 
+.credits-header {
+    position: absolute;
+    left: 4.6%;
+    top: 3.1%;
+    font-size: 4.2em;
+    line-height: 1.8em;
+}
+
+.credits-header > h1 {
+    color: white;
+}
+
+.credits-header > h2 {
+    color: black;
+}
+
 .credits-text {
     color: white;
     position: absolute;
