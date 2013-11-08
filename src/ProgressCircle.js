@@ -5,9 +5,8 @@ function ProgressCircle(x, y, radius) {
 };
 
 ProgressCircle.prototype.update = function(progress) {
-  this.progress = Math.min(1, Math.max(0, progress));
-  this.progressAngle = (2 * Math.PI) * this.progress - Math.PI / 2;
-
+  this.progress = clamp(0, progress, 1);
+  this.progressAngle = 2 * Math.PI * this.progress - Math.PI / 2;
 };
 
 ProgressCircle.prototype.render = function(ctx) {
