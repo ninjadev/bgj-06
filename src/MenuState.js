@@ -5,7 +5,6 @@ MenuState.prototype.init = function() {
   this.bg_img = loadImage('res/bg.png');
   this.vignette_img = loadImage('res/vignette.png');
   this.menu_img = loadImage('res/menu.png');
-  this.bg_title_img = loadImage('res/bg-title.png');
 
   this.key_cooldown = 0;
 
@@ -52,6 +51,7 @@ MenuState.prototype.select = function(selected) {
 
 MenuState.prototype.pause = function() {
   document.removeEventListener('keypress', this.fullscreenHandler);
+  $("#wrapper > .logo").remove();
 };
 
 MenuState.prototype.resume = function() {
@@ -63,6 +63,8 @@ MenuState.prototype.resume = function() {
       document.body.mozRequestFullscreen && document.body.mozRequestFullScreen();
     }
   });
+  var logo = $('.logo.template').clone().removeClass('template');
+  $('#wrapper').append(logo);
 };
 
 MenuState.prototype.render = function(ctx) {
@@ -81,17 +83,12 @@ MenuState.prototype.render = function(ctx) {
   ctx.drawImage(this.vignette_img, 0, 0);
   ctx.restore();
 
-  ctx.save();
-  scaler = 16 * GU / this.bg_title_img.width;
-  ctx.scale(scaler, scaler);
-  ctx.drawImage(this.bg_title_img, 0, 0);
-  ctx.restore();
 
   ctx.fillStyle = '#8742d1';
-  ctx.fillRect(0, this.y * GU, 16 * GU, GU);
+  ctx.fillRect(3.9 * GU, this.y * GU, 8.2 * GU, GU);
 
   ctx.save();
-  scaler = 16 * GU / this.bg_img.width;
+  scaler = 16 * GU / this.menu_img.width;
   ctx.scale(scaler, scaler);
   ctx.drawImage(this.menu_img, 0, 0);
   ctx.restore();

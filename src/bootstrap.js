@@ -21,7 +21,7 @@ function loadImage(path) {
   var img = new Image();
   loaded++;
   img.onload = function() {
-    loaded--
+    loaded--;
   };
   img.src = path;
   return img;

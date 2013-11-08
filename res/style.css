@@ -257,3 +257,51 @@ strong {
     width: 10%;
     margin-right: 10px;
 }
+
+.logo {
+    position: absolute;
+    font-size: 7em;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: right;
+    width: 100%;
+    bottom: 1%;
+    right: 1%;
+    letter-spacing: 0.05em;
+}
+
+.purple {
+    color: #9A40D6;
+}
+
+.indigo {
+    color: #6063D8;
+}
+
+.blueish {
+    color: #0094DC;
+}
+
+.tealish {
+    color: #00AFC7;
+}
+
+.green {
+    color: #00D200;
+}
+
+.yellowish {
+    color: #B7C800;
+}
+
+.orange {
+    color: #E58B00;
+}
+
+.red1 {
+    color: #F54100;
+}
+
+.red2 {
+    color: #FA2800;
+}
