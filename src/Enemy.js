@@ -34,7 +34,6 @@ function Enemy(x, y, enemyType, scaling) {
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
-  console.log(this.baseSpeed);
 };
 
 Enemy.prototype.render = function(ctx) {
