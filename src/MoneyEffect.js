@@ -5,7 +5,7 @@ function MoneyEffect(options) {
   this.time_left = MoneyEffect.MAX_TIME_LEFT;
 };
 
-MoneyEffect.MAX_TIME_LEFT = 38;
+MoneyEffect.MAX_TIME_LEFT = 40;
 
 
 MoneyEffect.prototype.render = function(ctx) {
@@ -18,7 +18,7 @@ MoneyEffect.prototype.render = function(ctx) {
     (this.x + 0.02) * GU,
     (ratio * 0.2 + this.y + 0.02) * GU
   );
-  ctx.fillStyle = 'rgba(240,228,40,' + (ratio) + ')';
+  ctx.fillStyle = 'rgba(240,228,40,' + ratio + ')';
   ctx.fillText(
     (this.amount > 0 ? '+' : '') + this.amount,
     this.x * GU,
