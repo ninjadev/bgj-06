@@ -25,7 +25,7 @@ AudioButton.prototype.render = function() {
 };
 
 AudioButton.prototype.pause = function() {
-  this.musicElement.pause();
+  this.musicElement.pause && this.musicElement.pause();
 
   var cookie = JSON.parse(getCookie("cuteanimals_stats"));
   cookie.music = false;
