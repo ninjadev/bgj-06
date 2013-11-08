@@ -36,7 +36,7 @@ window.requestAnimFrame = (function() {
     function(callback) {
       window.setTimeout(callback, 0);
     };
-})()
+})();
 
 function loop() {
   if (loaded > 0) {
