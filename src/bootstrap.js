@@ -130,7 +130,7 @@ function resize(e) {
   if (typeof canvas !== "undefined") {
     canvas.width = 16 * GU;
     canvas.height = 9 * GU;
-    canvas.style.margin = ((window.innerHeight - 9 * GU) / 2) + "px 0 0 " + ((window.innerWidth - 16 * GU) / 2) + "px";
+    canvas.style.margin = (($(window).height() - 9 * GU) / 2) + "px 0 0 " + (($(window).width() - 16 * GU) / 2) + "px";
     var wrapper = document.getElementById('wrapper');
     wrapper.style.margin = canvas.style.margin;
     wrapper.style.width = 16 * GU + 'px';
