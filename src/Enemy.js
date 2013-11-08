@@ -34,6 +34,7 @@ function Enemy(x, y, enemyType, scaling) {
   this.height = 40;
   this.animation_ticker = 0;
   this.radius = 0.5;
+  console.log(this.baseSpeed);
 };
 
 Enemy.prototype.render = function(ctx) {
@@ -143,7 +144,11 @@ Enemy.prototype.hit = function(damage) {
   if (!this.dead) {
     if (damage > 0) {
       this.hp -= damage;
-      this.small_ps.explode(this.x, this.y, 3);
+      if (Math.random() < this.hp / this.maxHP) {
+        return;
+      }
+      var particles = (this.baseSpeed > 0.02 ? 4 : 2);
+      this.small_ps.explode(this.x, this.y, particles);
     }
   }
 };
