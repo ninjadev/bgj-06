@@ -10,15 +10,6 @@ GameState.prototype.init = function() {
   this.vignette = loadImage('res/vignette.png');
 };
 
-GameState.prototype.getPotAmount = function() {
-  var enemyCont = sm.activeState.enemies;
-  if (enemyCont && enemyCont.numberOfWaves > 1) {
-    return 1 + Math.floor(1.15 ^ enemyCont.numberOfWaves);
-  } else {
-    return 1;
-  }
-};
-
 GameState.prototype.spawnMoneyEffect = function(options) {
   this.moneyEffects.push(new MoneyEffect(options));
 };
