@@ -305,3 +305,16 @@ strong {
 .red2 {
     color: #FA2800;
 }
+
+.black {
+    color: black;
+}
+
+.credits-text {
+    color: white;
+    position: absolute;
+    left: 86.2%;
+    top: 9%;
+    width: 13%;
+    font-size: 1.3em;
+}

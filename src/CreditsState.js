@@ -2,19 +2,22 @@ function CreditsState() {
 };
 
 CreditsState.prototype.init = function() {
-  this.bg_img = loadImage('res/about.png');
 };
 
 CreditsState.prototype.pause = function() {
+  $('#wrapper > .credits-text').remove();
 };
 
 CreditsState.prototype.resume = function() {
+  this.bg_img = loadImage('res/about.png');
   this.cooldown = true;
   this.elements = [
     [function() {
       sm.changeState('menu');
     }, {x: 0, y: 0, w: 16, h: 9}]
   ];
+  var text = $('.credits-text.template').clone().removeClass('template');
+  $('#wrapper').append(text);
 };
 
 CreditsState.prototype.render = function(ctx) {

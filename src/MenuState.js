@@ -88,9 +88,10 @@ MenuState.prototype.render = function(ctx) {
   ctx.fillRect(3.9 * GU, this.y * GU, 8.2 * GU, GU);
 
   ctx.save();
+  ctx.translate(0, 1.32 * GU);
   scaler = 16 * GU / this.menu_img.width;
   ctx.scale(scaler, scaler);
-  ctx.drawImage(this.menu_img, 0, 1.36 * GU);
+  ctx.drawImage(this.menu_img, 0, 0);
   ctx.restore();
 };
 

@@ -63,87 +63,124 @@
             <source src="res/music/music.ogg" type="audio/ogg">
         </audio>
 
-    <div id=wrapper>
-    </div>
-
-    <div class="toast template">
-        <div class=message>
+        <div id=wrapper>
         </div>
-    </div>
 
-    <div class="achievement template">
-        <img class=image />
-        <div>
-            <div class=name></div>
-            <div class=description></div>
-        </div>
-    </div>
-
-    <div class="cash template">
-        <div class="value"></div>
-    </div>
-
-    <div class="upgrades template">
-        <h2>Upgrades</h2>
-        <div class="img-upgrade-container"></div>
-        <div class="desc-upgrade-container"></div>
-    </div>
-
-    <div class="health template">
-        <span class=heart>&hearts;</span>
-        <span class=value></span>
-    </div>
-
-    <div class="weapons template"></div>
-
-    <div class="achievements template"></div>
-
-    <div class="logo template">
-        <span class="purple">C</span><span class="indigo">U</span><span class="blueish">T</span><span class="tealish">E</span>&nbsp;<span class="green">ANIM</span><span class="yellowish">AL</span><span class="orange">S&nbsp;I</span><span class="red1">N</span><span class="red2">C.</span>
-    </div>
-
-    <script id="upgrade-img-template" type="text/x-handlebars-template">
-        <div class="tooltip upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
-            <img class=upgrade-purchase src=res/achievements/{{ img }} />
-        </div>
-    </script>
-
-    <script id="upgrade-desc-template" type="text/x-handlebars-template">
-        <div class=description data-id="{{ id }}">
-                <strong>{{ name }}</strong>
-                <span style=float:right;color:yellow>$ {{ cost }}</span>
-                <p>{{ description }}</p>
+        <div class="toast template">
+            <div class=message>
             </div>
         </div>
-    </script>
 
-    <script id="weapons-list-template" type="text/x-handlebars-template">
-        <div class="weapons-list">
-            {{#each weapons}}
-                <div class="weapon" data-id="{{@index}}">
-                    <img class=weapon-image src=res/achievements/{{ image }} />
-                </div>
-            {{/each}}
+        <div class="achievement template">
+            <img class=image />
+            <div>
+                <div class=name></div>
+                <div class=description></div>
+            </div>
         </div>
-    </script>
 
-
-    <script id="achievements-list-template" type="text/x-handlebars-template">
-        <a href=javascript:; class=back-button>[Back]</a>
-        <h1>Achievements</h1>
-        <div class="achievement-list">
-            {{#each achievements}}
-                <div class="achievement-element">
-                    <img class=achievement-avatar src=res/achievements/{{ custom_image }}.png />
-                    <h2>{{ name }}:</h2>
-                    {{ description }}
-                </div>
-            {{/each}}
+        <div class="cash template">
+            <div class="value"></div>
         </div>
-    </script>
 
-    <div id=overlay class=template></div>
-    <div id=game-over class=template></div>
+        <div class="upgrades template">
+            <h2>Upgrades</h2>
+            <div class="img-upgrade-container"></div>
+            <div class="desc-upgrade-container"></div>
+        </div>
+
+        <div class="health template">
+            <span class=heart>&hearts;</span>
+            <span class=value></span>
+        </div>
+
+        <div class="weapons template"></div>
+
+        <div class="achievements template"></div>
+
+        <div class="logo template">
+            <span class="purple">C</span><span class="indigo">U</span><span class="blueish">T</span><span class="tealish">E</span>&nbsp;<span class="green">ANIM</span><span class="yellowish">AL</span><span class="orange">S&nbsp;I</span><span class="red1">N</span><span class="red2">C.</span>
+        </div>
+
+        <div class="credits-text template">
+            this game was<br>
+            written during<br>
+            a period of 48<br>
+            hours for the<br>
+            online game jam<br>
+            competition<br>
+            <span class=black>bacon game<br>
+            jam 06.</span><br>
+            <br>
+            the theme of<br>
+            the game jam<br>
+            was <span class=black>rainbows.</span><br>
+            <br>
+            shoutouts go<br>
+            to all the great<br>
+            people in the<br>
+            game jam com-<br>
+            munity, the reg-<br>
+            ulars at <span class=black>#ba-<br>
+            congamejam</span> on<br>
+            freenode, and<br>
+            the guy who<br>
+            had to cancel<br>
+            on the jam a<br>
+            couple of hours<br>
+            into it because<br>
+            his wife went<br>
+            into labor.<br>
+            happy father-<br>
+            hood!<br>
+            <br>
+            <span class=black>(press esc<br>
+            to go back)</span>
+        </div>
+
+
+        <script id="upgrade-img-template" type="text/x-handlebars-template">
+            <div class="tooltip upgrade {{#if canPurchase}}can-purchase{{/if}}" data-id="{{ id }}">
+                <img class=upgrade-purchase src=res/achievements/{{ img }} />
+            </div>
+        </script>
+
+        <script id="upgrade-desc-template" type="text/x-handlebars-template">
+            <div class=description data-id="{{ id }}">
+                    <strong>{{ name }}</strong>
+                    <span style=float:right;color:yellow>$ {{ cost }}</span>
+                    <p>{{ description }}</p>
+                </div>
+            </div>
+        </script>
+
+        <script id="weapons-list-template" type="text/x-handlebars-template">
+            <div class="weapons-list">
+                {{#each weapons}}
+                    <div class="weapon" data-id="{{@index}}">
+                        <img class=weapon-image src=res/achievements/{{ image }} />
+                    </div>
+                {{/each}}
+            </div>
+        </script>
+
+
+        <script id="achievements-list-template" type="text/x-handlebars-template">
+            <a href=javascript:; class=back-button>[Back]</a>
+            <h1>Achievements</h1>
+            <div class="achievement-list">
+                {{#each achievements}}
+                    <div class="achievement-element">
+                        <img class=achievement-avatar src=res/achievements/{{ custom_image }}.png />
+                        <h2>{{ name }}:</h2>
+                        {{ description }}
+                    </div>
+                {{/each}}
+            </div>
+        </script>
+
+        <div id=overlay class=template></div>
+        <div id=game-over class=template></div>
 
     </body>
 </html>
