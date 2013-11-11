@@ -11,7 +11,7 @@ CreditsState.prototype.pause = function() {
 
 CreditsState.prototype.resume = function() {
   if (highResolution()) {
-    this.bg_img = loadImage('res/about_retina.png');
+    this.bg_img = loadImage('res/about@2x.png');
   } else {
     this.bg_img = loadImage('res/about.png?v=2');
   }

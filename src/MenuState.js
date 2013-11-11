@@ -5,7 +5,7 @@ MenuState.prototype.init = function() {
   this.bg_img = loadImage('res/bg.png');
   this.vignette_img = loadImage('res/vignette.png');
   if (highResolution()) {
-    this.menu_img = loadImage('res/menu_retina.png');
+    this.menu_img = loadImage('res/menu@2x.png');
   } else {
     this.menu_img = loadImage('res/menu.png?v=2');
   }
