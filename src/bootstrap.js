@@ -269,5 +269,9 @@ Array.remove = function(array, from, to) {
 }
 
 function highResolution() {
-  return $(window).width() > 1440 && $(window).height() > 810;
+  var pixelRatio = 1;
+  if (window.devicePixelRatio) {
+    pixelRatio = window.devicePixelRatio;
+  }
+  return pixelRatio * $(window).width() > 1440 && pixelRatio * $(window).height() > 810;
 }
