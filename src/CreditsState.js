@@ -10,7 +10,11 @@ CreditsState.prototype.pause = function() {
 };
 
 CreditsState.prototype.resume = function() {
-  this.bg_img = loadImage('res/about.png?v=2');
+  if (highResolution()) {
+    this.bg_img = loadImage('res/about_retina.png');
+  } else {
+    this.bg_img = loadImage('res/about.png?v=2');
+  }
   this.cooldown = true;
   this.elements = [
     [function() {

@@ -267,3 +267,7 @@ Array.remove = function(array, from, to) {
   array.length = from < 0 ? array.length + from : from;
   return array.push.apply(array, rest);
 }
+
+function highResolution() {
+  return $(window).width() > 1440 && $(window).height() > 810;
+}

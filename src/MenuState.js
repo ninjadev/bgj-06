@@ -4,7 +4,11 @@ function MenuState() {
 MenuState.prototype.init = function() {
   this.bg_img = loadImage('res/bg.png');
   this.vignette_img = loadImage('res/vignette.png');
-  this.menu_img = loadImage('res/menu.png?v=2');
+  if (highResolution()) {
+    this.menu_img = loadImage('res/menu_retina.png');
+  } else {
+    this.menu_img = loadImage('res/menu.png?v=2');
+  }
 
   this.key_cooldown = 0;
 
