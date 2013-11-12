@@ -2,19 +2,28 @@ function CreditsState() {
 };
 
 CreditsState.prototype.init = function() {
-  this.bg_img = loadImage('res/about.png');
 };
 
 CreditsState.prototype.pause = function() {
+  $('#wrapper > .credits-header').remove();
+  $('#wrapper > .credits-text').remove();
 };
 
 CreditsState.prototype.resume = function() {
+  if (highResolution()) {
+    this.bg_img = loadImage('res/about@2x.png');
+  } else {
+    this.bg_img = loadImage('res/about.png?v=2');
+  }
   this.cooldown = true;
   this.elements = [
     [function() {
       sm.changeState('menu');
     }, {x: 0, y: 0, w: 16, h: 9}]
   ];
+  var header = $('.credits-header.template').clone().removeClass('template');
+  var text = $('.credits-text.template').clone().removeClass('template');
+  $('#wrapper').append(header).append(text);
 };
 
 CreditsState.prototype.render = function(ctx) {

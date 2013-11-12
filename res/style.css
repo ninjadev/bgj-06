@@ -257,3 +257,81 @@ strong {
     width: 10%;
     margin-right: 10px;
 }
+
+.logo {
+    position: absolute;
+    font-size: 7em;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: right;
+    width: 100%;
+    bottom: 1%;
+    right: 1%;
+    letter-spacing: 0.05em;
+}
+
+.purple {
+    color: #9A40D6;
+}
+
+.indigo {
+    color: #6063D8;
+}
+
+.blueish {
+    color: #0094DC;
+}
+
+.tealish {
+    color: #00AFC7;
+}
+
+.green {
+    color: #00D200;
+}
+
+.yellowish {
+    color: #B7C800;
+}
+
+.orange {
+    color: #E58B00;
+}
+
+.red1 {
+    color: #F54100;
+}
+
+.red2 {
+    color: #FA2800;
+}
+
+.black {
+    color: black;
+}
+
+.credits-header {
+    position: absolute;
+    left: 4.6%;
+    top: 3.1%;
+    font-size: 4.2em;
+    line-height: 1.8em;
+}
+
+.credits-header > h1 {
+    color: white;
+}
+
+.credits-header > h2 {
+    color: black;
+}
+
+.credits-text {
+    color: white;
+    position: absolute;
+    left: 86.2%;
+    top: 9%;
+    width: 13%;
+    font-size: 1.3em;
+    line-height: 1.2em;
+}

@@ -143,7 +143,11 @@ Enemy.prototype.hit = function(damage) {
   if (!this.dead) {
     if (damage > 0) {
       this.hp -= damage;
-      this.small_ps.explode(this.x, this.y, 3);
+      if (Math.random() < this.hp / this.maxHP) {
+        return;
+      }
+      var particles = (this.baseSpeed > 0.02 ? 4 : 2);
+      this.small_ps.explode(this.x, this.y, particles);
     }
   }
 };

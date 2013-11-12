@@ -4,7 +4,7 @@ function Rainbow() {
     y: CENTER.y
   };
 
-  this.ps = new ParticleSystem({max_particles: 64});
+  this.ps = new ParticleSystem({max_particles: 55, life: 90});
   this.ps_timer = this.psTimerInterval;
 };
 

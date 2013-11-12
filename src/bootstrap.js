@@ -21,7 +21,7 @@ function loadImage(path) {
   var img = new Image();
   loaded++;
   img.onload = function() {
-    loaded--
+    loaded--;
   };
   img.src = path;
   return img;
@@ -130,13 +130,13 @@ function resize(e) {
   if (typeof canvas !== "undefined") {
     canvas.width = 16 * GU;
     canvas.height = 9 * GU;
-    canvas.style.margin = ((window.innerHeight - 9 * GU) / 2) + "px 0 0 " + ((window.innerWidth - 16 * GU) / 2) + "px";
+    canvas.style.margin = (($(window).height() - 9 * GU) / 2) + "px 0 0 " + (($(window).width() - 16 * GU) / 2) + "px";
     var wrapper = document.getElementById('wrapper');
     wrapper.style.margin = canvas.style.margin;
     wrapper.style.width = 16 * GU + 'px';
     wrapper.style.height = 9 * GU + 'px';
     wrapper.style.fontSize = 0.15 * GU + 'px';
-    wrapper.style.zIndex = 999999999;
+    wrapper.style.zIndex = 99999999;
   }
 }
 
@@ -266,4 +266,12 @@ Array.remove = function(array, from, to) {
   var rest = array.slice((to || from) + 1 || array.length);
   array.length = from < 0 ? array.length + from : from;
   return array.push.apply(array, rest);
+}
+
+function highResolution() {
+  var pixelRatio = 1;
+  if (window.devicePixelRatio) {
+    pixelRatio = window.devicePixelRatio;
+  }
+  return pixelRatio * $(window).width() > 1440 && pixelRatio * $(window).height() > 810;
 }

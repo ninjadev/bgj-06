@@ -87,8 +87,8 @@ GameState.prototype.resume = function() {
 
 GameState.prototype.render = function(ctx) {
   ctx.save();
-  var scaler = 16 * GU / this.bg.width + 1 + 0.01 * Math.sin(t / 125);
-  ctx.translate(16 * GU / 2, 9 * GU / 2);
+  var scaler = 16 * GU / this.bg.width + 0.01 + 0.01 * Math.sin(t / 125);
+  ctx.translate(CENTER.x * GU, CENTER.y * GU);
   ctx.scale(scaler, scaler);
   ctx.translate(-this.bg.width / 2, -this.bg.height / 2);
   ctx.drawImage(this.bg, 0, 0);
