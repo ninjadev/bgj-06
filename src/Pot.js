@@ -41,9 +41,7 @@ Pot.prototype.lostLife = function() {
 
   this.$health.children().eq(1).html(this.hp);
 
-  if (this.hp < 20) {
-    this.$health.show();
-  }
+  this.$health.show();
   if (this.hp < 1) {
     return false;
   }

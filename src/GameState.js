@@ -50,8 +50,8 @@ GameState.prototype.resume = function() {
 
   this.isGameOver = false;
 
-  var playerHP = 20;
-  this.pot = new Pot(playerHP);
+  this.initPlayerHp = 10;
+  this.pot = new Pot(this.initPlayerHp);
   this.rainbow = new Rainbow();
   this.cash = new Cash(this.achievements, this);
 
