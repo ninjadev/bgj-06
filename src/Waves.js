@@ -1,15 +1,15 @@
 WAVES = [
   {
-    monsters: ["dog"],
-    numberOfMonsters: 5,
+    monsters: ["bear"],
+    numberOfMonsters: 7,
     scaling: 0,
     duration: 5000
   },
   {
-    monsters: ["bear"],
-    numberOfMonsters: 10,
+    monsters: ["dog"],
+    numberOfMonsters: 7,
     scaling: 0,
-    duration: 10000
+    duration: 7000
   },
   {
     monsters: ["elephant"],
