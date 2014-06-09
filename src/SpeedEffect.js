@@ -25,7 +25,7 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
   }
   var sprite = this["sprite_" + color];
 
-  var radius = 1.6;
+  var radius = 1.6 * this.getRemainingPower();
 
   ctx.save();
   var scaler = radius * GU / sprite.width;
@@ -35,8 +35,19 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
   ctx.restore();
 };
 
+/**
+ * The effect degrades over time.
+ * This function returns a number between 1 and 0, based on the remaining time of the effect.
+ */
+SpeedEffect.prototype.getRemainingPower = function() {
+  var ticksSinceApplied = sm.activeState.t - this.appliedT,
+    ticksLeft = Math.max(this.duration - ticksSinceApplied, 0);
+  return Math.sqrt(ticksLeft / this.duration);
+}
+
 SpeedEffect.prototype.update = function(enemy) {
-  enemy.speed *= this.speedFactor;
+  var speedMultiplier = (1 - this.getRemainingPower()) * (1 - this.speedFactor) + this.speedFactor;
+  enemy.speed *= speedMultiplier;
   if (this.duration == undefined || this.duration <= 0) {
     return;
   }

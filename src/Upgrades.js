@@ -60,7 +60,7 @@ function Upgrades(game) {
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
         laser.addUpgrade(new UpgradeDebuffOnHit(function() {
-          return new SpeedEffect(0.7, 10)
+          return new SpeedEffect(0.6, 12)
         }));
         that.game.achievements.give('blue_laser');
       },
