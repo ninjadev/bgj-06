@@ -87,9 +87,9 @@ Enemy.prototype.render = function(ctx) {
   this.small_ps.render(ctx);
 };
 
-Enemy.prototype.update = function(t) {
+Enemy.prototype.update = function() {
   this.speed = this.baseSpeed;
-  this.effectsUpdate(t);
+  this.effectsUpdate();
 
   this.ps.update();
   this.small_ps.update();
@@ -162,9 +162,9 @@ Enemy.prototype.kill = function() {
   createjs.Sound.play('res/kill-' + sound_number + '.mp3|res/kill-' + sound_number + '.ogg');
 };
 
-Enemy.prototype.effectsUpdate = function(t) {
+Enemy.prototype.effectsUpdate = function() {
   for (var i = 0; i < this.effects.length; i++) {
-    this.effects[i].update(this, t);
+    this.effects[i].update(this);
   }
 };
 
