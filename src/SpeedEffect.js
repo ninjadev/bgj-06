@@ -9,6 +9,7 @@ SpeedEffect.prototype.onApply = function(enemy) {
 };
 
 SpeedEffect.prototype.onReapply = function(enemy, effect) {
+  this.appliedT = sm.activeState.t;
 };
 
 SpeedEffect.prototype.onRemove = function(enemy) {
@@ -46,6 +47,7 @@ SpeedEffect.prototype.getRemainingPower = function() {
 }
 
 SpeedEffect.prototype.update = function(enemy) {
+  //speedMultiplier starts at speedfactor and goes towards 1 as the effect degrades
   var speedMultiplier = (1 - this.getRemainingPower()) * (1 - this.speedFactor) + this.speedFactor;
   enemy.speed *= speedMultiplier;
   if (this.duration == undefined || this.duration <= 0) {
