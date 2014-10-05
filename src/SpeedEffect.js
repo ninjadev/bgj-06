@@ -1,46 +1,18 @@
 // Copy this file, rename to name of state and add to StateManager
-function SpeedEffect(maxSpeedFactor, tickDuration, applicationsToMax) {
-  this.maxSpeedFactor = maxSpeedFactor;
-  this.duration = tickDuration;
-  this.applications = 1;
-  this.applicationsToMax = applicationsToMax;
-
-  if (this.applicationsToMax && this.applicationsToMax > 0) {
-    this.speedFactor = maxSpeedFactor * 1 / applicationsToMax;
-  } else {
-    this.speedFactor = maxSpeedFactor;
-  }
-
+function SpeedEffect(speedFactor, duration) {
+  this.speedFactor = speedFactor;
+  this.duration = duration;
 };
 
 SpeedEffect.prototype.onApply = function(enemy) {
   this.appliedT = sm.activeState.t;
 };
 
-
-SpeedEffect.prototype.onReapply = function(enemy, newEffect) {
-  this.applications += 1;
+SpeedEffect.prototype.onReapply = function(enemy, effect) {
   this.appliedT = sm.activeState.t;
-
-  //I'm trying to make sure that you never override with worse stats.
-  if (newEffect.maxSpeedFactor > this.maxSpeedFactor) {
-    this.applicationsToMax = newEffect.applicationsToMax;
-    this.maxSpeedFactor = newEffect.maxSpeedFactor;
-  }
-  this.recalculateSpeed();
-
 };
 
 SpeedEffect.prototype.onRemove = function(enemy) {
-};
-
-SpeedEffect.prototype.recalculateSpeed = function() {
-  if (this.applicationsToMax && this.applicationsToMax > 0) {
-    this.speedFactor = 1 - (1 - this.maxSpeedFactor)
-      * Math.min(1, this.applications / this.applicationsToMax);
-  } else {
-    this.speedFactor = this.maxSpeedFactor;
-  }
 };
 
 SpeedEffect.prototype.render = function(ctx, enemy) {
@@ -54,11 +26,7 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
   }
   var sprite = this["sprite_" + color];
 
-  var radius = 1.6;
-  //Scale with power.
-  if (this.applicationsToMax && this.applicationsToMax > 0) {
-    radius *= Math.min(1, this.applications / this.applicationsToMax);
-  }
+  var radius = 1.6 * this.getRemainingPower();
 
   ctx.save();
   var scaler = radius * GU / sprite.width;
@@ -68,14 +36,24 @@ SpeedEffect.prototype.render = function(ctx, enemy) {
   ctx.restore();
 };
 
-SpeedEffect.prototype.update = function(enemy, t) {
-  enemy.speed *= this.speedFactor;
-  if (this.duration == undefined || this.duration <= 0) return;
+/**
+ * The effect degrades over time.
+ * This function returns a number between 1 and 0, based on the remaining time of the effect.
+ */
+SpeedEffect.prototype.getRemainingPower = function() {
+  var ticksSinceApplied = sm.activeState.t - this.appliedT,
+    ticksLeft = Math.max(this.duration - ticksSinceApplied, 0);
+  return Math.sqrt(ticksLeft / this.duration);
+}
+
+SpeedEffect.prototype.update = function(enemy) {
+  //speedMultiplier starts at speedfactor and goes towards 1 as the effect degrades
+  var speedMultiplier = (1 - this.getRemainingPower()) * (1 - this.speedFactor) + this.speedFactor;
+  enemy.speed *= speedMultiplier;
+  if (this.duration == undefined || this.duration <= 0) {
+    return;
+  }
   if (sm.activeState.t - this.appliedT >= this.duration) {
-    this.applications -= 1;
-    this.recalculateSpeed();
-    if (this.applications <= 0) {
-      enemy.removeEffect(this);
-    }
+    enemy.removeEffect(this);
   }
 };

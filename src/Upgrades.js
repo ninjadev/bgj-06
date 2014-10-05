@@ -60,7 +60,7 @@ function Upgrades(game) {
       init: function() {
         var laser = that.game.laserController.addLaser(Colors.BLUE, 0);
         laser.addUpgrade(new UpgradeDebuffOnHit(function() {
-          return new SpeedEffect(0.6, 10, 1)
+          return new SpeedEffect(0.6, 12)
         }));
         that.game.achievements.give('blue_laser');
       },
@@ -79,20 +79,14 @@ function Upgrades(game) {
         this.cost = this.level * (cost_scaling + this.level * cost_square_scaling);
         this.name = "Frost Coating on Mirrors " + this.level;
 
-        //Please excuse the uglieness of this, on account of it being late in a hackathon.
         var laser = that.game.laserController.blueLaser;
         var upgradeExample = laser.upgrades[0].generateNewDebuff();
-        var maxSpeed = upgradeExample.maxSpeedFactor;
-        var duration = upgradeExample.duration;
-        var applicationsToMax = upgradeExample.applicationsToMax;
+        var speedFactor = upgradeExample.speedFactor * 0.8;
+        var duration = upgradeExample.duration * 1.2;
 
-        maxSpeed *= 0.8;
-        applications = Math.max(1, 0.8 * applications);
-        duration = Math.min(500, duration * 1.3);
         laser.upgrades[0].generateNewDebuff = function() {
-          return new SpeedEffect(maxSpeed, duration, applicationsToMax);
+          return new SpeedEffect(speedFactor, duration);
         }
-
 
       },
       stock: 10,
@@ -232,7 +226,6 @@ function Upgrades(game) {
       img: 'blast.png',
       description: "Scare your enemies with this blast! They will run away as fast as they can.",
       init: function() {
-        //that.game.activateSpecialWeapon("blast", -1, 0.7*50);
         that.game.specialWeaponController.add(new SpecialWeapon("blast", this.img, -1.5, 0.7 * 50, 10));
       },
       stock: 1,
